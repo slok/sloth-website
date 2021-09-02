@@ -1,8 +1,17 @@
-baseURL = "https://sloth.dev"
+baseURL = "https://sloth.dev/"
 title = "Sloth"
 theme = "hugo-geekdoc"
-
+languageCode = "en-us"
 pluralizeListTitles = false
+
+# Disable so the version of hugo is not set on the html and generating the docs with
+# different versions always fail because of the metadata.
+disableHugoGeneratorInject = true
+
+publishDir = "./docs"
+
+[params]
+  geekdocLogo = "media/sloth-logo-white.svg"
 
 # Geekdoc required configuration
 pygmentsUseClasses = true

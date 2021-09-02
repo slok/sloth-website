@@ -1,0 +1,14 @@
+---
+more:
+  - name: Releases
+    ref: "https://github.com/slok/sloth/releases"
+    external: true
+    icon: "gdoc_download"
+  - name: "SLI plugins source"
+    ref: "https://github.com/slok/sloth-common-sli-plugins"
+    external: true
+    icon: "gdoc_github"
+  - name: "Docs Source"
+    ref: "https://github.com/slok/sloth-website"
+    external: true
+    icon: "gdoc_github"
