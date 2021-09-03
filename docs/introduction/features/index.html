@@ -3,7 +3,7 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=color-scheme content="light dark">
-<meta name=description content="Something">
+<meta name=description content="Simple, maintainable and understandable SLO spec. Reliable SLO metrics and alerts. Based on Google SLO implementation and [multi window multi burn][mwmb] alerts framework. Autogenerates Prometheus SLI recording rules in different time windows. Autogenerates Prometheus SLO metadata rules. Autogenerates Prometheus SLO [multi window multi burn][mwmb] alert rules (Page and warning). SLO spec validation (including validate command for Gitops and CI). Customization of labels, disabling different type of alerts&mldr; A single way (uniform) of creating SLOs across all different services and teams.">
 <title>Features | Sloth</title>
 <link rel=icon href=/favicon/favicon-32x32.png type=image/x-icon>
 <script src=/js/darkmode-ce906ea916.min.js></script>
@@ -158,7 +158,11 @@ Kubernetes controller
 </span>
 </li>
 <li>
-<span class=flex>SLI plugins</span>
+<span class=flex>
+<a href=/usage/plugins/ class=gdoc-nav__entry>
+SLI plugins
+</a>
+</span>
 </li>
 </ul>
 </li>
@@ -280,7 +284,26 @@ hidden-mobile" itemprop=breadcrumb>
 </div>
 <article class="gdoc-markdown gdoc-markdown__align--left">
 <h1>Features</h1>
-<p>Something</p>
+<ul>
+<li>Simple, maintainable and understandable SLO spec.</li>
+<li>Reliable SLO metrics and alerts.</li>
+<li>Based on <a class=gdoc-markdown__link href=[mwmb]:>Google SLO</a> implementation and [multi window multi burn][mwmb] alerts framework.</li>
+<li>Autogenerates Prometheus SLI recording rules in different time windows.</li>
+<li>Autogenerates Prometheus SLO metadata rules.</li>
+<li>Autogenerates Prometheus SLO [multi window multi burn][mwmb] alert rules (Page and warning).</li>
+<li>SLO spec validation (including <code>validate</code> command for Gitops and CI).</li>
+<li>Customization of labels, disabling different type of alerts&mldr;</li>
+<li>A single way (uniform) of creating SLOs across all different services and teams.</li>
+<li>Automatic <a class=gdoc-markdown__link href=TODO>Grafana dashboard</a> to see all your SLOs state.</li>
+<li>Single binary and easy to use CLI.</li>
+<li>Kubernetes (<a class=gdoc-markdown__link href=[common-sli-plugins]:>Prometheus-operator</a>) support.</li>
+<li>Kubernetes Controller/operator mode with CRDs.</li>
+<li>Support different <a class=gdoc-markdown__link href=TODO>SLI types</a>.</li>
+<li>Support for <a class=gdoc-markdown__link href=TODO>SLI plugins</a></li>
+<li>A library with <a class=gdoc-markdown__link href=TODO>common SLI plugins</a>.</li>
+<li>[OpenSLO] support.</li>
+</ul>
+<p>[OpenSLO]:</p>
 </article>
 <div class="gdoc-page__footer flex flex-wrap justify-between">
 </div>

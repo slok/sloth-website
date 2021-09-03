@@ -3,7 +3,9 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=color-scheme content="light dark">
-<meta name=description content="Something">
+<meta name=description content="Why Sloth SLI? SLO? Error budget? Burn rate? SLO based alerting? What are ticket and page alerts? Can I disable alerts? Grafana dashboard? CLI VS K8s controller? SLI types on manifests     Why Sloth    Creating Prometheus rules for SLI/SLO framework is hard, error prone and is pure toil.
+Sloth abstracts this task, and we also gain:
+ Read friendlyness: Easy to read and declare SLI/SLOs.">
 <title>F.A.Q | Sloth</title>
 <link rel=icon href=/favicon/favicon-32x32.png type=image/x-icon>
 <script src=/js/darkmode-ce906ea916.min.js></script>
@@ -159,7 +161,11 @@ Kubernetes controller
 </span>
 </li>
 <li>
-<span class=flex>SLI plugins</span>
+<span class=flex>
+<a href=/usage/plugins/ class=gdoc-nav__entry>
+SLI plugins
+</a>
+</span>
 </li>
 </ul>
 </li>
@@ -281,7 +287,161 @@ hidden-mobile" itemprop=breadcrumb>
 </div>
 <article class="gdoc-markdown gdoc-markdown__align--left">
 <h1>F.A.Q</h1>
-<p>Something</p>
+<div class="gdoc-toc gdoc-toc__level--6"><nav id=TableOfContents><ul>
+<li><a href=#why-sloth>Why Sloth</a></li>
+<li><a href=#sli>SLI?</a></li>
+<li><a href=#slo>SLO?</a></li>
+<li><a href=#error-budget>Error budget?</a></li>
+<li><a href=#burn-rate>Burn rate?</a></li>
+<li><a href=#slo-based-alerting>SLO based alerting?</a></li>
+<li><a href=#what-are-ticket-and-page-alerts>What are ticket and page alerts?</a></li>
+<li><a href=#can-i-disable-alerts>Can I disable alerts?</a></li>
+<li><a href=#grafana-dashboard>Grafana dashboard?</a></li>
+<li><a href=#cli-vs-k8s-controller>CLI VS K8s controller?</a></li>
+<li><a href=#sli-types-on-manifests>SLI types on manifests</a></li>
+</ul></nav><hr></div>
+<div class=gdoc-page__anchorwrap>
+<h2 id=why-sloth>
+Why Sloth
+<a data-clipboard-text=https://sloth.dev/faq/#why-sloth class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Why Sloth" href=#why-sloth><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
+</a>
+</h2>
+</div><p>Creating Prometheus rules for SLI/SLO framework is hard, error prone and is pure toil.</p>
+<p>Sloth abstracts this task, and we also gain:</p>
+<ul>
+<li>Read friendlyness: Easy to read and declare SLI/SLOs.</li>
+<li>Gitops: Easy to integrate with CI flows like validation, checks&mldr;</li>
+<li>Reliability and testing: Generated prometheus rules are already known that work, no need the creation of tests.</li>
+<li>Centralize features and error fixes: An update in Sloth would be applied to all the SLOs managed/generated with it.</li>
+<li>Standardize the metrics: Same conventions, automatic dashboards&mldr;</li>
+<li>Rollout future features for free with the same specs: e.g automatic report creation.</li>
+</ul>
+<div class=gdoc-page__anchorwrap>
+<h2 id=sli>
+SLI?
+<a data-clipboard-text=https://sloth.dev/faq/#sli class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor SLI?" href=#sli><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
+</a>
+</h2>
+</div><p><a class=gdoc-markdown__link href=https://landing.google.com/sre/sre-book/chapters/service-level-objectives/#indicators-o8seIAcZ>Service level indicator</a>. Is a way of quantify how your service should be responding to user.</p>
+<p>TL;DR: What is good/bad service for your users. E.g:</p>
+<ul>
+<li>Requests >=500 considered errors.</li>
+<li>Requests >200ms considered errors.</li>
+<li>Process executions with exit code >0 considered errors.</li>
+</ul>
+<p>Normally is measured using events: <code>good/bad-events / total-events</code>.</p>
+<div class=gdoc-page__anchorwrap>
+<h2 id=slo>
+SLO?
+<a data-clipboard-text=https://sloth.dev/faq/#slo class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor SLO?" href=#slo><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
+</a>
+</h2>
+</div><p><a class=gdoc-markdown__link href=https://landing.google.com/sre/sre-book/chapters/service-level-objectives/#objectives-g0s1tdcz>Service level objective</a>. A percent that will tell how many <a class=gdoc-markdown__link href=https://landing.google.com/sre/sre-book/chapters/service-level-objectives/#indicators-o8seIAcZ>SLI</a> errors your service can have in a specific period of time.</p>
+<div class=gdoc-page__anchorwrap>
+<h2 id=error-budget>
+Error budget?
+<a data-clipboard-text=https://sloth.dev/faq/#error-budget class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Error budget?" href=#error-budget><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
+</a>
+</h2>
+</div><p>An error budget is the ammount of errors (driven by the <a class=gdoc-markdown__link href=https://landing.google.com/sre/sre-book/chapters/service-level-objectives/#indicators-o8seIAcZ>SLI</a>) you can have in a specific period of time, this is driven by the <a class=gdoc-markdown__link href=https://landing.google.com/sre/sre-book/chapters/service-level-objectives/#objectives-g0s1tdcz>SLO</a>.</p>
+<p>Lets see an example:</p>
+<ul>
+<li>SLI Error: Requests status code >= 500</li>
+<li>Period: 30 days</li>
+<li>SLO: 99.9%</li>
+<li>Error budget: 0.0999 (100-99.9)</li>
+<li>Total requests in 30 days: 10000</li>
+<li>Available error requests: 9.99 (10000 * 0.0999 / 100)</li>
+</ul>
+<p>If we have more than 9.99 request response with >=500 status code, we would be burning more error budget than the available, if we have less errors, we would end without spending all the error budget.</p>
+<div class=gdoc-page__anchorwrap>
+<h2 id=burn-rate>
+Burn rate?
+<a data-clipboard-text=https://sloth.dev/faq/#burn-rate class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Burn rate?" href=#burn-rate><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
+</a>
+</h2>
+</div><p>The speed you are consuming your error budget. This is key for <a class=gdoc-markdown__link href=https://landing.google.com/sre/sre-book/chapters/service-level-objectives/#objectives-g0s1tdcz>SLO</a> based alerting (Sloth will create all these alerts), because depending on the speed you are consuming your error budget, it will trigger your alerts.</p>
+<p>Speed/rate examples:</p>
+<ul>
+<li>1: You are consuming 100% of the error budget in the expected period (e.g if 30d period, then 30 days).</li>
+<li>2: You are consuming 200% of the error budget in the expected period (e.g if 30d period, then 15 days).</li>
+<li>60: You are consuming 6000% of the error budget in the expected period (e.g if 30d period, then 12h hour).</li>
+<li>1080: You are consuming 108000% of the error budget in the expected period (e.g if 30d period, then 40 minute).</li>
+</ul>
+<div class=gdoc-page__anchorwrap>
+<h2 id=slo-based-alerting>
+SLO based alerting?
+<a data-clipboard-text=https://sloth.dev/faq/#slo-based-alerting class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor SLO based alerting?" href=#slo-based-alerting><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
+</a>
+</h2>
+</div><p>With SLO based alerting you will get better alerting to a regular alerting system, because:</p>
+<ul>
+<li>Alerts on symptoms (<a class=gdoc-markdown__link href=https://landing.google.com/sre/sre-book/chapters/service-level-objectives/#indicators-o8seIAcZ>SLI</a>s), not causes.</li>
+<li>Trigger at different levels (warning/ticket and critical/page).</li>
+<li>Takes into account time and quantity, this is: speed of errors and number of errors on specific time.</li>
+</ul>
+<p>The result of these is:</p>
+<ul>
+<li>Correct time to trigger alerts (important == fast, not so important == slow).</li>
+<li>Reduce alert fatigue.</li>
+<li>Reduce false positives and negatives.</li>
+</ul>
+<div class=gdoc-page__anchorwrap>
+<h2 id=what-are-ticket-and-page-alerts>
+What are ticket and page alerts?
+<a data-clipboard-text=https://sloth.dev/faq/#what-are-ticket-and-page-alerts class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor What are ticket and page alerts?" href=#what-are-ticket-and-page-alerts><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
+</a>
+</h2>
+</div><p><a class=gdoc-markdown__link href=https://landing.google.com/sre/workbook/chapters/alerting-on-slos/#6-multiwindow-multi-burn-rate-alerts>MWMB</a> type alerting is based on two kinds of alerts, <code>ticket</code> and <code>page</code>:</p>
+<ul>
+<li><code>page</code>: Are critical alerts that normally are used to <em>wake up</em>, notify on important channels, trigger oncall&mldr;</li>
+<li><code>ticket</code>: The warning alerts that normally open tickets, post messages on non-important Slack channels&mldr;</li>
+</ul>
+<p>These are triggered in different ways, <code>page</code> alerts are triggered faster but require faster error budget burn rate, on the other side, <code>ticket</code> alerts
+are triggered slower and require a lower and constant error budget burn rate.</p>
+<div class=gdoc-page__anchorwrap>
+<h2 id=can-i-disable-alerts>
+Can I disable alerts?
+<a data-clipboard-text=https://sloth.dev/faq/#can-i-disable-alerts class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Can I disable alerts?" href=#can-i-disable-alerts><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
+</a>
+</h2>
+</div><p>Yes, use <code>disable: true</code> on <code>page</code> and <code>ticket</code>.</p>
+<div class=gdoc-page__anchorwrap>
+<h2 id=grafana-dashboard>
+Grafana dashboard?
+<a data-clipboard-text=https://sloth.dev/faq/#grafana-dashboard class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Grafana dashboard?" href=#grafana-dashboard><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
+</a>
+</h2>
+</div><p>Check <a class=gdoc-markdown__link href=TODO>grafana-dashboard</a>, this dashboard will load the SLOs automatically.</p>
+<div class=gdoc-page__anchorwrap>
+<h2 id=cli-vs-k8s-controller>
+CLI VS K8s controller?
+<a data-clipboard-text=https://sloth.dev/faq/#cli-vs-k8s-controller class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor CLI VS K8s controller?" href=#cli-vs-k8s-controller><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
+</a>
+</h2>
+</div><p>If you don&rsquo;t have Kubernetes and you need raw prometheus rules, its easy, the CLI (<code>generate</code>) mode is the only one that supports raw prometheus rules.</p>
+<p>On the other side if you have Kubernetes (and most likely prometheus-operator). Using <a class=gdoc-markdown__link href=pkg/kubernetes/api/sloth/v1><code>sloth.slok.dev/v1/PrometheusServiceLevel</code></a> CRD will output the same result used as a CLI or used as a Kubernetes controller.</p>
+<p>The only difference between bot modes is how Sloth application loads the SLOs manifest. On both modes the output will be a Prometheus Operator Rules CRD.</p>
+<p>Both have pros and cons:</p>
+<ul>
+<li>The CLI in an advanced gitops flow gives you faster feedback loops because of the generation on the CI.</li>
+<li>Using as a controller the CRD integrates better in helm charts and similar because it removes that generation extra step.</li>
+<li>Having the SLO as CRs in K8s, improves the discovery as you can always do <code>kubectl get slos --all-namespaces</code>.</li>
+<li>The CLI doesn&rsquo;t require an app running, Sloth CRDs registered&mldr; the SLO generation process is simpler, so you have less PoFs.</li>
+</ul>
+<p>In a few words, theres no right or wrong answer, pick your own flavour based on your use case: teams size, engineers in the company or development flow&mldr;</p>
+<div class=gdoc-page__anchorwrap>
+<h2 id=sli-types-on-manifests>
+SLI types on manifests
+<a data-clipboard-text=https://sloth.dev/faq/#sli-types-on-manifests class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor SLI types on manifests" href=#sli-types-on-manifests><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
+</a>
+</h2>
+</div><p><code>prometheus/v1</code> (regular) and <code>sloth.slok.dev/v1/PrometheusServiceLevel</code> (Kubernetes CRD), support 3 ways of setting SLIs:</p>
+<ul>
+<li>Events: This are based on 2 queries, the one that returns the total/valid number of events and the one that returns the bad events. Sloht will make a query dividing them to get the final error ratio (0-1).</li>
+<li>Raw: This is a single raw prometheus query that when executed will return the error ratio (0-1).</li>
+<li>Plugins: Check <a class=gdoc-markdown__link href=TODO>plugins</a> for more information. It reference plugins that will be preloaded and already developed. Sloth will execute them on generation and it will return a raw query. This is the best way to abstract queries from users or having SLOs at scale.</li>
+</ul>
 </article>
 <div class="gdoc-page__footer flex flex-wrap justify-between">
 </div>

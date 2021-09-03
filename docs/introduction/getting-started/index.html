@@ -3,7 +3,9 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=color-scheme content="light dark">
-<meta name=description content="Something">
+<meta name=description content="Get sloth and execute with one of the examples:
+sloth generate -i ./examples/getting-started.yml From the spec, you will obtain the rules for Prometheus with the generated SLO recording rules and alert rules.
+SLO spec  version: &#34;prometheus/v1&#34; service: &#34;myservice&#34; labels: owner: &#34;myteam&#34; repo: &#34;myorg/myservice&#34; tier: &#34;2&#34; slos: # We allow failing (5xx and 429) 1 request every 1000 requests (99.9%). - name: &#34;requests-availability&#34; objective: 99.9 description: &#34;Common SLO based on availability for HTTP request responses.">
 <title>Getting started | Sloth</title>
 <link rel=icon href=/favicon/favicon-32x32.png type=image/x-icon>
 <script src=/js/darkmode-ce906ea916.min.js></script>
@@ -158,7 +160,11 @@ Kubernetes controller
 </span>
 </li>
 <li>
-<span class=flex>SLI plugins</span>
+<span class=flex>
+<a href=/usage/plugins/ class=gdoc-nav__entry>
+SLI plugins
+</a>
+</span>
 </li>
 </ul>
 </li>
@@ -280,7 +286,306 @@ hidden-mobile" itemprop=breadcrumb>
 </div>
 <article class="gdoc-markdown gdoc-markdown__align--left">
 <h1>Getting started</h1>
-<p>Something</p>
+<p><a class=gdoc-markdown__link href=/introduction/install/>Get sloth</a> and execute with one of the examples:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>sloth generate -i ./examples/getting-started.yml
+</code></pre></div><p>From the spec, you will obtain the rules for Prometheus with the generated SLO recording rules and alert rules.</p>
+<div class=gdoc-tabs>
+<input type=radio class="gdoc-tabs__control hidden" name=tabs-getting-started id=tabs-getting-started-0 checked>
+<label for=tabs-getting-started-0 class=gdoc-tabs__label>
+SLO spec
+</label>
+<div class="gdoc-markdown--nested gdoc-tabs__content">
+<div class=gdoc-include><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#f92672>version</span>: <span style=color:#e6db74>&#34;prometheus/v1&#34;</span>
+<span style=color:#f92672>service</span>: <span style=color:#e6db74>&#34;myservice&#34;</span>
+<span style=color:#f92672>labels</span>:
+  <span style=color:#f92672>owner</span>: <span style=color:#e6db74>&#34;myteam&#34;</span>
+  <span style=color:#f92672>repo</span>: <span style=color:#e6db74>&#34;myorg/myservice&#34;</span>
+  <span style=color:#f92672>tier</span>: <span style=color:#e6db74>&#34;2&#34;</span>
+<span style=color:#f92672>slos</span>:
+  <span style=color:#75715e># We allow failing (5xx and 429) 1 request every 1000 requests (99.9%).</span>
+  - <span style=color:#f92672>name</span>: <span style=color:#e6db74>&#34;requests-availability&#34;</span>
+    <span style=color:#f92672>objective</span>: <span style=color:#ae81ff>99.9</span>
+    <span style=color:#f92672>description</span>: <span style=color:#e6db74>&#34;Common SLO based on availability for HTTP request responses.&#34;</span>
+    <span style=color:#f92672>sli</span>:
+      <span style=color:#f92672>events</span>:
+        <span style=color:#f92672>error_query</span>: <span style=color:#ae81ff>sum(rate(http_request_duration_seconds_count{job=&#34;myservice&#34;,code=~&#34;(5..|429)&#34;}[{{.window}}]))</span>
+        <span style=color:#f92672>total_query</span>: <span style=color:#ae81ff>sum(rate(http_request_duration_seconds_count{job=&#34;myservice&#34;}[{{.window}}]))</span>
+    <span style=color:#f92672>alerting</span>:
+      <span style=color:#f92672>name</span>: <span style=color:#ae81ff>MyServiceHighErrorRate</span>
+      <span style=color:#f92672>labels</span>:
+        <span style=color:#f92672>category</span>: <span style=color:#e6db74>&#34;availability&#34;</span>
+      <span style=color:#f92672>annotations</span>:
+        <span style=color:#75715e># Overwrite default Sloth SLO alert summmary on ticket and page alerts.</span>
+        <span style=color:#f92672>summary</span>: <span style=color:#e6db74>&#34;High error rate on &#39;myservice&#39; requests responses&#34;</span>
+      <span style=color:#f92672>page_alert</span>:
+        <span style=color:#f92672>labels</span>:
+          <span style=color:#f92672>severity</span>: <span style=color:#ae81ff>pageteam</span>
+          <span style=color:#f92672>routing_key</span>: <span style=color:#ae81ff>myteam</span>
+      <span style=color:#f92672>ticket_alert</span>:
+        <span style=color:#f92672>labels</span>:
+          <span style=color:#f92672>severity</span>: <span style=color:#e6db74>&#34;slack&#34;</span>
+          <span style=color:#f92672>slack_channel</span>: <span style=color:#e6db74>&#34;#alerts-myteam&#34;</span>
+</code></pre></div></div>
+</div>
+<input type=radio class="gdoc-tabs__control hidden" name=tabs-getting-started id=tabs-getting-started-1>
+<label for=tabs-getting-started-1 class=gdoc-tabs__label>
+Generated
+</label>
+<div class="gdoc-markdown--nested gdoc-tabs__content">
+<div class=gdoc-include><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml>
+---
+<span style=color:#75715e># Code generated by Sloth (dev): https://github.com/slok/sloth.</span>
+<span style=color:#75715e># DO NOT EDIT.</span>
+<p><span style=color:#f92672>groups</span>:</p>
+<ul>
+<li><span style=color:#f92672>name</span>: <span style=color:#ae81ff>sloth-slo-sli-recordings-myservice-requests-availability</span>
+<span style=color:#f92672>rules</span>:
+<ul>
+<li><span style=color:#f92672>record</span>: <span style=color:#ae81ff>slo:sli_error:ratio_rate5m</span>
+<span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
+</span><span style=color:#e6db74>      (sum(rate(http_request_duration_seconds_count{job=&quot;myservice&quot;,code=~&quot;(5..|429)&quot;}[5m])))
+</span><span style=color:#e6db74>      /
+</span><span style=color:#e6db74>      (sum(rate(http_request_duration_seconds_count{job=&quot;myservice&quot;}[5m])))</span>   <br>
+<span style=color:#f92672>labels</span>:
+<span style=color:#f92672>cmd</span>: <span style=color:#ae81ff>examplesgen.sh</span>
+<span style=color:#f92672>owner</span>: <span style=color:#ae81ff>myteam</span>
+<span style=color:#f92672>repo</span>: <span style=color:#ae81ff>myorg/myservice</span>
+<span style=color:#f92672>sloth_id</span>: <span style=color:#ae81ff>myservice-requests-availability</span>
+<span style=color:#f92672>sloth_service</span>: <span style=color:#ae81ff>myservice</span>
+<span style=color:#f92672>sloth_slo</span>: <span style=color:#ae81ff>requests-availability</span>
+<span style=color:#f92672>sloth_window</span>: <span style=color:#ae81ff>5m</span>
+<span style=color:#f92672>tier</span>: <span style=color:#e6db74>&quot;2&quot;</span></li>
+<li><span style=color:#f92672>record</span>: <span style=color:#ae81ff>slo:sli_error:ratio_rate30m</span>
+<span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
+</span><span style=color:#e6db74>      (sum(rate(http_request_duration_seconds_count{job=&quot;myservice&quot;,code=~&quot;(5..|429)&quot;}[30m])))
+</span><span style=color:#e6db74>      /
+</span><span style=color:#e6db74>      (sum(rate(http_request_duration_seconds_count{job=&quot;myservice&quot;}[30m])))</span>   <br>
+<span style=color:#f92672>labels</span>:
+<span style=color:#f92672>cmd</span>: <span style=color:#ae81ff>examplesgen.sh</span>
+<span style=color:#f92672>owner</span>: <span style=color:#ae81ff>myteam</span>
+<span style=color:#f92672>repo</span>: <span style=color:#ae81ff>myorg/myservice</span>
+<span style=color:#f92672>sloth_id</span>: <span style=color:#ae81ff>myservice-requests-availability</span>
+<span style=color:#f92672>sloth_service</span>: <span style=color:#ae81ff>myservice</span>
+<span style=color:#f92672>sloth_slo</span>: <span style=color:#ae81ff>requests-availability</span>
+<span style=color:#f92672>sloth_window</span>: <span style=color:#ae81ff>30m</span>
+<span style=color:#f92672>tier</span>: <span style=color:#e6db74>&quot;2&quot;</span></li>
+<li><span style=color:#f92672>record</span>: <span style=color:#ae81ff>slo:sli_error:ratio_rate1h</span>
+<span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
+</span><span style=color:#e6db74>      (sum(rate(http_request_duration_seconds_count{job=&quot;myservice&quot;,code=~&quot;(5..|429)&quot;}[1h])))
+</span><span style=color:#e6db74>      /
+</span><span style=color:#e6db74>      (sum(rate(http_request_duration_seconds_count{job=&quot;myservice&quot;}[1h])))</span>   <br>
+<span style=color:#f92672>labels</span>:
+<span style=color:#f92672>cmd</span>: <span style=color:#ae81ff>examplesgen.sh</span>
+<span style=color:#f92672>owner</span>: <span style=color:#ae81ff>myteam</span>
+<span style=color:#f92672>repo</span>: <span style=color:#ae81ff>myorg/myservice</span>
+<span style=color:#f92672>sloth_id</span>: <span style=color:#ae81ff>myservice-requests-availability</span>
+<span style=color:#f92672>sloth_service</span>: <span style=color:#ae81ff>myservice</span>
+<span style=color:#f92672>sloth_slo</span>: <span style=color:#ae81ff>requests-availability</span>
+<span style=color:#f92672>sloth_window</span>: <span style=color:#ae81ff>1h</span>
+<span style=color:#f92672>tier</span>: <span style=color:#e6db74>&quot;2&quot;</span></li>
+<li><span style=color:#f92672>record</span>: <span style=color:#ae81ff>slo:sli_error:ratio_rate2h</span>
+<span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
+</span><span style=color:#e6db74>      (sum(rate(http_request_duration_seconds_count{job=&quot;myservice&quot;,code=~&quot;(5..|429)&quot;}[2h])))
+</span><span style=color:#e6db74>      /
+</span><span style=color:#e6db74>      (sum(rate(http_request_duration_seconds_count{job=&quot;myservice&quot;}[2h])))</span>   <br>
+<span style=color:#f92672>labels</span>:
+<span style=color:#f92672>cmd</span>: <span style=color:#ae81ff>examplesgen.sh</span>
+<span style=color:#f92672>owner</span>: <span style=color:#ae81ff>myteam</span>
+<span style=color:#f92672>repo</span>: <span style=color:#ae81ff>myorg/myservice</span>
+<span style=color:#f92672>sloth_id</span>: <span style=color:#ae81ff>myservice-requests-availability</span>
+<span style=color:#f92672>sloth_service</span>: <span style=color:#ae81ff>myservice</span>
+<span style=color:#f92672>sloth_slo</span>: <span style=color:#ae81ff>requests-availability</span>
+<span style=color:#f92672>sloth_window</span>: <span style=color:#ae81ff>2h</span>
+<span style=color:#f92672>tier</span>: <span style=color:#e6db74>&quot;2&quot;</span></li>
+<li><span style=color:#f92672>record</span>: <span style=color:#ae81ff>slo:sli_error:ratio_rate6h</span>
+<span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
+</span><span style=color:#e6db74>      (sum(rate(http_request_duration_seconds_count{job=&quot;myservice&quot;,code=~&quot;(5..|429)&quot;}[6h])))
+</span><span style=color:#e6db74>      /
+</span><span style=color:#e6db74>      (sum(rate(http_request_duration_seconds_count{job=&quot;myservice&quot;}[6h])))</span>   <br>
+<span style=color:#f92672>labels</span>:
+<span style=color:#f92672>cmd</span>: <span style=color:#ae81ff>examplesgen.sh</span>
+<span style=color:#f92672>owner</span>: <span style=color:#ae81ff>myteam</span>
+<span style=color:#f92672>repo</span>: <span style=color:#ae81ff>myorg/myservice</span>
+<span style=color:#f92672>sloth_id</span>: <span style=color:#ae81ff>myservice-requests-availability</span>
+<span style=color:#f92672>sloth_service</span>: <span style=color:#ae81ff>myservice</span>
+<span style=color:#f92672>sloth_slo</span>: <span style=color:#ae81ff>requests-availability</span>
+<span style=color:#f92672>sloth_window</span>: <span style=color:#ae81ff>6h</span>
+<span style=color:#f92672>tier</span>: <span style=color:#e6db74>&quot;2&quot;</span></li>
+<li><span style=color:#f92672>record</span>: <span style=color:#ae81ff>slo:sli_error:ratio_rate1d</span>
+<span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
+</span><span style=color:#e6db74>      (sum(rate(http_request_duration_seconds_count{job=&quot;myservice&quot;,code=~&quot;(5..|429)&quot;}[1d])))
+</span><span style=color:#e6db74>      /
+</span><span style=color:#e6db74>      (sum(rate(http_request_duration_seconds_count{job=&quot;myservice&quot;}[1d])))</span>   <br>
+<span style=color:#f92672>labels</span>:
+<span style=color:#f92672>cmd</span>: <span style=color:#ae81ff>examplesgen.sh</span>
+<span style=color:#f92672>owner</span>: <span style=color:#ae81ff>myteam</span>
+<span style=color:#f92672>repo</span>: <span style=color:#ae81ff>myorg/myservice</span>
+<span style=color:#f92672>sloth_id</span>: <span style=color:#ae81ff>myservice-requests-availability</span>
+<span style=color:#f92672>sloth_service</span>: <span style=color:#ae81ff>myservice</span>
+<span style=color:#f92672>sloth_slo</span>: <span style=color:#ae81ff>requests-availability</span>
+<span style=color:#f92672>sloth_window</span>: <span style=color:#ae81ff>1d</span>
+<span style=color:#f92672>tier</span>: <span style=color:#e6db74>&quot;2&quot;</span></li>
+<li><span style=color:#f92672>record</span>: <span style=color:#ae81ff>slo:sli_error:ratio_rate3d</span>
+<span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
+</span><span style=color:#e6db74>      (sum(rate(http_request_duration_seconds_count{job=&quot;myservice&quot;,code=~&quot;(5..|429)&quot;}[3d])))
+</span><span style=color:#e6db74>      /
+</span><span style=color:#e6db74>      (sum(rate(http_request_duration_seconds_count{job=&quot;myservice&quot;}[3d])))</span>   <br>
+<span style=color:#f92672>labels</span>:
+<span style=color:#f92672>cmd</span>: <span style=color:#ae81ff>examplesgen.sh</span>
+<span style=color:#f92672>owner</span>: <span style=color:#ae81ff>myteam</span>
+<span style=color:#f92672>repo</span>: <span style=color:#ae81ff>myorg/myservice</span>
+<span style=color:#f92672>sloth_id</span>: <span style=color:#ae81ff>myservice-requests-availability</span>
+<span style=color:#f92672>sloth_service</span>: <span style=color:#ae81ff>myservice</span>
+<span style=color:#f92672>sloth_slo</span>: <span style=color:#ae81ff>requests-availability</span>
+<span style=color:#f92672>sloth_window</span>: <span style=color:#ae81ff>3d</span>
+<span style=color:#f92672>tier</span>: <span style=color:#e6db74>&quot;2&quot;</span></li>
+<li><span style=color:#f92672>record</span>: <span style=color:#ae81ff>slo:sli_error:ratio_rate30d</span>
+<span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
+</span><span style=color:#e6db74>      sum_over_time(slo:sli_error:ratio_rate5m{sloth_id=&quot;myservice-requests-availability&quot;, sloth_service=&quot;myservice&quot;, sloth_slo=&quot;requests-availability&quot;}[30d])
+</span><span style=color:#e6db74>      / ignoring (sloth_window)
+</span><span style=color:#e6db74>      count_over_time(slo:sli_error:ratio_rate5m{sloth_id=&quot;myservice-requests-availability&quot;, sloth_service=&quot;myservice&quot;, sloth_slo=&quot;requests-availability&quot;}[30d])</span>   <br>
+<span style=color:#f92672>labels</span>:
+<span style=color:#f92672>sloth_window</span>: <span style=color:#ae81ff>30d</span></li>
+</ul>
+</li>
+<li><span style=color:#f92672>name</span>: <span style=color:#ae81ff>sloth-slo-meta-recordings-myservice-requests-availability</span>
+<span style=color:#f92672>rules</span>:
+<ul>
+<li><span style=color:#f92672>record</span>: <span style=color:#ae81ff>slo:objective:ratio</span>
+<span style=color:#f92672>expr</span>: <span style=color:#ae81ff>vector(0.9990000000000001)</span>
+<span style=color:#f92672>labels</span>:
+<span style=color:#f92672>cmd</span>: <span style=color:#ae81ff>examplesgen.sh</span>
+<span style=color:#f92672>owner</span>: <span style=color:#ae81ff>myteam</span>
+<span style=color:#f92672>repo</span>: <span style=color:#ae81ff>myorg/myservice</span>
+<span style=color:#f92672>sloth_id</span>: <span style=color:#ae81ff>myservice-requests-availability</span>
+<span style=color:#f92672>sloth_service</span>: <span style=color:#ae81ff>myservice</span>
+<span style=color:#f92672>sloth_slo</span>: <span style=color:#ae81ff>requests-availability</span>
+<span style=color:#f92672>tier</span>: <span style=color:#e6db74>&quot;2&quot;</span></li>
+<li><span style=color:#f92672>record</span>: <span style=color:#ae81ff>slo:error_budget:ratio</span>
+<span style=color:#f92672>expr</span>: <span style=color:#ae81ff>vector(1-0.9990000000000001)</span>
+<span style=color:#f92672>labels</span>:
+<span style=color:#f92672>cmd</span>: <span style=color:#ae81ff>examplesgen.sh</span>
+<span style=color:#f92672>owner</span>: <span style=color:#ae81ff>myteam</span>
+<span style=color:#f92672>repo</span>: <span style=color:#ae81ff>myorg/myservice</span>
+<span style=color:#f92672>sloth_id</span>: <span style=color:#ae81ff>myservice-requests-availability</span>
+<span style=color:#f92672>sloth_service</span>: <span style=color:#ae81ff>myservice</span>
+<span style=color:#f92672>sloth_slo</span>: <span style=color:#ae81ff>requests-availability</span>
+<span style=color:#f92672>tier</span>: <span style=color:#e6db74>&quot;2&quot;</span></li>
+<li><span style=color:#f92672>record</span>: <span style=color:#ae81ff>slo:time_period:days</span>
+<span style=color:#f92672>expr</span>: <span style=color:#ae81ff>vector(30)</span>
+<span style=color:#f92672>labels</span>:
+<span style=color:#f92672>cmd</span>: <span style=color:#ae81ff>examplesgen.sh</span>
+<span style=color:#f92672>owner</span>: <span style=color:#ae81ff>myteam</span>
+<span style=color:#f92672>repo</span>: <span style=color:#ae81ff>myorg/myservice</span>
+<span style=color:#f92672>sloth_id</span>: <span style=color:#ae81ff>myservice-requests-availability</span>
+<span style=color:#f92672>sloth_service</span>: <span style=color:#ae81ff>myservice</span>
+<span style=color:#f92672>sloth_slo</span>: <span style=color:#ae81ff>requests-availability</span>
+<span style=color:#f92672>tier</span>: <span style=color:#e6db74>&quot;2&quot;</span></li>
+<li><span style=color:#f92672>record</span>: <span style=color:#ae81ff>slo:current_burn_rate:ratio</span>
+<span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
+</span><span style=color:#e6db74>      slo:sli_error:ratio_rate5m{sloth_id=&quot;myservice-requests-availability&quot;, sloth_service=&quot;myservice&quot;, sloth_slo=&quot;requests-availability&quot;}
+</span><span style=color:#e6db74>      / on(sloth_id, sloth_slo, sloth_service) group_left
+</span><span style=color:#e6db74>      slo:error_budget:ratio{sloth_id=&quot;myservice-requests-availability&quot;, sloth_service=&quot;myservice&quot;, sloth_slo=&quot;requests-availability&quot;}</span>   <br>
+<span style=color:#f92672>labels</span>:
+<span style=color:#f92672>cmd</span>: <span style=color:#ae81ff>examplesgen.sh</span>
+<span style=color:#f92672>owner</span>: <span style=color:#ae81ff>myteam</span>
+<span style=color:#f92672>repo</span>: <span style=color:#ae81ff>myorg/myservice</span>
+<span style=color:#f92672>sloth_id</span>: <span style=color:#ae81ff>myservice-requests-availability</span>
+<span style=color:#f92672>sloth_service</span>: <span style=color:#ae81ff>myservice</span>
+<span style=color:#f92672>sloth_slo</span>: <span style=color:#ae81ff>requests-availability</span>
+<span style=color:#f92672>tier</span>: <span style=color:#e6db74>&quot;2&quot;</span></li>
+<li><span style=color:#f92672>record</span>: <span style=color:#ae81ff>slo:period_burn_rate:ratio</span>
+<span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
+</span><span style=color:#e6db74>      slo:sli_error:ratio_rate30d{sloth_id=&quot;myservice-requests-availability&quot;, sloth_service=&quot;myservice&quot;, sloth_slo=&quot;requests-availability&quot;}
+</span><span style=color:#e6db74>      / on(sloth_id, sloth_slo, sloth_service) group_left
+</span><span style=color:#e6db74>      slo:error_budget:ratio{sloth_id=&quot;myservice-requests-availability&quot;, sloth_service=&quot;myservice&quot;, sloth_slo=&quot;requests-availability&quot;}</span>   <br>
+<span style=color:#f92672>labels</span>:
+<span style=color:#f92672>cmd</span>: <span style=color:#ae81ff>examplesgen.sh</span>
+<span style=color:#f92672>owner</span>: <span style=color:#ae81ff>myteam</span>
+<span style=color:#f92672>repo</span>: <span style=color:#ae81ff>myorg/myservice</span>
+<span style=color:#f92672>sloth_id</span>: <span style=color:#ae81ff>myservice-requests-availability</span>
+<span style=color:#f92672>sloth_service</span>: <span style=color:#ae81ff>myservice</span>
+<span style=color:#f92672>sloth_slo</span>: <span style=color:#ae81ff>requests-availability</span>
+<span style=color:#f92672>tier</span>: <span style=color:#e6db74>&quot;2&quot;</span></li>
+<li><span style=color:#f92672>record</span>: <span style=color:#ae81ff>slo:period_error_budget_remaining:ratio</span>
+<span style=color:#f92672>expr</span>: <span style=color:#ae81ff>1</span> - <span style=color:#ae81ff>slo:period_burn_rate:ratio{sloth_id=&quot;myservice-requests-availability&quot;,</span>
+<span style=color:#ae81ff>sloth_service=&quot;myservice&quot;, sloth_slo=&quot;requests-availability&quot;}</span>
+<span style=color:#f92672>labels</span>:
+<span style=color:#f92672>cmd</span>: <span style=color:#ae81ff>examplesgen.sh</span>
+<span style=color:#f92672>owner</span>: <span style=color:#ae81ff>myteam</span>
+<span style=color:#f92672>repo</span>: <span style=color:#ae81ff>myorg/myservice</span>
+<span style=color:#f92672>sloth_id</span>: <span style=color:#ae81ff>myservice-requests-availability</span>
+<span style=color:#f92672>sloth_service</span>: <span style=color:#ae81ff>myservice</span>
+<span style=color:#f92672>sloth_slo</span>: <span style=color:#ae81ff>requests-availability</span>
+<span style=color:#f92672>tier</span>: <span style=color:#e6db74>&quot;2&quot;</span></li>
+<li><span style=color:#f92672>record</span>: <span style=color:#ae81ff>sloth_slo_info</span>
+<span style=color:#f92672>expr</span>: <span style=color:#ae81ff>vector(1)</span>
+<span style=color:#f92672>labels</span>:
+<span style=color:#f92672>cmd</span>: <span style=color:#ae81ff>examplesgen.sh</span>
+<span style=color:#f92672>owner</span>: <span style=color:#ae81ff>myteam</span>
+<span style=color:#f92672>repo</span>: <span style=color:#ae81ff>myorg/myservice</span>
+<span style=color:#f92672>sloth_id</span>: <span style=color:#ae81ff>myservice-requests-availability</span>
+<span style=color:#f92672>sloth_mode</span>: <span style=color:#ae81ff>cli-gen-prom</span>
+<span style=color:#f92672>sloth_service</span>: <span style=color:#ae81ff>myservice</span>
+<span style=color:#f92672>sloth_slo</span>: <span style=color:#ae81ff>requests-availability</span>
+<span style=color:#f92672>sloth_spec</span>: <span style=color:#ae81ff>prometheus/v1</span>
+<span style=color:#f92672>sloth_version</span>: <span style=color:#ae81ff>dev</span>
+<span style=color:#f92672>tier</span>: <span style=color:#e6db74>&quot;2&quot;</span></li>
+</ul>
+</li>
+<li><span style=color:#f92672>name</span>: <span style=color:#ae81ff>sloth-slo-alerts-myservice-requests-availability</span>
+<span style=color:#f92672>rules</span>:
+<ul>
+<li><span style=color:#f92672>alert</span>: <span style=color:#ae81ff>MyServiceHighErrorRate</span>
+<span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
+</span><span style=color:#e6db74>      (
+</span><span style=color:#e6db74>          (slo:sli_error:ratio_rate5m{sloth_id=&quot;myservice-requests-availability&quot;, sloth_service=&quot;myservice&quot;, sloth_slo=&quot;requests-availability&quot;} &gt; (14.4 * 0.0009999999999999432))
+</span><span style=color:#e6db74>          and ignoring (sloth_window)
+</span><span style=color:#e6db74>          (slo:sli_error:ratio_rate1h{sloth_id=&quot;myservice-requests-availability&quot;, sloth_service=&quot;myservice&quot;, sloth_slo=&quot;requests-availability&quot;} &gt; (14.4 * 0.0009999999999999432))
+</span><span style=color:#e6db74>      )
+</span><span style=color:#e6db74>      or ignoring (sloth_window)
+</span><span style=color:#e6db74>      (
+</span><span style=color:#e6db74>          (slo:sli_error:ratio_rate30m{sloth_id=&quot;myservice-requests-availability&quot;, sloth_service=&quot;myservice&quot;, sloth_slo=&quot;requests-availability&quot;} &gt; (6 * 0.0009999999999999432))
+</span><span style=color:#e6db74>          and ignoring (sloth_window)
+</span><span style=color:#e6db74>          (slo:sli_error:ratio_rate6h{sloth_id=&quot;myservice-requests-availability&quot;, sloth_service=&quot;myservice&quot;, sloth_slo=&quot;requests-availability&quot;} &gt; (6 * 0.0009999999999999432))
+</span><span style=color:#e6db74>      )</span>   <br>
+<span style=color:#f92672>labels</span>:
+<span style=color:#f92672>category</span>: <span style=color:#ae81ff>availability</span>
+<span style=color:#f92672>routing_key</span>: <span style=color:#ae81ff>myteam</span>
+<span style=color:#f92672>severity</span>: <span style=color:#ae81ff>pageteam</span>
+<span style=color:#f92672>sloth_severity</span>: <span style=color:#ae81ff>page</span>
+<span style=color:#f92672>annotations</span>:
+<span style=color:#f92672>summary</span>: <span style=color:#ae81ff>High error rate on 'myservice' requests responses</span>
+<span style=color:#f92672>title</span>: <span style=color:#ae81ff>(page) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget</span>
+<span style=color:#ae81ff>burn rate is too fast.</span></li>
+<li><span style=color:#f92672>alert</span>: <span style=color:#ae81ff>MyServiceHighErrorRate</span>
+<span style=color:#f92672>expr</span>: |<span style=color:#e6db74>
+</span><span style=color:#e6db74>      (
+</span><span style=color:#e6db74>          (slo:sli_error:ratio_rate2h{sloth_id=&quot;myservice-requests-availability&quot;, sloth_service=&quot;myservice&quot;, sloth_slo=&quot;requests-availability&quot;} &gt; (3 * 0.0009999999999999432))
+</span><span style=color:#e6db74>          and ignoring (sloth_window)
+</span><span style=color:#e6db74>          (slo:sli_error:ratio_rate1d{sloth_id=&quot;myservice-requests-availability&quot;, sloth_service=&quot;myservice&quot;, sloth_slo=&quot;requests-availability&quot;} &gt; (3 * 0.0009999999999999432))
+</span><span style=color:#e6db74>      )
+</span><span style=color:#e6db74>      or ignoring (sloth_window)
+</span><span style=color:#e6db74>      (
+</span><span style=color:#e6db74>          (slo:sli_error:ratio_rate6h{sloth_id=&quot;myservice-requests-availability&quot;, sloth_service=&quot;myservice&quot;, sloth_slo=&quot;requests-availability&quot;} &gt; (1 * 0.0009999999999999432))
+</span><span style=color:#e6db74>          and ignoring (sloth_window)
+</span><span style=color:#e6db74>          (slo:sli_error:ratio_rate3d{sloth_id=&quot;myservice-requests-availability&quot;, sloth_service=&quot;myservice&quot;, sloth_slo=&quot;requests-availability&quot;} &gt; (1 * 0.0009999999999999432))
+</span><span style=color:#e6db74>      )</span>   <br>
+<span style=color:#f92672>labels</span>:
+<span style=color:#f92672>category</span>: <span style=color:#ae81ff>availability</span>
+<span style=color:#f92672>severity</span>: <span style=color:#ae81ff>slack</span>
+<span style=color:#f92672>slack_channel</span>: <span style=color:#e6db74>'#alerts-myteam'</span>
+<span style=color:#f92672>sloth_severity</span>: <span style=color:#ae81ff>ticket</span>
+<span style=color:#f92672>annotations</span>:
+<span style=color:#f92672>summary</span>: <span style=color:#ae81ff>High error rate on 'myservice' requests responses</span>
+<span style=color:#f92672>title</span>: <span style=color:#ae81ff>(ticket) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget</span>
+<span style=color:#ae81ff>burn rate is too fast.</span>
+</code></pre></div></div></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
 </article>
 <div class="gdoc-page__footer flex flex-wrap justify-between">
 </div>

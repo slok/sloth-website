@@ -3,7 +3,11 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=color-scheme content="light dark">
-<meta name=description content="Something">
+<meta name=description content="Sloth comes with Grafana ready dashboards to be imported and used.
+Detailed SLOs    Get it here
+This dashboards features detailed view of each of the SLOs.
+Every SLO will show:
+ SLI. SLO metadata details (name, objective&mldr;). SLO Burn rate. Remaining error budget for the current month (Since 1st). Remaining error budget for the last 30 days. In case of enabled alerts, show the state of the current alerts.">
 <title>Dashboards | Sloth</title>
 <link rel=icon href=/favicon/favicon-32x32.png type=image/x-icon>
 <script src=/js/darkmode-ce906ea916.min.js></script>
@@ -159,7 +163,11 @@ Kubernetes controller
 </span>
 </li>
 <li>
-<span class=flex>SLI plugins</span>
+<span class=flex>
+<a href=/usage/plugins/ class=gdoc-nav__entry>
+SLI plugins
+</a>
+</span>
 </li>
 </ul>
 </li>
@@ -281,7 +289,46 @@ hidden-mobile" itemprop=breadcrumb>
 </div>
 <article class="gdoc-markdown gdoc-markdown__align--left">
 <h1>Dashboards</h1>
-<p>Something</p>
+<p>Sloth comes with <a class=gdoc-markdown__link href=https://grafana.com/>Grafana</a> ready dashboards to be imported and used.</p>
+<div class=gdoc-page__anchorwrap>
+<h2 id=detailed-slos>
+Detailed SLOs
+<a data-clipboard-text=https://sloth.dev/dashboards/#detailed-slos class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Detailed SLOs" href=#detailed-slos><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
+</a>
+</h2>
+</div><p><strong>Get it <a class=gdoc-markdown__link href=https://grafana.com/grafana/dashboards/14348>here</a></strong></p>
+<p>This dashboards features detailed view of each of the SLOs.</p>
+<p><img src=/media/dashboards/details-slo.png alt="Details slo"></p>
+<p><img src=/media/dashboards/details-slo-burndown.png alt="Error budget burndown"></p>
+<p>Every SLO will show:</p>
+<ul>
+<li>SLI.</li>
+<li>SLO metadata details (name, objective&mldr;).</li>
+<li>SLO Burn rate.</li>
+<li>Remaining error budget for the current month (Since 1st).</li>
+<li>Remaining error budget for the last 30 days.</li>
+<li>In case of enabled alerts, show the state of the current alerts.</li>
+<li>Error budget month burndown chart.</li>
+<li>Burn rate magnitude.</li>
+</ul>
+<p><img src=/media/dashboards/details-slo-general.png alt="General slo info"></p>
+<p>Apart from this, the dashboards has a general view of the current exceeded SLO list and graph.</p>
+<div class=gdoc-page__anchorwrap>
+<h2 id=high-level-overview>
+High level overview
+<a data-clipboard-text=https://sloth.dev/dashboards/#high-level-overview class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor High level overview" href=#high-level-overview><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
+</a>
+</h2>
+</div><p><strong>Get it <a class=gdoc-markdown__link href=https://grafana.com/grafana/dashboards/14643>here</a></strong></p>
+<p>This dashboards shows a high level overview of all the SLOs in the system managed by sloth. Normally this
+dashboards will be used to check correlation between SLO error budget burns.</p>
+<p><img src=/media/dashboards/high-level.png alt="High level overview"></p>
+<p>This dashboards comes with:</p>
+<ul>
+<li>Information of SLOs (quantity, average burn rate of all, triggering alerts&mldr;).</li>
+<li>Graph and tables of the SLOs currently burning budget at high rates.</li>
+<li>Timeline with all SLOS error budget burns.</li>
+</ul>
 </article>
 <div class="gdoc-page__footer flex flex-wrap justify-between">
 </div>

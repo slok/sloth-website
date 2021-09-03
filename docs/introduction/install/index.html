@@ -3,7 +3,10 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=color-scheme content="light dark">
-<meta name=description content="Something">
+<meta name=description content="Releases    Get binary releases from https://github.com/slok/sloth/releases
+Docker images    Official multi arch docker images in dockerhub.
+docker pull slok/sloth Building from source code    Clone the repository and build:
+git clone git@github.com:slok/sloth.git && \ cd ./sloth && \ make build && \ ls -la ./bin Kubernetes     Helm chart Raw Kubernetes manifests without common SLI plugins Raw Kubernetes manifests with common SLI plugins Kustomize  ">
 <title>Installing Sloth | Sloth</title>
 <link rel=icon href=/favicon/favicon-32x32.png type=image/x-icon>
 <script src=/js/darkmode-ce906ea916.min.js></script>
@@ -158,7 +161,11 @@ Kubernetes controller
 </span>
 </li>
 <li>
-<span class=flex>SLI plugins</span>
+<span class=flex>
+<a href=/usage/plugins/ class=gdoc-nav__entry>
+SLI plugins
+</a>
+</span>
 </li>
 </ul>
 </li>
@@ -280,7 +287,44 @@ hidden-mobile" itemprop=breadcrumb>
 </div>
 <article class="gdoc-markdown gdoc-markdown__align--left">
 <h1>Installing Sloth</h1>
-<p>Something</p>
+<div class=gdoc-page__anchorwrap>
+<h2 id=releases>
+Releases
+<a data-clipboard-text=https://sloth.dev/introduction/install/#releases class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Releases" href=#releases><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
+</a>
+</h2>
+</div><p>Get binary releases from <a class=gdoc-markdown__link href=https://github.com/slok/sloth/releases>https://github.com/slok/sloth/releases</a></p>
+<div class=gdoc-page__anchorwrap>
+<h2 id=docker-images>
+Docker images
+<a data-clipboard-text=https://sloth.dev/introduction/install/#docker-images class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Docker images" href=#docker-images><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
+</a>
+</h2>
+</div><p>Official multi arch docker images in <a class=gdoc-markdown__link href=https://hub.docker.com/r/slok/sloth>dockerhub</a>.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>docker pull slok/sloth
+</code></pre></div><div class=gdoc-page__anchorwrap>
+<h2 id=building-from-source-code>
+Building from source code
+<a data-clipboard-text=https://sloth.dev/introduction/install/#building-from-source-code class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Building from source code" href=#building-from-source-code><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
+</a>
+</h2>
+</div><p>Clone the repository and build:</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git clone git@github.com:slok/sloth.git <span style=color:#f92672>&amp;&amp;</span> <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>cd ./sloth <span style=color:#f92672>&amp;&amp;</span> <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>make build <span style=color:#f92672>&amp;&amp;</span> <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>ls -la ./bin
+</code></pre></div><div class=gdoc-page__anchorwrap>
+<h2 id=kubernetes>
+Kubernetes
+<a data-clipboard-text=https://sloth.dev/introduction/install/#kubernetes class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Kubernetes" href=#kubernetes><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
+</a>
+</h2>
+</div><ul>
+<li><a class=gdoc-markdown__link href=https://github.com/slok/sloth/tree/main/deploy/kubernetes/helm>Helm chart</a></li>
+<li><a class=gdoc-markdown__link href=https://raw.githubusercontent.com/slok/sloth/main/deploy/kubernetes/raw/sloth.yaml>Raw Kubernetes manifests without common SLI plugins</a></li>
+<li><a class=gdoc-markdown__link href=https://raw.githubusercontent.com/slok/sloth/main/deploy/kubernetes/raw/sloth-with-common-plugins.yaml>Raw Kubernetes manifests with common SLI plugins</a></li>
+<li><a class=gdoc-markdown__link href=https://raw.githubusercontent.com/slok/sloth/main/deploy/kubernetes/kustomization.yaml>Kustomize</a></li>
+</ul>
 </article>
 <div class="gdoc-page__footer flex flex-wrap justify-between">
 </div>
