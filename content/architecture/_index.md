@@ -62,10 +62,10 @@ Sloth SLO alerts use [multiwindow-multiburn][mwmb] method. It will generate 2 ty
 
 Using 4 different alerts across different time window periods:
 
-- Critical in short time window: Very very high rate of burning budget.
-- Critical in medium time window: High rate rate of burning budget.
-- Ticket in medium time window: Constant normal rate of burning budget.
-- Ticket in long time window: Constant low rate of burning budget.
+- Critical/Page in short time window: Very very high rate of burning budget.
+- Critical/Page in medium time window: High rate rate of burning budget.
+- Warning/Ticket in medium time window: Constant normal rate of burning budget.
+- Warning/Ticket in long time window: Constant low rate of burning budget.
 
 [prom-recordings]: https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/
 [prom-alerts]: https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/
