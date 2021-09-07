@@ -18,6 +18,7 @@ Kubernetes format means that the SLOs use a Kubernetes style spec. Is very simil
 Check related resources:
 
 - [Spec][spec].
+- [Examples]({{< relref "../examples/kubernetes" >}})
 - [K8s client][k8s-cli].
 - [CRD manifest][crd-manifest].
 
@@ -38,8 +39,6 @@ INFO[0000] Metadata recording rules generated            rules=7 slo=home-wifi-r
 INFO[0000] SLO alert rules generated                     rules=2 slo=home-wifi-risk-wifi-client-satisfaction svc=generate.prometheus.Service version=v0.1.0-43-g5715af5
 
 ```
-
-{{< include file="sync/pkg-kubernetes-api-v1.md" >}}
 
 [spec]: https://pkg.go.dev/github.com/slok/sloth@v0.6.0/pkg/kubernetes/api/sloth/v1
 [k8s-cli]: https://pkg.go.dev/github.com/slok/sloth@v0.6.0/pkg/kubernetes/gen/clientset/versioned/typed/sloth/v1

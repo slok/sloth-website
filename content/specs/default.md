@@ -12,7 +12,8 @@ This is the default format for Sloth, doesn't depend on Kubernetes CRDs or anyth
 
 Normally this format is used when the integration you want is a vanilla Prometheus integration with raw Prometheus rules, so, this will generate the prometheus [recording][prom-recordings] and [alerting][prom-alerts] rules in Standard Prometheus YAML format.
 
-**[Check spec here][spec]**
+- [Spec]
+- [Examples]({{< relref "../examples/default" >}})
 
 CLI Example:
 
@@ -29,8 +30,6 @@ INFO[0000] Metadata recording rules generated            rules=7 slo=home-wifi-r
 INFO[0000] SLO alert rules generated                     rules=2 slo=home-wifi-risk-wifi-client-satisfaction svc=generate.prometheus.Service version=v0.1.0-43-g5715af5
 INFO[0000] Prometheus rules written                      format=yaml groups=6 out=/tmp/home-wifi.yml svc=storage.IOWriter version=v0.1.0-43-g5715af5
 ```
-
-{{< include file="sync/pkg-prometheus-api-v1.md" >}}
 
 [spec]: https://pkg.go.dev/github.com/slok/sloth@v0.6.0/pkg/prometheus/api/v1
 [prom-recordings]: https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/
