@@ -11,5 +11,10 @@ run: ## Runs docs locally.
 	./scripts/run.sh
 
 .PHONY: gen
-gen: ## Generate site.
+gen: sync  ## Generate site.
 	./scripts/generate.sh
+
+.PHONY: sync
+sync: ## Sync all required files.
+	./scripts/sync-sloth.sh
+	./scripts/sync-sli-plugins.sh
