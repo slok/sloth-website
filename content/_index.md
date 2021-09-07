@@ -12,7 +12,7 @@ Stop using complex specs and processes to create [Prometheus] based [SLOs][googl
 
 _Fast, easy and reliable Prometheus SLO generator._
 
-{{< button size="large" relref="introduction/getting-started/" >}}Get started{{< /button >}}
+{{< button size="large" relref="introduction/" >}}Get started{{< /button >}}
 
 {{< columns >}}
 
