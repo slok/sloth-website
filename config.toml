@@ -12,6 +12,7 @@ publishDir = "./docs"
 
 [params]
   geekdocLogo = "media/sloth-logo-white.svg"
+  favicon = "/media/favicon.ico"
 
 # Geekdoc required configuration
 pygmentsUseClasses = true
@@ -20,6 +21,16 @@ disablePathToLower = true
 
 # Needed for mermaid shortcodes
 [markup]
+  [markup.highlight]
+    codeFences = false
+    guessSyntax = false
+    hl_Lines = ""
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = false
+    style = "dracula"
+    tabWidth = 4
   [markup.goldmark.renderer]
     # Needed for mermaid shortcode
     unsafe = true

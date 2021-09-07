@@ -4,6 +4,10 @@ more:
     ref: "https://github.com/slok/sloth/releases"
     external: true
     icon: "gdoc_download"
+  - name: Changelog
+    ref: "https://github.com/slok/sloth/blob/main/CHANGELOG.md"
+    external: true
+    icon: "gdoc_timer"
   - name: "SLI plugins source"
     ref: "https://github.com/slok/sloth-common-sli-plugins"
     external: true
