@@ -1,5 +1,5 @@
 ---
-title: Sloth
+title:
 description: Sloth documentation
 geekdocNav: false
 geekdocAlign: center
@@ -24,7 +24,7 @@ Simplicity and UX is priority. Easy CLIs, APIs and specs that make the usage of 
 
 ## Focused on standards
 
-Accepts multiple spec types that adapts to your needs OpenSLO] or Kubernetes CRDs that will generate a set of standardized Prometheus metrics and alerts.
+Accepts multiple spec types that adapts to your needs OpenSLO or Kubernetes CRDs that will generate a set of standardized Prometheus metrics and alerts.
 
 <--->
 
