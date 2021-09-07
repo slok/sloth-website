@@ -3,7 +3,8 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=color-scheme content="light dark">
-<meta name=description content="Sloth">
+<meta name=description content="How does it work    Sloth uses Prometheus rules to generate SLOs. Based on the generated recording and alert rules it creates a reliable and uniform SLO implementation:
+  stateDiagram-v2 direction LR input: 1 Sloth spec sloth: Sloth output: N prometheus rules input -- sloth sloth -- output state sloth { direction LR load: Load SLO Spec metadata: Gen Metadata rules slis: Gen SLI rules alerts: Gen Alert rules save: Out format load -- metadata load -- slis load -- alerts metadata -- save slis -- save alerts -- save }  The Prometheus rules that Sloth generates, fall in 3 categories:">
 <title>Architecture | Sloth</title>
 <link rel=icon href=/favicon/favicon-32x32.png type=image/x-icon>
 <script src=/js/darkmode-ce906ea916.min.js></script>
@@ -92,7 +93,7 @@ Installing Sloth
 <li>
 <span class=flex>
 <a href=/specs/default/ class=gdoc-nav__entry>
-Default
+Default (prometheus/v1)
 </a>
 </span>
 </li>
@@ -113,23 +114,11 @@ OpenSLO
 </ul>
 </li>
 <li>
-<span class=flex>Architecture</span>
-<ul class=gdoc-nav__list>
-<li>
 <span class=flex>
-<a href=/architecture/metrics/ class=gdoc-nav__entry>
-Metrics
+<a href=/architecture/ class="gdoc-nav__entry is-active">
+Architecture
 </a>
 </span>
-</li>
-<li>
-<span class=flex>
-<a href=/architecture/alerts/ class=gdoc-nav__entry>
-Alerts
-</a>
-</span>
-</li>
-</ul>
 </li>
 <li>
 <span class=flex>
@@ -142,12 +131,9 @@ Dashboards
 <span class=flex>Usage</span>
 <ul class=gdoc-nav__list>
 <li>
-<span class=flex>Slo Validation</span>
-</li>
-<li>
 <span class=flex>
 <a href=/usage/cli/ class=gdoc-nav__entry>
-CLI
+CLI generate
 </a>
 </span>
 </li>
@@ -165,6 +151,145 @@ SLI plugins
 </a>
 </span>
 </li>
+<li>
+<span class=flex>
+<a href=/usage/slo-validation/ class=gdoc-nav__entry>
+SLO validation
+</a>
+</span>
+</li>
+</ul>
+</li>
+<li>
+<span class=flex>Examples</span>
+<ul class=gdoc-nav__list>
+<li>
+<input type=checkbox id=navtree-02ab23f1 class=gdoc-nav__toggle>
+<label for=navtree-02ab23f1 class="flex justify-between">
+<span class=flex>
+<a href=/examples/default/ class=gdoc-nav__entry>
+Default
+</a>
+</span><svg class="icon gdoc_keyborad_arrow_left"><use xlink:href="#gdoc_keyborad_arrow_left"/></svg><svg class="icon gdoc_keyborad_arrow_down hidden"><use xlink:href="#gdoc_keyborad_arrow_down"/></svg>
+</label>
+<ul class=gdoc-nav__list>
+<li>
+<span class=flex>
+<a href=/examples/default/getting-started/ class=gdoc-nav__entry>
+Getting started
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/default/home-wifi/ class=gdoc-nav__entry>
+Home WiFi
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/default/kubernetes-apiserver/ class=gdoc-nav__entry>
+Kubernetes APIserver
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/default/multifile/ class=gdoc-nav__entry>
+Multi file
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/default/no-alerts/ class=gdoc-nav__entry>
+No alerts
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/default/raw-sli/ class=gdoc-nav__entry>
+Raw SLI
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/default/sli-plugin/ class=gdoc-nav__entry>
+SLI plugin
+</a>
+</span>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=navtree-1ba05e7e class=gdoc-nav__toggle>
+<label for=navtree-1ba05e7e class="flex justify-between">
+<span class=flex>
+<a href=/examples/kubernetes/ class=gdoc-nav__entry>
+Kubernetes
+</a>
+</span><svg class="icon gdoc_keyborad_arrow_left"><use xlink:href="#gdoc_keyborad_arrow_left"/></svg><svg class="icon gdoc_keyborad_arrow_down hidden"><use xlink:href="#gdoc_keyborad_arrow_down"/></svg>
+</label>
+<ul class=gdoc-nav__list>
+<li>
+<span class=flex>
+<a href=/examples/kubernetes/getting-started/ class=gdoc-nav__entry>
+Getting started
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/kubernetes/home-wifi/ class=gdoc-nav__entry>
+Home WiFi
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/kubernetes/multifile/ class=gdoc-nav__entry>
+Multi file
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/kubernetes/sli-plugin/ class=gdoc-nav__entry>
+SLI plugin
+</a>
+</span>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=navtree-f0cfab89 class=gdoc-nav__toggle>
+<label for=navtree-f0cfab89 class="flex justify-between">
+<span class=flex>
+<a href=/examples/openslo/ class=gdoc-nav__entry>
+OpenSLO
+</a>
+</span><svg class="icon gdoc_keyborad_arrow_left"><use xlink:href="#gdoc_keyborad_arrow_left"/></svg><svg class="icon gdoc_keyborad_arrow_down hidden"><use xlink:href="#gdoc_keyborad_arrow_down"/></svg>
+</label>
+<ul class=gdoc-nav__list>
+<li>
+<span class=flex>
+<a href=/examples/openslo/getting-started/ class=gdoc-nav__entry>
+Getting started
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/openslo/kubernetes-apiserver/ class=gdoc-nav__entry>
+Kubernetes APIserver
+</a>
+</span>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
@@ -178,61 +303,109 @@ SLI plugins
 </label>
 <ul class=gdoc-nav__list>
 <li>
-<span class=flex>Group A</span>
-<ul class=gdoc-nav__list>
-<li>
 <span class=flex>
-<a href=/sli-plugins/group1/plugin0/ class=gdoc-nav__entry>
-Plugin0
+<a href=/sli-plugins/coredns-availability/ class=gdoc-nav__entry>
+Coredns Availability
 </a>
 </span>
 </li>
 <li>
 <span class=flex>
-<a href=/sli-plugins/group1/plugin1/ class=gdoc-nav__entry>
-Plugin 1
+<a href=/sli-plugins/coredns-latency/ class=gdoc-nav__entry>
+Coredns Latency
 </a>
 </span>
 </li>
 <li>
 <span class=flex>
-<a href=/sli-plugins/group1/plugin2/ class=gdoc-nav__entry>
-Plugin 2
-</a>
-</span>
-</li>
-</ul>
-</li>
-<li>
-<span class=flex>Group B</span>
-<ul class=gdoc-nav__list>
-<li>
-<span class=flex>
-<a href=/sli-plugins/group2/plugin3/ class=gdoc-nav__entry>
-Plugin 3
-</a>
-</span>
-</li>
-</ul>
-</li>
-<li>
-<span class=flex>Group C</span>
-<ul class=gdoc-nav__list>
-<li>
-<span class=flex>
-<a href=/sli-plugins/group3/plugin4/ class=gdoc-nav__entry>
-Plugin 4
+<a href=/sli-plugins/fake/ class=gdoc-nav__entry>
+Fake
 </a>
 </span>
 </li>
 <li>
 <span class=flex>
-<a href=/sli-plugins/group3/plugin5/ class=gdoc-nav__entry>
-Plugin 5
+<a href=/sli-plugins/kubernetes-apiserver-availability/ class=gdoc-nav__entry>
+Kubernetes Apiserver Availability
 </a>
 </span>
 </li>
-</ul>
+<li>
+<span class=flex>
+<a href=/sli-plugins/kubernetes-apiserver-latency/ class=gdoc-nav__entry>
+Kubernetes Apiserver Latency
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/kubernetes-kooper-availability/ class=gdoc-nav__entry>
+Kubernetes Kooper Availability
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/kubernetes-kooper-latency/ class=gdoc-nav__entry>
+Kubernetes Kooper Latency
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/kubernetes-kooper-queuecongestion/ class=gdoc-nav__entry>
+Kubernetes Kooper Queuecongestion
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/noop/ class=gdoc-nav__entry>
+Noop
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/prometheus-rules-evalavailability/ class=gdoc-nav__entry>
+Prometheus Rules Evalavailability
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/prometheus-targets-availability/ class=gdoc-nav__entry>
+Prometheus Targets Availability
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/slok-go-http-metrics-availability/ class=gdoc-nav__entry>
+Slok Go HTTP Metrics Availability
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/slok-go-http-metrics-latency/ class=gdoc-nav__entry>
+Slok Go HTTP Metrics Latency
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/traefik-v1-availability/ class=gdoc-nav__entry>
+Traefik V1 Availability
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/traefik-v1-latency/ class=gdoc-nav__entry>
+Traefik V1 Latency
+</a>
+</span>
 </li>
 </ul>
 </li>
@@ -252,6 +425,13 @@ F.A.Q
 <span class=flex><svg class="icon gdoc_download"><use xlink:href="#gdoc_download"/></svg>
 <a href=https://github.com/slok/sloth/releases class=gdoc-nav__entry>
 Releases
+</a>
+</span>
+</li>
+<li>
+<span class=flex><svg class="icon gdoc_timer"><use xlink:href="#gdoc_timer"/></svg>
+<a href=https://github.com/slok/sloth/blob/main/CHANGELOG.md class=gdoc-nav__entry>
+Changelog
 </a>
 </span>
 </li>
@@ -279,12 +459,83 @@ justify-between
 hidden-mobile" itemprop=breadcrumb>
 <div><svg class="icon gdoc_path hidden-mobile"><use xlink:href="#gdoc_path"/></svg>
 <ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList>
-<li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemscope itemtype=https://schema.org/WebPage itemprop=item itemid=/ href=/><span itemprop=name>Sloth</span></a><meta itemprop=position content="1"></li><li> / </li><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>Architecture</span><meta itemprop=position content="2"></li>
+<li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemscope itemtype=https://schema.org/WebPage itemprop=item itemid=/ href=/><span itemprop=name></span></a><meta itemprop=position content="1"></li><li> / </li><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>Architecture</span><meta itemprop=position content="2"></li>
 </ol>
 </div>
 </div>
 <article class="gdoc-markdown gdoc-markdown__align--left">
 <h1>Architecture</h1>
+<div class=gdoc-page__anchorwrap>
+<h2 id=how-does-it-work>
+How does it work
+<a data-clipboard-text=https://sloth.dev/architecture/#how-does-it-work class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor How does it work" href=#how-does-it-work><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
+</a>
+</h2>
+</div><p>Sloth uses Prometheus rules to generate SLOs. Based on the generated <a class=gdoc-markdown__link href=https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/>recording</a> and <a class=gdoc-markdown__link href=https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/>alert</a> rules it creates a reliable and uniform SLO implementation:</p>
+<script defer src=/js/mermaid-55c0f948e4.min.js></script>
+<script defer src=/js/mermaid-loader-1bd1515cbf.min.js></script>
+<pre class="gdoc-mermaid mermaid text-center">
+stateDiagram-v2
+direction LR
+
+input: 1 Sloth spec
+sloth: Sloth
+output: N prometheus rules
+
+input --> sloth
+sloth --> output
+
+state sloth {
+direction LR
+load: Load SLO Spec
+metadata: Gen Metadata rules
+slis: Gen SLI rules
+alerts: Gen Alert rules
+save: Out format
+
+load --> metadata
+load --> slis
+load --> alerts
+metadata --> save
+slis --> save
+alerts --> save
+}
+</pre>
+<p>The Prometheus rules that Sloth generates, fall in 3 categories:</p>
+<ul>
+<li><strong>SLIs</strong>: These rules are the base, they use the queries provided by the user to get a value used to show what is the error service level (availability). It creates multiple rules for different time windows, these different results will be used for the alerts.</li>
+<li><strong>Metadata</strong>: These are used as informative metrics, like the remaining error budget, the SLO objective percent&mldr; These are very handy for SLO visualization, e.g Grafana dashboard.</li>
+<li><strong>Alerts</strong>: These are the <a class=gdoc-markdown__link href=https://landing.google.com/sre/workbook/chapters/alerting-on-slos/#6-multiwindow-multi-burn-rate-alerts>multiwindow-multiburn</a> alerts that are based on the SLI rules.</li>
+</ul>
+<p>Sloth will take the service level spec and for each SLO in the spec will create 3 rule groups with the above categories.</p>
+<div class=gdoc-page__anchorwrap>
+<h2 id=metrics>
+Metrics
+<a data-clipboard-text=https://sloth.dev/architecture/#metrics class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Metrics" href=#metrics><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
+</a>
+</h2>
+</div><p>The Sloth generated rules will share the same metric name across SLOs. However the labels are the key to identify the different services, SLO&mldr; This is how we obtain a uniform way of describing all the SLOs across different teams and services.</p>
+<p>To get all the available metric names created by Sloth, use this query:</p>
+<pre><code class=language-text>count({sloth_id!=&quot;&quot;}) by (__name__)
+</code></pre>
+<div class=gdoc-page__anchorwrap>
+<h2 id=alerts>
+Alerts
+<a data-clipboard-text=https://sloth.dev/architecture/#alerts class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Alerts" href=#alerts><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
+</a>
+</h2>
+</div><p>Sloth SLO alerts use <a class=gdoc-markdown__link href=https://landing.google.com/sre/workbook/chapters/alerting-on-slos/#6-multiwindow-multi-burn-rate-alerts>multiwindow-multiburn</a> method. It will generate 2 types of alerts:</p>
+<ul>
+<li>Critical/page: Pay attention right now.</li>
+<li>Warning/ticket: Take into account, however is not urgent.</li>
+</ul>
+<p>Using 4 different alerts across different time window periods:</p>
+<ul>
+<li>Critical/Page in short time window: Very very high rate of burning budget.</li>
+<li>Critical/Page in medium time window: High rate rate of burning budget.</li>
+<li>Warning/Ticket in medium time window: Constant normal rate of burning budget.</li>
+<li>Warning/Ticket in long time window: Constant low rate of burning budget.</li>
+</ul>
 </article>
 <div class="gdoc-page__footer flex flex-wrap justify-between">
 </div>

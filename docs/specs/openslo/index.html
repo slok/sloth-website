@@ -3,7 +3,9 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=color-scheme content="light dark">
-<meta name=description content="Something">
+<meta name=description content="Only CLI, Not Kubernetes compatible
+This spec can&rsquo;t be used with Kubernetes CRDs, use Kubernetes spec instead.  Sloth supports OpenSLO v1alpha spec, however we need to take into account that it has some restrictions:
+ OpenSLO time window restricted to 30 days. Only Objective ratio metrics are supported. Only Prometheus and PromQL query types are supported. Configuration fields not required by Sloth will be ignored.  Regarding Sloth features, OpenSLO spec doesn&rsquo;t support all of the sloth features:">
 <title>OpenSLO | Sloth</title>
 <link rel=icon href=/favicon/favicon-32x32.png type=image/x-icon>
 <script src=/js/darkmode-ce906ea916.min.js></script>
@@ -91,7 +93,7 @@ Installing Sloth
 <li>
 <span class=flex>
 <a href=/specs/default/ class=gdoc-nav__entry>
-Default
+Default (prometheus/v1)
 </a>
 </span>
 </li>
@@ -112,23 +114,11 @@ OpenSLO
 </ul>
 </li>
 <li>
-<span class=flex>Architecture</span>
-<ul class=gdoc-nav__list>
-<li>
 <span class=flex>
-<a href=/architecture/metrics/ class=gdoc-nav__entry>
-Metrics
+<a href=/architecture/ class=gdoc-nav__entry>
+Architecture
 </a>
 </span>
-</li>
-<li>
-<span class=flex>
-<a href=/architecture/alerts/ class=gdoc-nav__entry>
-Alerts
-</a>
-</span>
-</li>
-</ul>
 </li>
 <li>
 <span class=flex>
@@ -141,12 +131,9 @@ Dashboards
 <span class=flex>Usage</span>
 <ul class=gdoc-nav__list>
 <li>
-<span class=flex>Slo Validation</span>
-</li>
-<li>
 <span class=flex>
 <a href=/usage/cli/ class=gdoc-nav__entry>
-CLI
+CLI generate
 </a>
 </span>
 </li>
@@ -164,6 +151,145 @@ SLI plugins
 </a>
 </span>
 </li>
+<li>
+<span class=flex>
+<a href=/usage/slo-validation/ class=gdoc-nav__entry>
+SLO validation
+</a>
+</span>
+</li>
+</ul>
+</li>
+<li>
+<span class=flex>Examples</span>
+<ul class=gdoc-nav__list>
+<li>
+<input type=checkbox id=navtree-02ab23f1 class=gdoc-nav__toggle>
+<label for=navtree-02ab23f1 class="flex justify-between">
+<span class=flex>
+<a href=/examples/default/ class=gdoc-nav__entry>
+Default
+</a>
+</span><svg class="icon gdoc_keyborad_arrow_left"><use xlink:href="#gdoc_keyborad_arrow_left"/></svg><svg class="icon gdoc_keyborad_arrow_down hidden"><use xlink:href="#gdoc_keyborad_arrow_down"/></svg>
+</label>
+<ul class=gdoc-nav__list>
+<li>
+<span class=flex>
+<a href=/examples/default/getting-started/ class=gdoc-nav__entry>
+Getting started
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/default/home-wifi/ class=gdoc-nav__entry>
+Home WiFi
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/default/kubernetes-apiserver/ class=gdoc-nav__entry>
+Kubernetes APIserver
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/default/multifile/ class=gdoc-nav__entry>
+Multi file
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/default/no-alerts/ class=gdoc-nav__entry>
+No alerts
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/default/raw-sli/ class=gdoc-nav__entry>
+Raw SLI
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/default/sli-plugin/ class=gdoc-nav__entry>
+SLI plugin
+</a>
+</span>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=navtree-1ba05e7e class=gdoc-nav__toggle>
+<label for=navtree-1ba05e7e class="flex justify-between">
+<span class=flex>
+<a href=/examples/kubernetes/ class=gdoc-nav__entry>
+Kubernetes
+</a>
+</span><svg class="icon gdoc_keyborad_arrow_left"><use xlink:href="#gdoc_keyborad_arrow_left"/></svg><svg class="icon gdoc_keyborad_arrow_down hidden"><use xlink:href="#gdoc_keyborad_arrow_down"/></svg>
+</label>
+<ul class=gdoc-nav__list>
+<li>
+<span class=flex>
+<a href=/examples/kubernetes/getting-started/ class=gdoc-nav__entry>
+Getting started
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/kubernetes/home-wifi/ class=gdoc-nav__entry>
+Home WiFi
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/kubernetes/multifile/ class=gdoc-nav__entry>
+Multi file
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/kubernetes/sli-plugin/ class=gdoc-nav__entry>
+SLI plugin
+</a>
+</span>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=navtree-f0cfab89 class=gdoc-nav__toggle>
+<label for=navtree-f0cfab89 class="flex justify-between">
+<span class=flex>
+<a href=/examples/openslo/ class=gdoc-nav__entry>
+OpenSLO
+</a>
+</span><svg class="icon gdoc_keyborad_arrow_left"><use xlink:href="#gdoc_keyborad_arrow_left"/></svg><svg class="icon gdoc_keyborad_arrow_down hidden"><use xlink:href="#gdoc_keyborad_arrow_down"/></svg>
+</label>
+<ul class=gdoc-nav__list>
+<li>
+<span class=flex>
+<a href=/examples/openslo/getting-started/ class=gdoc-nav__entry>
+Getting started
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/openslo/kubernetes-apiserver/ class=gdoc-nav__entry>
+Kubernetes APIserver
+</a>
+</span>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
@@ -177,61 +303,109 @@ SLI plugins
 </label>
 <ul class=gdoc-nav__list>
 <li>
-<span class=flex>Group A</span>
-<ul class=gdoc-nav__list>
-<li>
 <span class=flex>
-<a href=/sli-plugins/group1/plugin0/ class=gdoc-nav__entry>
-Plugin0
+<a href=/sli-plugins/coredns-availability/ class=gdoc-nav__entry>
+Coredns Availability
 </a>
 </span>
 </li>
 <li>
 <span class=flex>
-<a href=/sli-plugins/group1/plugin1/ class=gdoc-nav__entry>
-Plugin 1
+<a href=/sli-plugins/coredns-latency/ class=gdoc-nav__entry>
+Coredns Latency
 </a>
 </span>
 </li>
 <li>
 <span class=flex>
-<a href=/sli-plugins/group1/plugin2/ class=gdoc-nav__entry>
-Plugin 2
-</a>
-</span>
-</li>
-</ul>
-</li>
-<li>
-<span class=flex>Group B</span>
-<ul class=gdoc-nav__list>
-<li>
-<span class=flex>
-<a href=/sli-plugins/group2/plugin3/ class=gdoc-nav__entry>
-Plugin 3
-</a>
-</span>
-</li>
-</ul>
-</li>
-<li>
-<span class=flex>Group C</span>
-<ul class=gdoc-nav__list>
-<li>
-<span class=flex>
-<a href=/sli-plugins/group3/plugin4/ class=gdoc-nav__entry>
-Plugin 4
+<a href=/sli-plugins/fake/ class=gdoc-nav__entry>
+Fake
 </a>
 </span>
 </li>
 <li>
 <span class=flex>
-<a href=/sli-plugins/group3/plugin5/ class=gdoc-nav__entry>
-Plugin 5
+<a href=/sli-plugins/kubernetes-apiserver-availability/ class=gdoc-nav__entry>
+Kubernetes Apiserver Availability
 </a>
 </span>
 </li>
-</ul>
+<li>
+<span class=flex>
+<a href=/sli-plugins/kubernetes-apiserver-latency/ class=gdoc-nav__entry>
+Kubernetes Apiserver Latency
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/kubernetes-kooper-availability/ class=gdoc-nav__entry>
+Kubernetes Kooper Availability
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/kubernetes-kooper-latency/ class=gdoc-nav__entry>
+Kubernetes Kooper Latency
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/kubernetes-kooper-queuecongestion/ class=gdoc-nav__entry>
+Kubernetes Kooper Queuecongestion
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/noop/ class=gdoc-nav__entry>
+Noop
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/prometheus-rules-evalavailability/ class=gdoc-nav__entry>
+Prometheus Rules Evalavailability
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/prometheus-targets-availability/ class=gdoc-nav__entry>
+Prometheus Targets Availability
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/slok-go-http-metrics-availability/ class=gdoc-nav__entry>
+Slok Go HTTP Metrics Availability
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/slok-go-http-metrics-latency/ class=gdoc-nav__entry>
+Slok Go HTTP Metrics Latency
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/traefik-v1-availability/ class=gdoc-nav__entry>
+Traefik V1 Availability
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/traefik-v1-latency/ class=gdoc-nav__entry>
+Traefik V1 Latency
+</a>
+</span>
 </li>
 </ul>
 </li>
@@ -251,6 +425,13 @@ F.A.Q
 <span class=flex><svg class="icon gdoc_download"><use xlink:href="#gdoc_download"/></svg>
 <a href=https://github.com/slok/sloth/releases class=gdoc-nav__entry>
 Releases
+</a>
+</span>
+</li>
+<li>
+<span class=flex><svg class="icon gdoc_timer"><use xlink:href="#gdoc_timer"/></svg>
+<a href=https://github.com/slok/sloth/blob/main/CHANGELOG.md class=gdoc-nav__entry>
+Changelog
 </a>
 </span>
 </li>
@@ -278,13 +459,41 @@ justify-between
 hidden-mobile" itemprop=breadcrumb>
 <div><svg class="icon gdoc_path hidden-mobile"><use xlink:href="#gdoc_path"/></svg>
 <ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList>
-<li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemscope itemtype=https://schema.org/WebPage itemprop=item itemid=/ href=/><span itemprop=name>Sloth</span></a><meta itemprop=position content="1"></li><li> / </li><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemscope itemtype=https://schema.org/WebPage itemprop=item itemid=/specs/ href=/specs/><span itemprop=name>SLO API & Specs</span></a><meta itemprop=position content="2"></li><li> / </li><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>OpenSLO</span><meta itemprop=position content="3"></li>
+<li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemscope itemtype=https://schema.org/WebPage itemprop=item itemid=/ href=/><span itemprop=name></span></a><meta itemprop=position content="1"></li><li> / </li><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemscope itemtype=https://schema.org/WebPage itemprop=item itemid=/specs/ href=/specs/><span itemprop=name>SLO API & Specs</span></a><meta itemprop=position content="2"></li><li> / </li><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>OpenSLO</span><meta itemprop=position content="3"></li>
 </ol>
 </div>
 </div>
 <article class="gdoc-markdown gdoc-markdown__align--left">
 <h1>OpenSLO</h1>
-<p>Something</p>
+<blockquote class="gdoc-hint warning">
+<strong>Only CLI, Not Kubernetes compatible</strong><br>
+This spec can&rsquo;t be used with Kubernetes CRDs, use <a class=gdoc-markdown__link href=/specs/kubernetes/>Kubernetes spec</a> instead.
+</blockquote>
+<p>Sloth supports <a class=gdoc-markdown__link href=https://github.com/OpenSLO/OpenSLO>OpenSLO v1alpha</a> spec, however we need to take into account that it has some restrictions:</p>
+<ul>
+<li>OpenSLO time window restricted to 30 days.</li>
+<li>Only Objective ratio metrics are supported.</li>
+<li>Only Prometheus and PromQL query types are supported.</li>
+<li>Configuration fields not required by Sloth will be ignored.</li>
+</ul>
+<p>Regarding Sloth features, <a class=gdoc-markdown__link href=https://openslo.com/>OpenSLO</a> spec doesn&rsquo;t support all of the sloth features:</p>
+<ul>
+<li>No Prometheus labels support.</li>
+<li>No alerting support.</li>
+<li>No SLI plugins support.</li>
+<li>No Kubernetes support (at least until official OpenSLO CRDs are released).</li>
+</ul>
+<p>Check <a class=gdoc-markdown__link href=/examples/openslo/>Examples</a></p>
+<p>CLI example:</p>
+<pre><code class=language-bash>sloth generate -i ./examples/openslo-getting-started.yml  -o /tmp/openslo-getting-started.yml
+INFO[0000] SLI plugins loaded                            plugins=0 svc=storage.FileSLIPlugin version=v0.6.0-8-ga8f37a2
+INFO[0000] Generating from OpenSLO spec                  version=v0.6.0-8-ga8f37a2
+INFO[0000] Multiwindow-multiburn alerts generated        out=/tmp/openslo-getting-started.yml slo=my-service-sloth-slo-my-service-0 svc=generate.prometheus.Service version=v0.6.0-8-ga8f37a2
+INFO[0000] SLI recording rules generated                 out=/tmp/openslo-getting-started.yml rules=8 slo=my-service-sloth-slo-my-service-0 svc=generate.prometheus.Service version=v0.6.0-8-ga8f37a2
+INFO[0000] Metadata recording rules generated            out=/tmp/openslo-getting-started.yml rules=7 slo=my-service-sloth-slo-my-service-0 svc=generate.prometheus.Service version=v0.6.0-8-ga8f37a2
+INFO[0000] SLO alert rules generated                     out=/tmp/openslo-getting-started.yml rules=0 slo=my-service-sloth-slo-my-service-0 svc=generate.prometheus.Service version=v0.6.0-8-ga8f37a2
+INFO[0000] Prometheus rules written                      format=yaml groups=2 out=/tmp/openslo-getting-started.yml svc=storage.IOWriter version=v0.6.0-8-ga8f37a2
+</code></pre>
 </article>
 <div class="gdoc-page__footer flex flex-wrap justify-between">
 </div>

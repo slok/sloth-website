@@ -3,7 +3,12 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=color-scheme content="light dark">
-<meta name=description content="Something">
+<meta name=description content="kubernetes-controller command runs Sloth as a controller/operator that will react on sloth.slok.dev/v1/PrometheusServiceLevel CRD.
+In the controller mode, Sloth will be running listneing to Kubernetes Sloth SLO CR events and generate the required prometheus-operator CR rules
+In the end, the controller mode makes the same work as the CLI however integrates better with a native Kubernetes flow.
+Sloth CRD is required
+Example:
+$ kubectl apply -f ./pkg/kubernetes/gen/crd/sloth.slok.dev_prometheusservicelevels.yaml   Prometheus Operator Rules CRD is required">
 <title>Kubernetes controller | Sloth</title>
 <link rel=icon href=/favicon/favicon-32x32.png type=image/x-icon>
 <script src=/js/darkmode-ce906ea916.min.js></script>
@@ -91,7 +96,7 @@ Installing Sloth
 <li>
 <span class=flex>
 <a href=/specs/default/ class=gdoc-nav__entry>
-Default
+Default (prometheus/v1)
 </a>
 </span>
 </li>
@@ -112,23 +117,11 @@ OpenSLO
 </ul>
 </li>
 <li>
-<span class=flex>Architecture</span>
-<ul class=gdoc-nav__list>
-<li>
 <span class=flex>
-<a href=/architecture/metrics/ class=gdoc-nav__entry>
-Metrics
+<a href=/architecture/ class=gdoc-nav__entry>
+Architecture
 </a>
 </span>
-</li>
-<li>
-<span class=flex>
-<a href=/architecture/alerts/ class=gdoc-nav__entry>
-Alerts
-</a>
-</span>
-</li>
-</ul>
 </li>
 <li>
 <span class=flex>
@@ -141,12 +134,9 @@ Dashboards
 <span class=flex>Usage</span>
 <ul class=gdoc-nav__list>
 <li>
-<span class=flex>Slo Validation</span>
-</li>
-<li>
 <span class=flex>
 <a href=/usage/cli/ class=gdoc-nav__entry>
-CLI
+CLI generate
 </a>
 </span>
 </li>
@@ -164,6 +154,145 @@ SLI plugins
 </a>
 </span>
 </li>
+<li>
+<span class=flex>
+<a href=/usage/slo-validation/ class=gdoc-nav__entry>
+SLO validation
+</a>
+</span>
+</li>
+</ul>
+</li>
+<li>
+<span class=flex>Examples</span>
+<ul class=gdoc-nav__list>
+<li>
+<input type=checkbox id=navtree-02ab23f1 class=gdoc-nav__toggle>
+<label for=navtree-02ab23f1 class="flex justify-between">
+<span class=flex>
+<a href=/examples/default/ class=gdoc-nav__entry>
+Default
+</a>
+</span><svg class="icon gdoc_keyborad_arrow_left"><use xlink:href="#gdoc_keyborad_arrow_left"/></svg><svg class="icon gdoc_keyborad_arrow_down hidden"><use xlink:href="#gdoc_keyborad_arrow_down"/></svg>
+</label>
+<ul class=gdoc-nav__list>
+<li>
+<span class=flex>
+<a href=/examples/default/getting-started/ class=gdoc-nav__entry>
+Getting started
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/default/home-wifi/ class=gdoc-nav__entry>
+Home WiFi
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/default/kubernetes-apiserver/ class=gdoc-nav__entry>
+Kubernetes APIserver
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/default/multifile/ class=gdoc-nav__entry>
+Multi file
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/default/no-alerts/ class=gdoc-nav__entry>
+No alerts
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/default/raw-sli/ class=gdoc-nav__entry>
+Raw SLI
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/default/sli-plugin/ class=gdoc-nav__entry>
+SLI plugin
+</a>
+</span>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=navtree-1ba05e7e class=gdoc-nav__toggle>
+<label for=navtree-1ba05e7e class="flex justify-between">
+<span class=flex>
+<a href=/examples/kubernetes/ class=gdoc-nav__entry>
+Kubernetes
+</a>
+</span><svg class="icon gdoc_keyborad_arrow_left"><use xlink:href="#gdoc_keyborad_arrow_left"/></svg><svg class="icon gdoc_keyborad_arrow_down hidden"><use xlink:href="#gdoc_keyborad_arrow_down"/></svg>
+</label>
+<ul class=gdoc-nav__list>
+<li>
+<span class=flex>
+<a href=/examples/kubernetes/getting-started/ class=gdoc-nav__entry>
+Getting started
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/kubernetes/home-wifi/ class=gdoc-nav__entry>
+Home WiFi
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/kubernetes/multifile/ class=gdoc-nav__entry>
+Multi file
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/kubernetes/sli-plugin/ class=gdoc-nav__entry>
+SLI plugin
+</a>
+</span>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=navtree-f0cfab89 class=gdoc-nav__toggle>
+<label for=navtree-f0cfab89 class="flex justify-between">
+<span class=flex>
+<a href=/examples/openslo/ class=gdoc-nav__entry>
+OpenSLO
+</a>
+</span><svg class="icon gdoc_keyborad_arrow_left"><use xlink:href="#gdoc_keyborad_arrow_left"/></svg><svg class="icon gdoc_keyborad_arrow_down hidden"><use xlink:href="#gdoc_keyborad_arrow_down"/></svg>
+</label>
+<ul class=gdoc-nav__list>
+<li>
+<span class=flex>
+<a href=/examples/openslo/getting-started/ class=gdoc-nav__entry>
+Getting started
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/openslo/kubernetes-apiserver/ class=gdoc-nav__entry>
+Kubernetes APIserver
+</a>
+</span>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
@@ -177,61 +306,109 @@ SLI plugins
 </label>
 <ul class=gdoc-nav__list>
 <li>
-<span class=flex>Group A</span>
-<ul class=gdoc-nav__list>
-<li>
 <span class=flex>
-<a href=/sli-plugins/group1/plugin0/ class=gdoc-nav__entry>
-Plugin0
+<a href=/sli-plugins/coredns-availability/ class=gdoc-nav__entry>
+Coredns Availability
 </a>
 </span>
 </li>
 <li>
 <span class=flex>
-<a href=/sli-plugins/group1/plugin1/ class=gdoc-nav__entry>
-Plugin 1
+<a href=/sli-plugins/coredns-latency/ class=gdoc-nav__entry>
+Coredns Latency
 </a>
 </span>
 </li>
 <li>
 <span class=flex>
-<a href=/sli-plugins/group1/plugin2/ class=gdoc-nav__entry>
-Plugin 2
-</a>
-</span>
-</li>
-</ul>
-</li>
-<li>
-<span class=flex>Group B</span>
-<ul class=gdoc-nav__list>
-<li>
-<span class=flex>
-<a href=/sli-plugins/group2/plugin3/ class=gdoc-nav__entry>
-Plugin 3
-</a>
-</span>
-</li>
-</ul>
-</li>
-<li>
-<span class=flex>Group C</span>
-<ul class=gdoc-nav__list>
-<li>
-<span class=flex>
-<a href=/sli-plugins/group3/plugin4/ class=gdoc-nav__entry>
-Plugin 4
+<a href=/sli-plugins/fake/ class=gdoc-nav__entry>
+Fake
 </a>
 </span>
 </li>
 <li>
 <span class=flex>
-<a href=/sli-plugins/group3/plugin5/ class=gdoc-nav__entry>
-Plugin 5
+<a href=/sli-plugins/kubernetes-apiserver-availability/ class=gdoc-nav__entry>
+Kubernetes Apiserver Availability
 </a>
 </span>
 </li>
-</ul>
+<li>
+<span class=flex>
+<a href=/sli-plugins/kubernetes-apiserver-latency/ class=gdoc-nav__entry>
+Kubernetes Apiserver Latency
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/kubernetes-kooper-availability/ class=gdoc-nav__entry>
+Kubernetes Kooper Availability
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/kubernetes-kooper-latency/ class=gdoc-nav__entry>
+Kubernetes Kooper Latency
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/kubernetes-kooper-queuecongestion/ class=gdoc-nav__entry>
+Kubernetes Kooper Queuecongestion
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/noop/ class=gdoc-nav__entry>
+Noop
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/prometheus-rules-evalavailability/ class=gdoc-nav__entry>
+Prometheus Rules Evalavailability
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/prometheus-targets-availability/ class=gdoc-nav__entry>
+Prometheus Targets Availability
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/slok-go-http-metrics-availability/ class=gdoc-nav__entry>
+Slok Go HTTP Metrics Availability
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/slok-go-http-metrics-latency/ class=gdoc-nav__entry>
+Slok Go HTTP Metrics Latency
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/traefik-v1-availability/ class=gdoc-nav__entry>
+Traefik V1 Availability
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/traefik-v1-latency/ class=gdoc-nav__entry>
+Traefik V1 Latency
+</a>
+</span>
 </li>
 </ul>
 </li>
@@ -251,6 +428,13 @@ F.A.Q
 <span class=flex><svg class="icon gdoc_download"><use xlink:href="#gdoc_download"/></svg>
 <a href=https://github.com/slok/sloth/releases class=gdoc-nav__entry>
 Releases
+</a>
+</span>
+</li>
+<li>
+<span class=flex><svg class="icon gdoc_timer"><use xlink:href="#gdoc_timer"/></svg>
+<a href=https://github.com/slok/sloth/blob/main/CHANGELOG.md class=gdoc-nav__entry>
+Changelog
 </a>
 </span>
 </li>
@@ -278,13 +462,56 @@ justify-between
 hidden-mobile" itemprop=breadcrumb>
 <div><svg class="icon gdoc_path hidden-mobile"><use xlink:href="#gdoc_path"/></svg>
 <ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList>
-<li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemscope itemtype=https://schema.org/WebPage itemprop=item itemid=/ href=/><span itemprop=name>Sloth</span></a><meta itemprop=position content="1"></li><li> / </li><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemscope itemtype=https://schema.org/WebPage itemprop=item itemid=/usage/ href=/usage/><span itemprop=name>Usage</span></a><meta itemprop=position content="2"></li><li> / </li><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>Kubernetes controller</span><meta itemprop=position content="3"></li>
+<li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemscope itemtype=https://schema.org/WebPage itemprop=item itemid=/ href=/><span itemprop=name></span></a><meta itemprop=position content="1"></li><li> / </li><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemscope itemtype=https://schema.org/WebPage itemprop=item itemid=/usage/ href=/usage/><span itemprop=name>Usage</span></a><meta itemprop=position content="2"></li><li> / </li><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>Kubernetes controller</span><meta itemprop=position content="3"></li>
 </ol>
 </div>
 </div>
 <article class="gdoc-markdown gdoc-markdown__align--left">
 <h1>Kubernetes controller</h1>
-<p>Something</p>
+<p><code>kubernetes-controller</code> command runs Sloth as a controller/operator that will react on <a class=gdoc-markdown__link href=https://raw.githubusercontent.com/slok/sloth/main/pkg/kubernetes/gen/crd/sloth.slok.dev_prometheusservicelevels.yaml><code>sloth.slok.dev/v1/PrometheusServiceLevel</code></a> CRD.</p>
+<p>In the controller mode, Sloth will be running listneing to Kubernetes Sloth SLO CR events and generate the required prometheus-operator <a class=gdoc-markdown__link href=https://github.com/prometheus-operator/kube-prometheus/blob/main/manifests/setup/prometheus-operator-0prometheusruleCustomResourceDefinition.yaml>CR rules</a></p>
+<p>In the end, the controller mode makes the same work as the CLI however integrates better with a native Kubernetes flow.</p>
+<blockquote class="gdoc-hint info">
+<p><strong>Sloth <a class=gdoc-markdown__link href=https://raw.githubusercontent.com/slok/sloth/main/pkg/kubernetes/gen/crd/sloth.slok.dev_prometheusservicelevels.yaml>CRD</a> is required</strong></p>
+<p>Example:</p>
+<pre><code class=language-bash>$ kubectl apply -f ./pkg/kubernetes/gen/crd/sloth.slok.dev_prometheusservicelevels.yaml
+</code></pre>
+</blockquote>
+<blockquote class="gdoc-hint info">
+<p><strong>Prometheus Operator Rules <a class=gdoc-markdown__link href=https://github.com/prometheus-operator/kube-prometheus/blob/main/manifests/setup/prometheus-operator-0prometheusruleCustomResourceDefinition.yaml>CRD</a> is required</strong></p>
+<p>Example:</p>
+<pre><code class=language-bash>$ kubectl apply -f ./test/integration/crd/prometheus-operator-crd.yaml
+</code></pre>
+</blockquote>
+<div class=gdoc-page__anchorwrap>
+<h2 id=deploying-in-kubernetes>
+Deploying in Kubernetes
+<a data-clipboard-text=https://sloth.dev/usage/kubernetes/#deploying-in-kubernetes class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Deploying in Kubernetes" href=#deploying-in-kubernetes><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
+</a>
+</h2>
+</div><p>Check <a class=gdoc-markdown__link href=/introduction/install/#kubernetes>Kubernetes installing section</a></p>
+<div class=gdoc-page__anchorwrap>
+<h3 id=example>
+Example
+<a data-clipboard-text=https://sloth.dev/usage/kubernetes/#example class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Example" href=#example><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
+</a>
+</h3>
+</div><pre><code class=language-bash># Run sloth controller.
+$ kubectl create ns monitoring
+$ kubectl apply -f ./deploy/kubernetes/raw/sloth.yaml
+
+# Deploy some SLOs.
+$ kubectl apply -f ./examples/k8s-getting-started.yml
+
+# Get CRs.
+$ kubectl -n monitoring get slos
+NAME                   SERVICE           DESIRED SLOS   READY SLOS   GEN OK   GEN AGE   AGE
+sloth-slo-my-service   myservice         1              1            true     27s       27s
+
+$ kubectl -n monitoring get prometheusrules
+NAME                  AGE
+sloth-slo-my-service  38s
+</code></pre>
 </article>
 <div class="gdoc-page__footer flex flex-wrap justify-between">
 </div>

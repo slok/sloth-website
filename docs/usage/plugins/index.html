@@ -3,7 +3,10 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=color-scheme content="light dark">
-<meta name=description content="Something">
+<meta name=description content="SLI plugins are small Go plugins (using Yaegi) that can be loaded on Sloth start.
+These plugins can be referenced as an SLI on the SLO specs and will return a raw SLI type.
+Common plugins    Sloth maintains a library with common SLI plugins that can be used on your SLOs or used as examples to develop your own ones.
+ Check plugins source code here. Check the documentation here.">
 <title>SLI plugins | Sloth</title>
 <link rel=icon href=/favicon/favicon-32x32.png type=image/x-icon>
 <script src=/js/darkmode-ce906ea916.min.js></script>
@@ -91,7 +94,7 @@ Installing Sloth
 <li>
 <span class=flex>
 <a href=/specs/default/ class=gdoc-nav__entry>
-Default
+Default (prometheus/v1)
 </a>
 </span>
 </li>
@@ -112,23 +115,11 @@ OpenSLO
 </ul>
 </li>
 <li>
-<span class=flex>Architecture</span>
-<ul class=gdoc-nav__list>
-<li>
 <span class=flex>
-<a href=/architecture/metrics/ class=gdoc-nav__entry>
-Metrics
+<a href=/architecture/ class=gdoc-nav__entry>
+Architecture
 </a>
 </span>
-</li>
-<li>
-<span class=flex>
-<a href=/architecture/alerts/ class=gdoc-nav__entry>
-Alerts
-</a>
-</span>
-</li>
-</ul>
 </li>
 <li>
 <span class=flex>
@@ -141,12 +132,9 @@ Dashboards
 <span class=flex>Usage</span>
 <ul class=gdoc-nav__list>
 <li>
-<span class=flex>Slo Validation</span>
-</li>
-<li>
 <span class=flex>
 <a href=/usage/cli/ class=gdoc-nav__entry>
-CLI
+CLI generate
 </a>
 </span>
 </li>
@@ -164,6 +152,145 @@ SLI plugins
 </a>
 </span>
 </li>
+<li>
+<span class=flex>
+<a href=/usage/slo-validation/ class=gdoc-nav__entry>
+SLO validation
+</a>
+</span>
+</li>
+</ul>
+</li>
+<li>
+<span class=flex>Examples</span>
+<ul class=gdoc-nav__list>
+<li>
+<input type=checkbox id=navtree-02ab23f1 class=gdoc-nav__toggle>
+<label for=navtree-02ab23f1 class="flex justify-between">
+<span class=flex>
+<a href=/examples/default/ class=gdoc-nav__entry>
+Default
+</a>
+</span><svg class="icon gdoc_keyborad_arrow_left"><use xlink:href="#gdoc_keyborad_arrow_left"/></svg><svg class="icon gdoc_keyborad_arrow_down hidden"><use xlink:href="#gdoc_keyborad_arrow_down"/></svg>
+</label>
+<ul class=gdoc-nav__list>
+<li>
+<span class=flex>
+<a href=/examples/default/getting-started/ class=gdoc-nav__entry>
+Getting started
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/default/home-wifi/ class=gdoc-nav__entry>
+Home WiFi
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/default/kubernetes-apiserver/ class=gdoc-nav__entry>
+Kubernetes APIserver
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/default/multifile/ class=gdoc-nav__entry>
+Multi file
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/default/no-alerts/ class=gdoc-nav__entry>
+No alerts
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/default/raw-sli/ class=gdoc-nav__entry>
+Raw SLI
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/default/sli-plugin/ class=gdoc-nav__entry>
+SLI plugin
+</a>
+</span>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=navtree-1ba05e7e class=gdoc-nav__toggle>
+<label for=navtree-1ba05e7e class="flex justify-between">
+<span class=flex>
+<a href=/examples/kubernetes/ class=gdoc-nav__entry>
+Kubernetes
+</a>
+</span><svg class="icon gdoc_keyborad_arrow_left"><use xlink:href="#gdoc_keyborad_arrow_left"/></svg><svg class="icon gdoc_keyborad_arrow_down hidden"><use xlink:href="#gdoc_keyborad_arrow_down"/></svg>
+</label>
+<ul class=gdoc-nav__list>
+<li>
+<span class=flex>
+<a href=/examples/kubernetes/getting-started/ class=gdoc-nav__entry>
+Getting started
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/kubernetes/home-wifi/ class=gdoc-nav__entry>
+Home WiFi
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/kubernetes/multifile/ class=gdoc-nav__entry>
+Multi file
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/kubernetes/sli-plugin/ class=gdoc-nav__entry>
+SLI plugin
+</a>
+</span>
+</li>
+</ul>
+</li>
+<li>
+<input type=checkbox id=navtree-f0cfab89 class=gdoc-nav__toggle>
+<label for=navtree-f0cfab89 class="flex justify-between">
+<span class=flex>
+<a href=/examples/openslo/ class=gdoc-nav__entry>
+OpenSLO
+</a>
+</span><svg class="icon gdoc_keyborad_arrow_left"><use xlink:href="#gdoc_keyborad_arrow_left"/></svg><svg class="icon gdoc_keyborad_arrow_down hidden"><use xlink:href="#gdoc_keyborad_arrow_down"/></svg>
+</label>
+<ul class=gdoc-nav__list>
+<li>
+<span class=flex>
+<a href=/examples/openslo/getting-started/ class=gdoc-nav__entry>
+Getting started
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/examples/openslo/kubernetes-apiserver/ class=gdoc-nav__entry>
+Kubernetes APIserver
+</a>
+</span>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
@@ -177,61 +304,109 @@ SLI plugins
 </label>
 <ul class=gdoc-nav__list>
 <li>
-<span class=flex>Group A</span>
-<ul class=gdoc-nav__list>
-<li>
 <span class=flex>
-<a href=/sli-plugins/group1/plugin0/ class=gdoc-nav__entry>
-Plugin0
+<a href=/sli-plugins/coredns-availability/ class=gdoc-nav__entry>
+Coredns Availability
 </a>
 </span>
 </li>
 <li>
 <span class=flex>
-<a href=/sli-plugins/group1/plugin1/ class=gdoc-nav__entry>
-Plugin 1
+<a href=/sli-plugins/coredns-latency/ class=gdoc-nav__entry>
+Coredns Latency
 </a>
 </span>
 </li>
 <li>
 <span class=flex>
-<a href=/sli-plugins/group1/plugin2/ class=gdoc-nav__entry>
-Plugin 2
-</a>
-</span>
-</li>
-</ul>
-</li>
-<li>
-<span class=flex>Group B</span>
-<ul class=gdoc-nav__list>
-<li>
-<span class=flex>
-<a href=/sli-plugins/group2/plugin3/ class=gdoc-nav__entry>
-Plugin 3
-</a>
-</span>
-</li>
-</ul>
-</li>
-<li>
-<span class=flex>Group C</span>
-<ul class=gdoc-nav__list>
-<li>
-<span class=flex>
-<a href=/sli-plugins/group3/plugin4/ class=gdoc-nav__entry>
-Plugin 4
+<a href=/sli-plugins/fake/ class=gdoc-nav__entry>
+Fake
 </a>
 </span>
 </li>
 <li>
 <span class=flex>
-<a href=/sli-plugins/group3/plugin5/ class=gdoc-nav__entry>
-Plugin 5
+<a href=/sli-plugins/kubernetes-apiserver-availability/ class=gdoc-nav__entry>
+Kubernetes Apiserver Availability
 </a>
 </span>
 </li>
-</ul>
+<li>
+<span class=flex>
+<a href=/sli-plugins/kubernetes-apiserver-latency/ class=gdoc-nav__entry>
+Kubernetes Apiserver Latency
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/kubernetes-kooper-availability/ class=gdoc-nav__entry>
+Kubernetes Kooper Availability
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/kubernetes-kooper-latency/ class=gdoc-nav__entry>
+Kubernetes Kooper Latency
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/kubernetes-kooper-queuecongestion/ class=gdoc-nav__entry>
+Kubernetes Kooper Queuecongestion
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/noop/ class=gdoc-nav__entry>
+Noop
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/prometheus-rules-evalavailability/ class=gdoc-nav__entry>
+Prometheus Rules Evalavailability
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/prometheus-targets-availability/ class=gdoc-nav__entry>
+Prometheus Targets Availability
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/slok-go-http-metrics-availability/ class=gdoc-nav__entry>
+Slok Go HTTP Metrics Availability
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/slok-go-http-metrics-latency/ class=gdoc-nav__entry>
+Slok Go HTTP Metrics Latency
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/traefik-v1-availability/ class=gdoc-nav__entry>
+Traefik V1 Availability
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
+<a href=/sli-plugins/traefik-v1-latency/ class=gdoc-nav__entry>
+Traefik V1 Latency
+</a>
+</span>
 </li>
 </ul>
 </li>
@@ -251,6 +426,13 @@ F.A.Q
 <span class=flex><svg class="icon gdoc_download"><use xlink:href="#gdoc_download"/></svg>
 <a href=https://github.com/slok/sloth/releases class=gdoc-nav__entry>
 Releases
+</a>
+</span>
+</li>
+<li>
+<span class=flex><svg class="icon gdoc_timer"><use xlink:href="#gdoc_timer"/></svg>
+<a href=https://github.com/slok/sloth/blob/main/CHANGELOG.md class=gdoc-nav__entry>
+Changelog
 </a>
 </span>
 </li>
@@ -278,13 +460,95 @@ justify-between
 hidden-mobile" itemprop=breadcrumb>
 <div><svg class="icon gdoc_path hidden-mobile"><use xlink:href="#gdoc_path"/></svg>
 <ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList>
-<li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemscope itemtype=https://schema.org/WebPage itemprop=item itemid=/ href=/><span itemprop=name>Sloth</span></a><meta itemprop=position content="1"></li><li> / </li><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemscope itemtype=https://schema.org/WebPage itemprop=item itemid=/usage/ href=/usage/><span itemprop=name>Usage</span></a><meta itemprop=position content="2"></li><li> / </li><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>SLI plugins</span><meta itemprop=position content="3"></li>
+<li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemscope itemtype=https://schema.org/WebPage itemprop=item itemid=/ href=/><span itemprop=name></span></a><meta itemprop=position content="1"></li><li> / </li><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemscope itemtype=https://schema.org/WebPage itemprop=item itemid=/usage/ href=/usage/><span itemprop=name>Usage</span></a><meta itemprop=position content="2"></li><li> / </li><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>SLI plugins</span><meta itemprop=position content="3"></li>
 </ol>
 </div>
 </div>
 <article class="gdoc-markdown gdoc-markdown__align--left">
 <h1>SLI plugins</h1>
-<p>Something</p>
+<p>SLI plugins are small Go plugins (using <a class=gdoc-markdown__link href=https://github.com/traefik/yaegi>Yaegi</a>) that can be loaded on Sloth start.</p>
+<p>These plugins can be referenced as an SLI on the SLO specs and will return a raw SLI type.</p>
+<div class=gdoc-page__anchorwrap>
+<h2 id=common-plugins>
+Common plugins
+<a data-clipboard-text=https://sloth.dev/usage/plugins/#common-plugins class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Common plugins" href=#common-plugins><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
+</a>
+</h2>
+</div><p>Sloth maintains a library with <a class=gdoc-markdown__link href=https://github.com/slok/sloth-common-sli-plugins>common SLI plugins</a> that can be used on your SLOs or used as examples to develop your own ones.</p>
+<ul>
+<li>Check plugins source code <a class=gdoc-markdown__link href=https://github.com/slok/sloth-common-sli-plugins>here</a>.</li>
+<li>Check the documentation <a class=gdoc-markdown__link href=/sli-plugins/>here</a>.</li>
+</ul>
+<div class=gdoc-page__anchorwrap>
+<h2 id=developing-plugins>
+Developing plugins
+<a data-clipboard-text=https://sloth.dev/usage/plugins/#developing-plugins class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Developing plugins" href=#developing-plugins><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
+</a>
+</h2>
+</div><div class=gdoc-page__anchorwrap>
+<h3 id=prometheusv1plugins-v1>
+<a class=gdoc-markdown__link href=https://github.com/slok/sloth/blob/main/pkg/prometheus/plugin/v1/v1.go><code>prometheus/v1</code></a>
+<a data-clipboard-text=https://sloth.dev/usage/plugins/#prometheusv1plugins-v1 class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor prometheus/v1" href=#prometheusv1plugins-v1><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
+</a>
+</h3>
+</div><p>Developing a <a class=gdoc-markdown__link href=https://github.com/slok/sloth/blob/main/pkg/prometheus/plugin/v1/v1.go><code>prometheus/v1</code></a> SLI plugin is very easy, however you need to meet some requirements:</p>
+<ul>
+<li>The plugin version used as a global called <code>SLIPluginVersion</code>.</li>
+<li>A plugin ID global called <code>SLIPluginID</code>.</li>
+<li>A Plugin logic function called <code>SLIPlugin</code>.</li>
+<li>The plugin must be in a single file named <code>plugin.go</code>.</li>
+<li>Plugins only can use the Go standard library (<code>reflect</code> and <code>unsafe</code> packages can&rsquo;t be used).</li>
+<li>Plugin received options are a <code>map[string]string</code> to avoid <code>interface{}</code> problems on dynamic execution code, the conversion to specific types are responsibility of the plugin.</li>
+<li>Plugins don&rsquo;t depend on go modules, GOPATH or similar (thanks to the previous requirements).</li>
+</ul>
+<p>Sloth knows how to autodiscover plugins giving a path (<code>--sli-plugins-path</code>), and will load all the discovered ones.</p>
+<p>A very simple example:</p>
+<p>from <code>plugins/x/y/plugin.go</code></p>
+<pre><code class=language-go>package testplugin
+
+import &quot;context&quot;
+
+const (
+  SLIPluginVersion = &quot;prometheus/v1&quot;
+  SLIPluginID      = &quot;test_plugin&quot;
+)
+
+func SLIPlugin(ctx context.Context, meta, labels, options map[string]string) (string, error) {
+  return &quot;rate(my_raw_error_ratio_query{}[{{.window}}])&quot;, nil
+}
+</code></pre>
+<p>Used in SLO spec:</p>
+<pre><code class=language-yaml>version: &quot;prometheus/v1&quot;
+service: &quot;myservice&quot;
+slos:
+  - name: &quot;some-slo&quot;
+    objective: 99.9
+    sli:
+      plugin:
+        id: &quot;test_plugin&quot;
+        options:
+          opt1: &quot;something&quot;
+          opt2: &quot;something&quot;
+    alerting:
+#...
+</code></pre>
+<p>On spec load, Sloth will execute the referenced plugins with the options and use the result as a Raw SLI type, the one that returns the error ratio query.</p>
+<div class=gdoc-page__anchorwrap>
+<h2 id=why-should-i-use-plugins>
+Why should I use plugins?
+<a data-clipboard-text=https://sloth.dev/usage/plugins/#why-should-i-use-plugins class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Why should I use plugins?" href=#why-should-i-use-plugins><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
+</a>
+</h2>
+</div><p>By default you shouldn&rsquo;t unless you have scenarios where they can simplify, add security or improve the SLO adoption on the team/company. Some examples:</p>
+<ul>
+<li>SLI custom validation (parameters, queries&mldr;).</li>
+<li>Company wide precreated SLIs for common used libraries.</li>
+<li>Complex Prometheus query SLIs.</li>
+<li>Precreated SLIs for the team or company that normally everyones uses on the SLOs.</li>
+<li>OSS SLI plugins that come with the apps, frameworks or libraries (e.g Kubernetes apiserver, http framework X&mldr;).</li>
+<li>The company or the team could have a repository with all the shared plugins and everyone could use them and contribute with new ones.</li>
+<li>Automation power when templates are not enough.</li>
+</ul>
 </article>
 <div class="gdoc-page__footer flex flex-wrap justify-between">
 </div>
