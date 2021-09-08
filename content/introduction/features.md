@@ -12,13 +12,13 @@ weight: 020
 - SLO spec validation (including `validate` command for Gitops and CI).
 - Customization of labels, disabling different type of alerts...
 - A single way (uniform) of creating SLOs across all different services and teams.
-- Automatic [Grafana dashboard](TODO) to see all your SLOs state.
+- Automatic [Grafana dashboard]({{< relref "../dashboards" >}}) to see all your SLOs state.
 - Single binary and easy to use CLI.
 - Kubernetes ([Prometheus-operator]) support.
 - Kubernetes Controller/operator mode with CRDs.
-- Support different [SLI types](TODO).
-- Support for [SLI plugins](TODO)
-- A library with [common SLI plugins](TODO).
+- Support different SLI types.
+- Support for [SLI plugins]({{< relref "../sli-plugins" >}})
+- A library with [common SLI plugins][common-sli-plugins].
 - [OpenSLO] support.
 
 [google-slo]: https://landing.google.com/sre/workbook/chapters/alerting-on-slos/

@@ -94,7 +94,7 @@ Yes, use `disable: true` on `page` and `ticket`.
 
 ## Grafana dashboard?
 
-Check [grafana-dashboard](TODO), this dashboard will load the SLOs automatically.
+Check [grafana-dashboard](({{< relref "../dashboards" >}})), this dashboard will load the SLOs automatically.
 
 ## CLI VS K8s controller?
 
@@ -119,7 +119,7 @@ In a few words, theres no right or wrong answer, pick your own flavour based on 
 
 - Events: This are based on 2 queries, the one that returns the total/valid number of events and the one that returns the bad events. Sloht will make a query dividing them to get the final error ratio (0-1).
 - Raw: This is a single raw prometheus query that when executed will return the error ratio (0-1).
-- Plugins: Check [plugins](TODO) for more information. It reference plugins that will be preloaded and already developed. Sloth will execute them on generation and it will return a raw query. This is the best way to abstract queries from users or having SLOs at scale.
+- Plugins: Check [plugins]({{< relref "../sli-plugins" >}}) for more information. It reference plugins that will be preloaded and already developed. Sloth will execute them on generation and it will return a raw query. This is the best way to abstract queries from users or having SLOs at scale.
 
 [mwmb]: https://landing.google.com/sre/workbook/chapters/alerting-on-slos/#6-multiwindow-multi-burn-rate-alerts
 [sli]: https://landing.google.com/sre/sre-book/chapters/service-level-objectives/#indicators-o8seIAcZ
