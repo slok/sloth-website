@@ -67,6 +67,10 @@ Using 4 different alerts across different time window periods:
 - Warning/Ticket in medium time window: Constant normal rate of burning budget.
 - Warning/Ticket in long time window: Constant low rate of burning budget.
 
+Sloth doesn't trigger/generate the alerts itself, [Prometheus] will by using Sloth generated alerting rules. Normally something connected with Prometheus (like [alertmanager]) will trigger these alerts notifications (e.g Slack, Pagerduty...).
+
 [prom-recordings]: https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/
 [prom-alerts]: https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/
 [mwmb]: https://landing.google.com/sre/workbook/chapters/alerting-on-slos/#6-multiwindow-multi-burn-rate-alerts
+[prometheus]: https://prometheus.io/
+[alertmanager]: https://github.com/prometheus/alertmanager

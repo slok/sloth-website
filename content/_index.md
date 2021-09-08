@@ -16,21 +16,53 @@ _Fast, easy and reliable Prometheus SLO generator._
 
 {{< columns >}}
 
-## Simple
+## ![](https://icongr.am/fontawesome/star.svg?size=32&color=EC604D) &nbsp; Simple
 
-Simplicity and UX is priority. Easy CLIs, APIs and specs that make the usage of Sloth SLOs understandable, maintainable and reliable over time.
-
-<--->
-
-## Focused on standards
-
-Accepts multiple spec types that adapts to your needs OpenSLO or Kubernetes CRDs that will generate a set of standardized Prometheus metrics and alerts.
+Lightweight, simple CLI, focused on UX, maintainable SLO specs and a single way of doing things.
 
 <--->
 
-## Extensible
+## ![](https://icongr.am/fontawesome/cubes.svg?size=32&color=EC604D)&nbsp; Standards
 
-Sloth can abstract and extend SLIs using plugins. Removing the need to write complex Prometheus queries or copy pasting the same queries over multiple SLOs.
+Based on Google's SRE book framework, SLOs and SLO alerting.
+
+<--->
+
+## ![](https://icongr.am/fontawesome/plug.svg?size=32&color=EC604D) &nbsp; Plugins
+
+Abstracts and extends SLIs using plugins. Removing the need to copy-paste or write complex Prometheus queries.
+
+<--->
+
+## ![](https://icongr.am/material/numeric-1-box.svg?size=32&color=EC604D) &nbsp; One way
+
+Standardizes the SLO implementation across companies and teams by creating a single way of doing SLOs.
+
+{{< /columns >}}
+
+{{< columns >}}
+
+## ![](https://icongr.am/fontawesome/repeat.svg?size=32&color=EC604D) &nbsp; Adaptive
+
+Accepts multiple YAML SLO spec/manifest types declarations, like OpenSLO or Kubernetes CRDs.
+
+<--->
+
+## ![](https://icongr.am/simple/prometheus.svg?size=32&color=EC604D)&nbsp; Prometheus
+
+Delegates and relies on Prometheus stable technology for the metrics and alerts.
+
+<--->
+
+## ![](https://icongr.am/simple/kubernetes.svg?size=32&color=EC604D) &nbsp; Kubernetes
+
+Designed to work with the latest shipping standards and technologies like Gitops and Kubernetes.
+
+<--->
+
+## ![](https://icongr.am/simple/grafana.svg?size=32&color=EC604D) &nbsp; Dashboards
+
+Plug and play Grafana dashboards to observe all the services SLOs status.
 
 {{< /columns >}}
 
