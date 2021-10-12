@@ -3,7 +3,7 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=color-scheme content="light dark">
-<meta name=description content="Why Sloth SLI? SLO? Error budget? Burn rate? SLO based alerting? What are ticket and page alerts? Can I disable alerts? Grafana dashboard? CLI VS K8s controller? SLI types on manifests     Why Sloth    Creating Prometheus rules for SLI/SLO framework is hard, error prone and is pure toil.
+<meta name=description content="Why Sloth SLI? SLO? Error budget? Burn rate? SLO based alerting? What are ticket and page alerts? Can I disable alerts? Grafana dashboard? CLI VS K8s controller? SLI types on manifests Custom SLO time windows?     Why Sloth    Creating Prometheus rules for SLI/SLO framework is hard, error prone and is pure toil.
 Sloth abstracts this task, and we also gain:
  Read friendlyness: Easy to read and declare SLI/SLOs.">
 <title>F.A.Q | Sloth</title>
@@ -475,6 +475,7 @@ hidden-mobile" itemprop=breadcrumb>
 <li><a href=#grafana-dashboard>Grafana dashboard?</a></li>
 <li><a href=#cli-vs-k8s-controller>CLI VS K8s controller?</a></li>
 <li><a href=#sli-types-on-manifests>SLI types on manifests</a></li>
+<li><a href=#custom-slo-time-windows>Custom SLO time windows?</a></li>
 </ul></nav><hr></div>
 <div class=gdoc-page__anchorwrap>
 <h2 id=why-sloth>
@@ -618,6 +619,14 @@ SLI types on manifests
 <li>Raw: This is a single raw prometheus query that when executed will return the error ratio (0-1).</li>
 <li>Plugins: Check <a class=gdoc-markdown__link href=/sli-plugins/>plugins</a> for more information. It reference plugins that will be preloaded and already developed. Sloth will execute them on generation and it will return a raw query. This is the best way to abstract queries from users or having SLOs at scale.</li>
 </ul>
+<div class=gdoc-page__anchorwrap>
+<h2 id=custom-slo-time-windows>
+Custom SLO time windows?
+<a data-clipboard-text=https://sloth.dev/faq/#custom-slo-time-windows class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Custom SLO time windows?" href=#custom-slo-time-windows><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
+</a>
+</h2>
+</div><p>Sloth tries simplifying SLO generation and maintainability, thats why uses safe defaults and removes a lot of knobs/settings. By default it will use a common used and well-known 30 day time window for the SLO full time windows.</p>
+<p>However, some companies/teams use a 28 day (4 weeks) time windows. Sloth can set the time window to 28 day when it runs using <code>--window-days</code> flag. This way all the generated SLOs will use a 28 day time window instead of 30 day.</p>
 </article>
 <div class="gdoc-page__footer flex flex-wrap justify-between">
 </div>
