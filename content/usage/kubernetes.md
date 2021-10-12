@@ -31,6 +31,11 @@ $ kubectl apply -f ./test/integration/crd/prometheus-operator-crd.yaml
 
 {{< /hint >}}
 
+{{< hint info >}}
+**28 days time windows**\
+By default Sloth uses 30 day time windows. Use `--window-days=28` flag to set a 28 day (4 weeks) time window.
+{{< /hint >}}
+
 ## Deploying in Kubernetes
 
 Check [Kubernetes installing section]({{< relref "../introduction/install.md#kubernetes" >}})

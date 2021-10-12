@@ -121,6 +121,12 @@ In a few words, theres no right or wrong answer, pick your own flavour based on 
 - Raw: This is a single raw prometheus query that when executed will return the error ratio (0-1).
 - Plugins: Check [plugins]({{< relref "../sli-plugins" >}}) for more information. It reference plugins that will be preloaded and already developed. Sloth will execute them on generation and it will return a raw query. This is the best way to abstract queries from users or having SLOs at scale.
 
+## Custom SLO time windows?
+
+Sloth tries simplifying SLO generation and maintainability, thats why uses safe defaults and removes a lot of knobs/settings. By default it will use a common used and well-known 30 day time window for the SLO full time windows.
+
+However, some companies/teams use a 28 day (4 weeks) time windows. Sloth can set the time window to 28 day when it runs using `--window-days` flag. This way all the generated SLOs will use a 28 day time window instead of 30 day.
+
 [mwmb]: https://landing.google.com/sre/workbook/chapters/alerting-on-slos/#6-multiwindow-multi-burn-rate-alerts
 [sli]: https://landing.google.com/sre/sre-book/chapters/service-level-objectives/#indicators-o8seIAcZ
 [slo]: https://landing.google.com/sre/sre-book/chapters/service-level-objectives/#objectives-g0s1tdcz
