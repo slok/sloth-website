@@ -8,6 +8,8 @@ pluralizeListTitles = false
 # different versions always fail because of the metadata.
 disableHugoGeneratorInject = true
 
+googleAnalytics = "G-MGXZFGF3VJ"
+
 publishDir = "./docs"
 
 [params]
