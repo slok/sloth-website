@@ -9,10 +9,10 @@ Get binary releases from https://github.com/slok/sloth/releases
 
 ## Docker images
 
-Official multi arch docker images in [dockerhub](https://hub.docker.com/r/slok/sloth).
+Official multi arch container images in [ghcr](https://github.com/slok/sloth/pkgs/container/sloth).
 
 ```bash
-docker pull slok/sloth
+docker pull ghcr.io/slok/sloth
 ```
 
 ## Building from source code
