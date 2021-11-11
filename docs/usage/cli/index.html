@@ -146,6 +146,13 @@ Kubernetes controller
 </li>
 <li>
 <span class=flex>
+<a href=/usage/slo-validation/ class=gdoc-nav__entry>
+SLO validation
+</a>
+</span>
+</li>
+<li>
+<span class=flex>
 <a href=/usage/plugins/ class=gdoc-nav__entry>
 SLI plugins
 </a>
@@ -153,8 +160,8 @@ SLI plugins
 </li>
 <li>
 <span class=flex>
-<a href=/usage/slo-validation/ class=gdoc-nav__entry>
-SLO validation
+<a href=/usage/slo-period-windows/ class=gdoc-nav__entry>
+SLO period windows
 </a>
 </span>
 </li>
@@ -479,10 +486,6 @@ In this case, you will need default spec to get vanilla prometheus rules and dep
 <blockquote class="gdoc-hint info">
 <strong>CLI mode don&rsquo;t need CRDs</strong><br>
 Sloth CRD is NOT required in the cluster because the generation happens offline as a CLI. For controller/operator K8s flow, check <a class=gdoc-markdown__link href=/usage/kubernetes/>Kubernetes controller</a> section
-</blockquote>
-<blockquote class="gdoc-hint info">
-<strong>28 days time windows</strong><br>
-By default Sloth uses 30 day time windows. Use <code>--window-days=28</code> flag to set a 28 day (4 weeks) time window.
 </blockquote>
 <blockquote class="gdoc-hint warning">
 <strong>Kubernetes specs need prometheus-operator CRDs</strong><br>

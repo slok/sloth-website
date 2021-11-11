@@ -1,6 +1,6 @@
 ---
 title: "SLO validation"
-weight: 020
+weight: 030
 ---
 
 Sloth validates the spec on generation, however, on specific steps of the SLO generation process, we only want to validate a group of SLOs.

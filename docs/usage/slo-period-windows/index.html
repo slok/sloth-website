@@ -3,10 +3,10 @@
 <meta charset=utf-8>
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=color-scheme content="light dark">
-<meta name=description content="Traefik V1 latency    Latency plugin for Traefik V1 backends.
-Uses Traefik v1 backend metrics to get the latency on the serving backends.
-Options     bucket: (Required) The max latency allowed histogram bucket. backend_regex: (required) Regex to match the traefik backends. filter: (Optional) A prometheus filter string using concatenated labels exclude_errors: (Optional) Boolean that will exclude errored requests from valid events when measuring latency requests.  Metric requirements     traefik_backend_request_duration_seconds_bucket: From traefik.">
-<title>Traefik V1 Latency | Sloth</title>
+<meta name=description content="Sloth tries simplifying SLO generation and maintainability, thats why uses safe defaults and removes a lot of knobs/settings. If you don&rsquo;t need custom SLO period windows is encouraged that you use Sloth&rsquo;s 30 day default one.
+Default SLO period catalog    Sloth can load a catalog of SLO period windows when it starts. By default Sloth comes with some well known SLO period windows loaded:
+ 30 day: SRE workbook month SLO period.">
+<title>SLO period windows | Sloth</title>
 <link rel=icon href=/favicon/favicon-32x32.png type=image/x-icon>
 <script src=/js/darkmode-ce906ea916.min.js></script>
 <link rel=preload as=font href=/fonts/Metropolis.woff2 type=font/woff2 crossorigin=anonymous>
@@ -19,7 +19,6 @@ Options     bucket: (Required) The max latency allowed histogram bucket. backend
 <link rel=stylesheet href=/print-f79fc3e5d7.min.css media=print>
 <link rel=preload href=/custom.css as=style>
 <link rel=stylesheet href=/custom.css media=all>
-<link rel=alternate type=application/rss+xml href=https://sloth.dev/sli-plugins/traefik-v1-latency/index.xml title=Sloth>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-MGXZFGF3VJ"></script>
 <script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-MGXZFGF3VJ',{anonymize_ip:!1})}</script>
 </head>
@@ -160,7 +159,7 @@ SLI plugins
 </li>
 <li>
 <span class=flex>
-<a href=/usage/slo-period-windows/ class=gdoc-nav__entry>
+<a href=/usage/slo-period-windows/ class="gdoc-nav__entry is-active">
 SLO period windows
 </a>
 </span>
@@ -300,7 +299,7 @@ Kubernetes APIserver
 </ul>
 </li>
 <li>
-<input type=checkbox id=navtree-91d89edb class=gdoc-nav__toggle checked>
+<input type=checkbox id=navtree-91d89edb class=gdoc-nav__toggle>
 <label for=navtree-91d89edb class="flex justify-between">
 <span class=flex>
 <a href=/sli-plugins/ class=gdoc-nav__entry>
@@ -409,7 +408,7 @@ Traefik V1 Availability
 </li>
 <li>
 <span class=flex>
-<a href=/sli-plugins/traefik-v1-latency/ class="gdoc-nav__entry is-active">
+<a href=/sli-plugins/traefik-v1-latency/ class=gdoc-nav__entry>
 Traefik V1 Latency
 </a>
 </span>
@@ -466,90 +465,107 @@ justify-between
 hidden-mobile" itemprop=breadcrumb>
 <div><svg class="icon gdoc_path hidden-mobile"><use xlink:href="#gdoc_path"/></svg>
 <ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList>
-<li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemscope itemtype=https://schema.org/WebPage itemprop=item itemid=/ href=/><span itemprop=name></span></a><meta itemprop=position content="1"></li><li> / </li><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemscope itemtype=https://schema.org/WebPage itemprop=item itemid=/sli-plugins/ href=/sli-plugins/><span itemprop=name>SLI plugins</span></a><meta itemprop=position content="2"></li><li> / </li><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>Traefik V1 Latency</span><meta itemprop=position content="3"></li>
+<li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemscope itemtype=https://schema.org/WebPage itemprop=item itemid=/ href=/><span itemprop=name></span></a><meta itemprop=position content="1"></li><li> / </li><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemscope itemtype=https://schema.org/WebPage itemprop=item itemid=/usage/ href=/usage/><span itemprop=name>Usage</span></a><meta itemprop=position content="2"></li><li> / </li><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>SLO period windows</span><meta itemprop=position content="3"></li>
 </ol>
 </div>
 </div>
 <article class="gdoc-markdown gdoc-markdown__align--left">
-<h1>Traefik V1 Latency</h1>
+<h1>SLO period windows</h1>
+<p>Sloth tries simplifying SLO generation and maintainability, thats why uses safe defaults and removes a lot of knobs/settings. If you don&rsquo;t need custom SLO period windows is encouraged that you use Sloth&rsquo;s 30 day default one.</p>
 <div class=gdoc-page__anchorwrap>
-<h1 id=traefik-v1-latency>
-Traefik V1 latency
-<a data-clipboard-text=https://sloth.dev/sli-plugins/traefik-v1-latency/#traefik-v1-latency class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Traefik V1 latency" href=#traefik-v1-latency><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
-</a>
-</h1>
-</div><p>Latency plugin for <a class=gdoc-markdown__link href=https://doc.traefik.io/traefik/v1.7/>Traefik V1</a> backends.</p>
-<p>Uses Traefik v1 backend metrics to get the latency on the serving backends.</p>
-<div class=gdoc-page__anchorwrap>
-<h2 id=options>
-Options
-<a data-clipboard-text=https://sloth.dev/sli-plugins/traefik-v1-latency/#options class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Options" href=#options><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
+<h2 id=default-slo-period-catalog>
+Default SLO period catalog
+<a data-clipboard-text=https://sloth.dev/usage/slo-period-windows/#default-slo-period-catalog class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Default SLO period catalog" href=#default-slo-period-catalog><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
 </a>
 </h2>
-</div><ul>
-<li><code>bucket</code>: (<strong>Required</strong>) The max latency allowed histogram bucket.</li>
-<li><code>backend_regex</code>: (<strong>required</strong>) Regex to match the traefik backends.</li>
-<li><code>filter</code>: (<strong>Optional</strong>) A prometheus filter string using concatenated labels</li>
-<li><code>exclude_errors</code>: (<strong>Optional</strong>) Boolean that will exclude errored requests from valid events when measuring latency requests.</li>
+</div><p>Sloth can load a catalog of SLO period windows when it starts. By default Sloth comes with some well known SLO period windows loaded:</p>
+<ul>
+<li>30 day: SRE workbook month SLO period.</li>
+<li>28 day: Similar to the 30 day but in 4 weeks format.</li>
 </ul>
 <div class=gdoc-page__anchorwrap>
-<h2 id=metric-requirements>
-Metric requirements
-<a data-clipboard-text=https://sloth.dev/sli-plugins/traefik-v1-latency/#metric-requirements class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Metric requirements" href=#metric-requirements><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
+<h2 id=custom-slo-period-catalog>
+Custom SLO period catalog
+<a data-clipboard-text=https://sloth.dev/usage/slo-period-windows/#custom-slo-period-catalog class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Custom SLO period catalog" href=#custom-slo-period-catalog><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
 </a>
 </h2>
-</div><ul>
-<li><code>traefik_backend_request_duration_seconds_bucket</code>: From <a class=gdoc-markdown__link href=https://doc.traefik.io/traefik/v1.7/>traefik</a>.</li>
-<li><code>traefik_backend_request_duration_seconds_count</code>: From <a class=gdoc-markdown__link href=https://doc.traefik.io/traefik/v1.7/>traefik</a>.</li>
+</div><p>In case you want to fully customize your SLO period catalog (7 day period, adjust 30 day period alerting windows&mldr;). You can use <a class=gdoc-markdown__link href=https://github.com/slok/sloth/tree/main/pkg/prometheus/alertwindows/v1><code>AlertWindows/v1</code></a> spec.</p>
+<p>Sloth will discover all SLO period window specs, load them on the SLO period catalog so the can be use them, by passing <code>--slo-period-windows-path</code>.</p>
+<p>Some spec examples:</p>
+<div class=gdoc-tabs>
+<input type=radio class="gdoc-tabs__control hidden" name=tabs- id=tabs--0 checked>
+<label for=tabs--0 class=gdoc-tabs__label>
+7 day
+</label>
+<div class="gdoc-markdown--nested gdoc-tabs__content">
+<div class=gdoc-include><div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>sloth.slok.dev/v1</span><span class=w>
+</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>AlertWindows</span><span class=w>
+</span><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>sloPeriod</span><span class=p>:</span><span class=w> </span><span class=l>7d</span><span class=w>
+</span><span class=w>  </span><span class=nt>page</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>quick</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span><span class=nt>errorBudgetPercent</span><span class=p>:</span><span class=w> </span><span class=m>8</span><span class=w>
+</span><span class=w>      </span><span class=nt>shortWindow</span><span class=p>:</span><span class=w> </span><span class=l>5m</span><span class=w>
+</span><span class=w>      </span><span class=nt>longWindow</span><span class=p>:</span><span class=w> </span><span class=l>1h</span><span class=w>
+</span><span class=w>    </span><span class=nt>slow</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span><span class=nt>errorBudgetPercent</span><span class=p>:</span><span class=w> </span><span class=m>12.5</span><span class=w>
+</span><span class=w>      </span><span class=nt>shortWindow</span><span class=p>:</span><span class=w> </span><span class=l>30m</span><span class=w>
+</span><span class=w>      </span><span class=nt>longWindow</span><span class=p>:</span><span class=w> </span><span class=l>6h</span><span class=w>
+</span><span class=w>  </span><span class=nt>ticket</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>quick</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span><span class=nt>errorBudgetPercent</span><span class=p>:</span><span class=w> </span><span class=m>20</span><span class=w>
+</span><span class=w>      </span><span class=nt>shortWindow</span><span class=p>:</span><span class=w> </span><span class=l>2h</span><span class=w>
+</span><span class=w>      </span><span class=nt>longWindow</span><span class=p>:</span><span class=w> </span><span class=l>1d</span><span class=w>
+</span><span class=w>    </span><span class=nt>slow</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span><span class=nt>errorBudgetPercent</span><span class=p>:</span><span class=w> </span><span class=m>42</span><span class=w>
+</span><span class=w>      </span><span class=nt>shortWindow</span><span class=p>:</span><span class=w> </span><span class=l>6h</span><span class=w>
+</span><span class=w>      </span><span class=nt>longWindow</span><span class=p>:</span><span class=w> </span><span class=l>3d</span><span class=w>
+</span></code></pre></div></div>
+</div>
+<input type=radio class="gdoc-tabs__control hidden" name=tabs- id=tabs--1>
+<label for=tabs--1 class=gdoc-tabs__label>
+Custom 30 day
+</label>
+<div class="gdoc-markdown--nested gdoc-tabs__content">
+<div class=gdoc-include><div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>sloth.slok.dev/v1</span><span class=w>
+</span><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>AlertWindows</span><span class=w>
+</span><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>sloPeriod</span><span class=p>:</span><span class=w> </span><span class=l>30d</span><span class=w>
+</span><span class=w>  </span><span class=nt>page</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>quick</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span><span class=nt>errorBudgetPercent</span><span class=p>:</span><span class=w> </span><span class=m>1</span><span class=w>
+</span><span class=w>      </span><span class=nt>shortWindow</span><span class=p>:</span><span class=w> </span><span class=l>2m</span><span class=w>
+</span><span class=w>      </span><span class=nt>longWindow</span><span class=p>:</span><span class=w> </span><span class=l>30m</span><span class=w>
+</span><span class=w>    </span><span class=nt>slow</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span><span class=nt>errorBudgetPercent</span><span class=p>:</span><span class=w> </span><span class=m>2</span><span class=w>
+</span><span class=w>      </span><span class=nt>shortWindow</span><span class=p>:</span><span class=w> </span><span class=l>15m</span><span class=w>
+</span><span class=w>      </span><span class=nt>longWindow</span><span class=p>:</span><span class=w> </span><span class=l>3h</span><span class=w>
+</span><span class=w>  </span><span class=nt>ticket</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>quick</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span><span class=nt>errorBudgetPercent</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
+</span><span class=w>      </span><span class=nt>shortWindow</span><span class=p>:</span><span class=w> </span><span class=l>1h</span><span class=w>
+</span><span class=w>      </span><span class=nt>longWindow</span><span class=p>:</span><span class=w> </span><span class=l>12h</span><span class=w>
+</span><span class=w>    </span><span class=nt>slow</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span><span class=nt>errorBudgetPercent</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
+</span><span class=w>      </span><span class=nt>shortWindow</span><span class=p>:</span><span class=w> </span><span class=l>3h</span><span class=w>
+</span><span class=w>      </span><span class=nt>longWindow</span><span class=p>:</span><span class=w> </span><span class=l>36h</span><span class=w>
+</span></code></pre></div></div>
+</div>
+</div>
+<div class=gdoc-page__anchorwrap>
+<h2 id=selecting-default-slo-period>
+Selecting default SLO period
+<a data-clipboard-text=https://sloth.dev/usage/slo-period-windows/#selecting-default-slo-period class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Selecting default SLO period" href=#selecting-default-slo-period><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
+</a>
+</h2>
+</div><p>Kubernetes and raw specs can&rsquo;s select an SLO period using the spec (because of simplicity), so, sloths fallbacks to its default slo period (<code>30d</code>). However, this can be changed using <code>--default-slo-period</code>.</p>
+<p>Some examples:</p>
+<ul>
+<li>Use default catalog and default 30 day (this would be the same as not specifying anything): <code>--default-slo-period=30d</code>.</li>
+<li>Use default catalog with 28 day: <code>--default-slo-period=28d</code>.</li>
+<li>Use custom catalog with 7 day: <code>--default-slo-period=7d --slo-period-windows-path=/my/custom/slo/catalog</code>.</li>
+<li>Use custom catalog with 45 day: <code>--default-slo-period=45d --slo-period-windows-path=/my/custom/slo/catalog</code>.</li>
 </ul>
-<div class=gdoc-page__anchorwrap>
-<h2 id=usage-examples>
-Usage examples
-<a data-clipboard-text=https://sloth.dev/sli-plugins/traefik-v1-latency/#usage-examples class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Usage examples" href=#usage-examples><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
-</a>
-</h2>
-</div><div class=gdoc-page__anchorwrap>
-<h3 id=without-filter>
-Without filter
-<a data-clipboard-text=https://sloth.dev/sli-plugins/traefik-v1-latency/#without-filter class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Without filter" href=#without-filter><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
-</a>
-</h3>
-</div><pre><code class=language-yaml>sli:
-  plugin:
-    id: &quot;sloth-common/traefik/v1/latency&quot;
-    options:
-      backend_regex: &quot;^github.com/slok/sloth/?$&quot;
-      bucket: &quot;0.3&quot;
-</code></pre>
-<div class=gdoc-page__anchorwrap>
-<h3 id=with-filters>
-With filters
-<a data-clipboard-text=https://sloth.dev/sli-plugins/traefik-v1-latency/#with-filters class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor With filters" href=#with-filters><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
-</a>
-</h3>
-</div><pre><code class=language-yaml>sli:
-  plugin:
-    id: &quot;sloth-common/traefik/v1/latency&quot;
-    options:
-      backend_regex: &quot;^github.com/slok/sloth/?$&quot;
-      bucket: &quot;0.3&quot;
-      filter: method=&quot;GET&quot;
-</code></pre>
-<div class=gdoc-page__anchorwrap>
-<h3 id=excluding-errors-5xx>
-Excluding errors (5xx)
-<a data-clipboard-text=https://sloth.dev/sli-plugins/traefik-v1-latency/#excluding-errors-5xx class="gdoc-page__anchor gdoc-page__anchor--right clip" aria-label="Anchor Excluding errors (5xx)" href=#excluding-errors-5xx><svg class="icon gdoc_link"><use xlink:href="#gdoc_link"/></svg>
-</a>
-</h3>
-</div><pre><code class=language-yaml>sli:
-  plugin:
-    id: &quot;sloth-common/traefik/v1/latency&quot;
-    options:
-      backend_regex: &quot;^github.com/slok/sloth/?$&quot;
-      bucket: &quot;0.3&quot;
-      filter: method=&quot;GET&quot;
-      exclude_errors: &quot;true&quot;
-</code></pre>
 </article>
 <div class="gdoc-page__footer flex flex-wrap justify-between">
 </div>
