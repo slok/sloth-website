@@ -1,6 +1,6 @@
 ---
 title: "SLI plugins"
-weight: 020
+weight: 040
 ---
 
 SLI plugins are small Go plugins (using [Yaegi]) that can be loaded on Sloth start.

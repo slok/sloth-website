@@ -22,11 +22,6 @@ In this case, you will need default spec to get vanilla prometheus rules and dep
 Sloth CRD is NOT required in the cluster because the generation happens offline as a CLI. For controller/operator K8s flow, check [Kubernetes controller]({{< relref "./kubernetes.md" >}}) section
 {{< /hint >}}
 
-{{< hint info >}}
-**28 days time windows**\
-By default Sloth uses 30 day time windows. Use `--window-days=28` flag to set a 28 day (4 weeks) time window.
-{{< /hint >}}
-
 {{< hint warning >}}
 **Kubernetes specs need prometheus-operator CRDs**\
 Kubernetes specs generate Prometheus operator Rules CRs, this means that the [CRD][prom-op-rules-crd] is required to be registered in the cluster.
