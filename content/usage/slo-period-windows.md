@@ -29,6 +29,19 @@ Some spec examples:
 {{< /tab >}}
 {{< /tabs >}}
 
+{{< hint info >}}
+**Multiple Sloth instances with different SLO period windows catalogs and defaults**
+
+You can have multiple Sloth instances with different default windows (with same or different slo period catalog) so you can have different behavior depending on the SLOs.
+
+For example in Kubernetes you can run Sloth using [label selectors][label-selectors] to include/exclude SLOs that will process. E.g:
+
+- `--label-selector=slo-window=7d`
+- `--label-selector=slo-window!=7d`
+- `--label-selector=environment=prod,tenant=5`
+
+{{< /hint >}}
+
 ## Selecting default SLO period
 
 Kubernetes and raw specs can's select an SLO period using the spec (because of simplicity), so, sloths fallbacks to its default slo period (`30d`). However, this can be changed using `--default-slo-period`.
@@ -39,3 +52,5 @@ Some examples:
 - Use default catalog with 28 day: `--default-slo-period=28d`.
 - Use custom catalog with 7 day: `--default-slo-period=7d --slo-period-windows-path=/my/custom/slo/catalog`.
 - Use custom catalog with 45 day: `--default-slo-period=45d --slo-period-windows-path=/my/custom/slo/catalog`.
+
+[label-selectors]: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
