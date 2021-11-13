@@ -555,7 +555,7 @@ Custom 30 day
 <blockquote class="gdoc-hint info">
 <p><strong>Multiple Sloth instances with different SLO period windows catalogs and defaults</strong></p>
 <p>You can have multiple Sloth instances with different default windows (with same or different slo period catalog) so you can have different behavior depending on the SLOs.</p>
-<p>For example in Kubernetes you can run Sloth using [label selectors][label-selectors] to include/exclude SLOs that will process. E.g:</p>
+<p>For example in Kubernetes you can run Sloth using <a class=gdoc-markdown__link href=https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/>label selectors</a> to include/exclude SLOs that will process. E.g:</p>
 <ul>
 <li><code>--label-selector=slo-window=7d</code></li>
 <li><code>--label-selector=slo-window!=7d</code></li>
