@@ -5,7 +5,8 @@ weight: 030
 
 ## Releases
 
-Get binary releases from https://github.com/slok/sloth/releases
+- Using github releases: https://github.com/slok/sloth/releases
+- Using [asdf]: https://github.com/slok/asdf-sloth
 
 ## Docker images
 
@@ -37,3 +38,4 @@ ls -la ./bin
 [raw-no-plugins]: https://raw.githubusercontent.com/slok/sloth/main/deploy/kubernetes/raw/sloth.yaml
 [raw-plugins]: https://raw.githubusercontent.com/slok/sloth/main/deploy/kubernetes/raw/sloth-with-common-plugins.yaml
 [kustomize]: https://raw.githubusercontent.com/slok/sloth/main/deploy/kubernetes/kustomization.yaml
+[asdf]: https://asdf-vm.com/
