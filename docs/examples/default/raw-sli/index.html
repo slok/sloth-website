@@ -1,815 +1,302 @@
-<!doctype html><html lang=en class=color-toggle-hidden>
-<head>
-<meta charset=utf-8>
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=color-scheme content="light dark">
-<meta name=description content="SLO spec  # This example shows another less accurate or simpler way of creating the home wifi SLO.## The metrics already give us a metric in ratio for each wifi connection satisfaction, instead of getting# good and bad events as connection with a minimum satisfaction ratio, we will calculate the averate of all# ratio satisfaction connections over the time window.# So we can't use the `events` SLI because we are not going to divide bad and total events.">
-<title>Raw SLI | Sloth</title>
-<link rel=icon href=/favicon/favicon-32x32.png type=image/x-icon>
-<script src=/js/darkmode-ce906ea916.min.js></script>
-<link rel=preload as=font href=/fonts/Metropolis.woff2 type=font/woff2 crossorigin=anonymous>
-<link rel=preload as=font href=/fonts/LiberationSans.woff2 type=font/woff2 crossorigin=anonymous>
-<link rel=preload href=/main-1be624d457.min.css as=style>
-<link rel=stylesheet href=/main-1be624d457.min.css media=all>
-<link rel=preload href=/mobile-3fc330242c.min.css as=style>
-<link rel=stylesheet href=/mobile-3fc330242c.min.css media="screen and (max-width: 45rem)">
-<link rel=preload href=/print-f79fc3e5d7.min.css as=style>
-<link rel=stylesheet href=/print-f79fc3e5d7.min.css media=print>
-<link rel=preload href=/custom.css as=style>
-<link rel=stylesheet href=/custom.css media=all>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-MGXZFGF3VJ"></script>
-<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-MGXZFGF3VJ',{anonymize_ip:!1})}</script>
-</head>
-<body itemscope itemtype=https://schema.org/WebPage><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><symbol viewBox="-2.29 -2.29 28.57 28.57" id="gdoc_arrow_back" xmlns="http://www.w3.org/2000/svg"><path d="M24 10.526v2.947H5.755l8.351 8.421-2.105 2.105-12-12 12-12 2.105 2.105-8.351 8.421H24z"/></symbol><symbol viewBox="-2.29 -2.29 28.57 28.57" id="gdoc_arrow_left_alt" xmlns="http://www.w3.org/2000/svg"><path d="M5.965 10.526V6.035L0 12l5.965 5.965v-4.491H24v-2.947H5.965z"/></symbol><symbol viewBox="-2.29 -2.29 28.57 28.57" id="gdoc_arrow_right_alt" xmlns="http://www.w3.org/2000/svg"><path d="M18.035 10.526V6.035L24 12l-5.965 5.965v-4.491H0v-2.947h18.035z"/></symbol><symbol viewBox="-2.29 -2.29 32.57 32.57" id="gdoc_bitbucket" xmlns="http://www.w3.org/2000/svg"><path d="M15.905 13.355c.189 1.444-1.564 2.578-2.784 1.839-1.375-.602-1.375-2.784-.034-3.403 1.151-.705 2.818.223 2.818 1.564zm1.907-.361c-.309-2.44-3.076-4.056-5.328-3.042-1.426.636-2.389 2.148-2.32 3.747.086 2.097 2.08 3.815 4.176 3.626s3.729-2.234 3.472-4.331zm4.108-9.315c-.756-.997-2.045-1.169-3.179-1.358-3.214-.516-6.513-.533-9.727.034-1.066.172-2.269.361-2.939 1.323 1.1 1.031 2.664 1.186 4.073 1.358 2.544.327 5.156.344 7.699.017 1.426-.172 3.008-.309 4.073-1.375zm.979 17.788c-.481 1.684-.206 3.953-1.994 4.932-3.076 1.701-6.806 1.89-10.191 1.289-1.787-.327-3.884-.894-4.864-2.578-.43-1.65-.705-3.334-.98-5.018l.103-.275.309-.155c5.121 3.386 12.288 3.386 17.427.0.808.241.206 1.22.189 1.805zM26.01 4.951c-.584 3.764-1.255 7.51-1.908 11.257-.189 1.1-1.255 1.719-2.148 2.183-3.214 1.615-6.96 1.89-10.483 1.512-2.389-.258-4.829-.894-6.771-2.389-.911-.705-.911-1.908-1.083-2.922-.602-3.523-1.289-7.046-1.719-10.604.206-1.547 1.942-2.217 3.231-2.698C6.848.654 8.686.362 10.508.19c3.884-.378 7.854-.241 11.618.859 1.341.395 2.784.945 3.695 2.097.412.533.275 1.203.189 1.805z"/></symbol><symbol viewBox="-2.29 -2.29 28.57 28.57" id="gdoc_bookmark" xmlns="http://www.w3.org/2000/svg"><path d="M15.268 4.392q.868.0 1.532.638t.664 1.506v17.463l-7.659-3.268-7.608 3.268V6.536q0-.868.664-1.506t1.532-.638h10.876zm4.34 14.144V4.392q0-.868-.638-1.532t-1.506-.664H6.537q0-.868.664-1.532T8.733.0h10.876q.868.0 1.532.664t.664 1.532v17.412z"/></symbol><symbol viewBox="-2.29 -2.29 32.57 32.57" id="gdoc_brightness_auto" xmlns="http://www.w3.org/2000/svg"><path d="M16.846 18.938h2.382L15.22 7.785h-2.44L8.772 18.938h2.382l.871-2.44h3.95zm7.087-9.062L27.999 14l-4.066 4.124v5.809h-5.809L14 27.999l-4.124-4.066H4.067v-5.809L.001 14l4.066-4.124V4.067h5.809L14 .001l4.124 4.066h5.809v5.809zm-11.385 4.937L14 10.282l1.452 4.531h-2.904z"/></symbol><symbol viewBox="-2.29 -2.29 32.57 32.57" id="gdoc_brightness_dark" xmlns="http://www.w3.org/2000/svg"><path d="M14 21.435q3.079.0 5.257-2.178T21.435 14t-2.178-5.257T14 6.565q-1.51.0-3.079.697 1.917.871 3.108 2.701T15.22 14t-1.191 4.037-3.108 2.701q1.568.697 3.079.697zm9.933-11.559L27.999 14l-4.066 4.124v5.809h-5.809L14 27.999l-4.124-4.066H4.067v-5.809L.001 14l4.066-4.124V4.067h5.809L14 .001l4.124 4.066h5.809v5.809z"/></symbol><symbol viewBox="-2.29 -2.29 32.57 32.57" id="gdoc_brightness_light" xmlns="http://www.w3.org/2000/svg"><path d="M14 21.435q3.079.0 5.257-2.178T21.435 14t-2.178-5.257T14 6.565 8.743 8.743 6.565 14t2.178 5.257T14 21.435zm9.933-3.311v5.809h-5.809L14 27.999l-4.124-4.066H4.067v-5.809L.001 14l4.066-4.124V4.067h5.809L14 .001l4.124 4.066h5.809v5.809L27.999 14z"/></symbol><symbol viewBox="-2.29 -2.29 32.57 32.57" id="gdoc_cloud_off" xmlns="http://www.w3.org/2000/svg"><path d="M9.023 10.5H7q-1.914.0-3.281 1.395t-1.367 3.309 1.367 3.281T7 19.852h11.375zM3.5 4.976l1.477-1.477L24.5 23.022l-1.477 1.477-2.352-2.297H6.999q-2.898.0-4.949-2.051t-2.051-4.949q0-2.844 1.969-4.867t4.758-2.133zm19.086 5.578q2.242.164 3.828 1.832T28 16.351q0 3.008-2.461 4.758l-1.695-1.695q1.805-.984 1.805-3.063.0-1.422-1.039-2.461t-2.461-1.039h-1.75v-.602q0-2.68-1.859-4.539t-4.539-1.859q-1.531.0-2.953.711l-1.75-1.695Q11.431 3.5 14.001 3.5q2.953.0 5.496 2.078t3.09 4.977z"/></symbol><symbol viewBox="-2.29 -2.29 32.57 32.57" id="gdoc_code" xmlns="http://www.w3.org/2000/svg"><path d="M9.917 24.5a1.75 1.75.0 10-3.501.001 1.75 1.75.0 003.501-.001zm0-21a1.75 1.75.0 10-3.501.001A1.75 1.75.0 009.917 3.5zm11.666 2.333a1.75 1.75.0 10-3.501.001 1.75 1.75.0 003.501-.001zm1.75.0a3.502 3.502.0 01-1.75 3.026c-.055 6.581-4.721 8.039-7.82 9.023-2.898.911-3.846 1.349-3.846 3.117v.474a3.502 3.502.0 011.75 3.026c0 1.932-1.568 3.5-3.5 3.5s-3.5-1.568-3.5-3.5c0-1.294.711-2.424 1.75-3.026V6.526A3.502 3.502.0 014.667 3.5c0-1.932 1.568-3.5 3.5-3.5s3.5 1.568 3.5 3.5a3.502 3.502.0 01-1.75 3.026v9.06c.93-.456 1.914-.766 2.807-1.039 3.391-1.075 5.323-1.878 5.359-5.687a3.502 3.502.0 01-1.75-3.026c0-1.932 1.568-3.5 3.5-3.5s3.5 1.568 3.5 3.5z"/></symbol><symbol viewBox="-2.29 -2.29 36.57 36.57" id="gdoc_date" xmlns="http://www.w3.org/2000/svg"><path d="M27.192 28.844V11.192H4.808v17.652h22.384zm0-25.689q1.277.0 2.253.976t.976 2.253v22.459q0 1.277-.976 2.216t-2.253.939H4.808q-1.352.0-2.291-.901t-.939-2.253V6.385q0-1.277.939-2.253t2.291-.976h1.577V.001h3.23v3.155h12.769V.001h3.23v3.155h1.577zm-3.155 11.267v3.155h-3.23v-3.155h3.23zm-6.46.0v3.155h-3.155v-3.155h3.155zm-6.384.0v3.155h-3.23v-3.155h3.23z"/></symbol><symbol viewBox="-2.29 -2.29 36.57 36.57" id="gdoc_download" xmlns="http://www.w3.org/2000/svg"><path d="M2.866 28.209h26.269v3.79H2.866v-3.79zm26.268-16.925L16 24.418 2.866 11.284h7.493V.001h11.283v11.283h7.493z"/></symbol><symbol viewBox="-2.29 -2.29 36.57 36.57" id="gdoc_email" xmlns="http://www.w3.org/2000/svg"><path d="M28.845 9.615v-3.23L16 14.422 3.155 6.385v3.23L16 17.577zm0-6.46q1.277.0 2.216.977T32 6.385v19.23q0 1.277-.939 2.253t-2.216.977H3.155q-1.277.0-2.216-.977T0 25.615V6.385q0-1.277.939-2.253t2.216-.977h25.69z"/></symbol><symbol viewBox="-2.29 -2.29 32.57 32.57" id="gdoc_git" xmlns="http://www.w3.org/2000/svg"><path d="M27.472 12.753 15.247.529a1.803 1.803.0 00-2.55.0l-2.84 2.84 2.137 2.137a2.625 2.625.0 013.501 3.501l3.499 3.499a2.625 2.625.0 11-1.237 1.237l-3.499-3.499c-.083.04-.169.075-.257.106v7.3a2.626 2.626.0 11-1.75.0v-7.3a2.626 2.626.0 01-1.494-3.607L8.62 4.606l-8.09 8.09a1.805 1.805.0 000 2.551l12.225 12.224a1.803 1.803.0 002.55.0l12.168-12.168a1.805 1.805.0 000-2.551z"/></symbol><symbol viewBox="-2.29 -2.29 36.57 36.57" id="gdoc_github" xmlns="http://www.w3.org/2000/svg"><path d="M16 .394c8.833.0 15.999 7.166 15.999 15.999.0 7.062-4.583 13.062-10.937 15.187-.813.146-1.104-.354-1.104-.771.0-.521.021-2.25.021-4.396.0-1.5-.5-2.458-1.083-2.958 3.562-.396 7.312-1.75 7.312-7.896.0-1.75-.625-3.167-1.646-4.291.167-.417.708-2.042-.167-4.25-1.333-.417-4.396 1.646-4.396 1.646a15.032 15.032.0 00-8 0S8.937 6.602 7.603 7.018c-.875 2.208-.333 3.833-.167 4.25-1.021 1.125-1.646 2.542-1.646 4.291.0 6.125 3.729 7.5 7.291 7.896-.458.417-.875 1.125-1.021 2.146-.917.417-3.25 1.125-4.646-1.333-.875-1.521-2.458-1.646-2.458-1.646-1.562-.021-.104.979-.104.979 1.042.479 1.771 2.333 1.771 2.333.938 2.854 5.396 1.896 5.396 1.896.0 1.333.021 2.583.021 2.979.0.417-.292.917-1.104.771C4.582 29.455-.001 23.455-.001 16.393-.001 7.56 7.165.394 15.998.394zM6.063 23.372c.042-.083-.021-.187-.146-.25-.125-.042-.229-.021-.271.042-.042.083.021.187.146.25.104.062.229.042.271-.042zm.646.709c.083-.062.062-.208-.042-.333-.104-.104-.25-.146-.333-.062-.083.062-.062.208.042.333.104.104.25.146.333.062zm.625.937c.104-.083.104-.25.0-.396-.083-.146-.25-.208-.354-.125-.104.062-.104.229.0.375s.271.208.354.146zm.875.875c.083-.083.042-.271-.083-.396-.146-.146-.333-.167-.417-.062-.104.083-.062.271.083.396.146.146.333.167.417.062zm1.187.521c.042-.125-.083-.271-.271-.333-.167-.042-.354.021-.396.146s.083.271.271.312c.167.062.354.0.396-.125zm1.313.104c0-.146-.167-.25-.354-.229-.187.0-.333.104-.333.229.0.146.146.25.354.229.187.0.333-.104.333-.229zm1.208-.208c-.021-.125-.187-.208-.375-.187-.187.042-.312.167-.292.312.021.125.187.208.375.167s.312-.167.292-.292z"/></symbol><symbol viewBox="-2.29 -2.29 32.57 32.57" id="gdoc_gitlab" xmlns="http://www.w3.org/2000/svg"><path d="M1.629 11.034 14 26.888.442 17.048a1.09 1.09.0 01-.39-1.203l1.578-4.811zm7.217.0h10.309l-5.154 15.854zM5.753 1.475l3.093 9.559H1.63l3.093-9.559a.548.548.0 011.031.0zm20.618 9.559 1.578 4.811c.141.437-.016.922-.39 1.203l-13.558 9.84 12.371-15.854zm0 0h-7.216l3.093-9.559a.548.548.0 011.031.0z"/></symbol><symbol viewBox="-2.29 -2.29 36.57 36.57" id="gdoc_heart" xmlns="http://www.w3.org/2000/svg"><path d="M16 29.714a1.11 1.11.0 01-.786-.321L4.072 18.643c-.143-.125-4.071-3.714-4.071-8 0-5.232 3.196-8.357 8.535-8.357 3.125.0 6.053 2.464 7.464 3.857 1.411-1.393 4.339-3.857 7.464-3.857 5.339.0 8.535 3.125 8.535 8.357.0 4.286-3.928 7.875-4.089 8.035L16.785 29.392c-.214.214-.5.321-.786.321z"/></symbol><symbol viewBox="-2.29 -2.29 32.57 32.57" id="gdoc_home" xmlns="http://www.w3.org/2000/svg"><path d="M24.003 15.695v8.336c0 .608-.504 1.111-1.111 1.111h-6.669v-6.669h-4.446v6.669H5.108a1.119 1.119.0 01-1.111-1.111v-8.336c0-.035.017-.069.017-.104L14 7.359l9.986 8.232a.224.224.0 01.017.104zm3.873-1.198-1.077 1.285a.578.578.0 01-.365.191h-.052a.547.547.0 01-.365-.122L14 5.831 1.983 15.851a.594.594.0 01-.417.122.578.578.0 01-.365-.191L.124 14.497a.57.57.0 01.069-.781L12.679 3.314c.729-.608 1.91-.608 2.64.0l4.237 3.543V3.471c0-.313.243-.556.556-.556h3.334c.313.0.556.243.556.556v7.085l3.803 3.161c.226.191.26.556.069.781z"/></symbol><symbol viewBox="-2.29 -2.29 32.57 32.57" id="gdoc_keyborad_arrow_down" xmlns="http://www.w3.org/2000/svg"><path d="M3.281 5.36 14 16.079 24.719 5.36 28 8.641l-14 14-14-14z"/></symbol><symbol viewBox="-2.29 -2.29 36.57 36.57" id="gdoc_keyborad_arrow_left" xmlns="http://www.w3.org/2000/svg"><path d="M25.875 28.25 22.125 32 6.126 16.001 22.125.002l3.75 3.75-12.25 12.25z"/></symbol><symbol viewBox="-2.29 -2.29 36.57 36.57" id="gdoc_keyborad_arrow_right" xmlns="http://www.w3.org/2000/svg"><path d="M6.125 28.25 18.375 16 6.125 3.75 9.875.0l15.999 15.999L9.875 31.998z"/></symbol><symbol viewBox="-2.29 -2.29 32.57 32.57" id="gdoc_keyborad_arrow_up" xmlns="http://www.w3.org/2000/svg"><path d="M24.719 22.64 14 11.921 3.281 22.64.0 19.359l14-14 14 14z"/></symbol><symbol viewBox="-2.29 -2.29 36.57 36.57" id="gdoc_link" xmlns="http://www.w3.org/2000/svg"><path d="M24.037 7.963q3.305.0 5.634 2.366T32 16t-2.329 5.671-5.634 2.366h-6.46v-3.08h6.46q2.028.0 3.493-1.465t1.465-3.493-1.465-3.493-3.493-1.465h-6.46v-3.08h6.46zM9.615 17.578v-3.155h12.77v3.155H9.615zM3.005 16q0 2.028 1.465 3.493t3.493 1.465h6.46v3.08h-6.46q-3.305.0-5.634-2.366T0 16.001t2.329-5.671 5.634-2.366h6.46v3.08h-6.46q-2.028.0-3.493 1.465t-1.465 3.493z"/></symbol><symbol viewBox="-2.29 -2.29 36.57 36.57" id="gdoc_menu" xmlns="http://www.w3.org/2000/svg"><path d="M.001 5.334h31.998v3.583H.001V5.334zm0 12.416v-3.5h31.998v3.5H.001zm0 8.916v-3.583h31.998v3.583H.001z"/></symbol><symbol viewBox="-2.29 -2.29 32.57 32.57" id="gdoc_notification" xmlns="http://www.w3.org/2000/svg"><path d="M22.615 19.384l2.894 2.894v1.413H2.49v-1.413l2.894-2.894V12.25q0-3.365 1.716-5.856t4.745-3.231v-1.01q0-.875.606-1.514T13.999.0t1.548.639.606 1.514v1.01q3.029.74 4.745 3.231t1.716 5.856v7.134zM14 27.999q-1.211.0-2.053-.808t-.841-2.019h5.788q0 1.144-.875 1.986T14 27.999z"/></symbol><symbol viewBox="-2.29 -2.29 32.57 32.57" id="gdoc_path" xmlns="http://www.w3.org/2000/svg"><path d="M28 12.62h-9.793V8.414h-2.826v11.173h2.826v-4.206H28V26.62h-9.793v-4.206H12.62v-14H9.794v4.206H.001V1.381h9.793v4.206h8.413V1.381H28V12.62z"/></symbol><symbol viewBox="-2.29 -2.29 36.57 36.57" id="gdoc_person" xmlns="http://www.w3.org/2000/svg"><path d="M16 20.023q5.052.0 10.526 2.199t5.473 5.754v4.023H0v-4.023q0-3.555 5.473-5.754t10.526-2.199zM16 16q-3.275.0-5.614-2.339T8.047 8.047t2.339-5.661T16 0t5.614 2.386 2.339 5.661-2.339 5.614T16 16z"/></symbol><symbol viewBox="-2.29 -2.29 36.57 36.57" id="gdoc_search" xmlns="http://www.w3.org/2000/svg"><path d="M11.925 20.161q3.432.0 5.834-2.402t2.402-5.834-2.402-5.834-5.834-2.402-5.834 2.402-2.402 5.834 2.402 5.834 5.834 2.402zm10.981.0L32 29.255 29.255 32l-9.094-9.094v-1.458l-.515-.515q-3.26 2.831-7.721 2.831-4.976.0-8.45-3.432T.001 11.925t3.474-8.45 8.45-3.474 8.407 3.474 3.432 8.45q0 1.802-.858 4.075t-1.973 3.646l.515.515h1.458z"/></symbol><symbol viewBox="-2.29 -2.29 32.57 32.57" id="gdoc_shield" xmlns="http://www.w3.org/2000/svg"><path d="M22.167 15.166V3.5h-8.166v20.726c.93-.492 2.424-1.349 3.883-2.497 1.95-1.531 4.284-3.919 4.284-6.562zm3.499-13.999v14c0 7.674-10.737 12.523-11.192 12.724-.146.073-.31.109-.474.109s-.328-.036-.474-.109c-.456-.201-11.192-5.049-11.192-12.724v-14C2.334.529 2.863.0 3.501.0H24.5c.638.0 1.167.529 1.167 1.167z"/></symbol><symbol viewBox="-2.29 -2.29 32.57 32.57" id="gdoc_tags" xmlns="http://www.w3.org/2000/svg"><path d="M6.606 7.549c0-1.047-.84-1.887-1.887-1.887s-1.887.84-1.887 1.887.84 1.887 1.887 1.887 1.887-.84 1.887-1.887zm15.732 8.493c0 .501-.206.988-.546 1.327l-7.239 7.254c-.354.339-.84.546-1.342.546s-.988-.206-1.327-.546L1.342 14.066C.59 13.329.0 11.899.0 10.852V4.718a1.9 1.9.0 011.887-1.887h6.134c1.047.0 2.477.59 3.229 1.342L21.792 14.7c.339.354.546.84.546 1.342zm5.661.0c0 .501-.206.988-.546 1.327l-7.239 7.254c-.354.339-.84.546-1.342.546-.767.0-1.15-.354-1.651-.87l6.93-6.93c.339-.339.546-.826.546-1.327s-.206-.988-.546-1.342L13.609 4.173c-.752-.752-2.182-1.342-3.229-1.342h3.303c1.047.0 2.477.59 3.229 1.342L27.454 14.7c.339.354.546.84.546 1.342z"/></symbol><symbol viewBox="-2.29 -2.29 36.57 36.57" id="gdoc_timer" xmlns="http://www.w3.org/2000/svg"><path d="M16 29q4.428.0 7.536-3.143t3.107-7.571-3.107-7.536T16 7.643 8.464 10.75t-3.107 7.536 3.107 7.571T16 29zM26.714 9.786q1.214 1.571 2.107 4.036t.893 4.464q0 5.643-4 9.678T16 32t-9.714-4.036-4-9.678 4-9.678T16 4.572q1.929.0 4.464.929t4.107 2.143l2.143-2.214q1.143.929 2.143 2.143zM14.5 19.857v-9.143h3v9.143h-3zM20.571.001v3.071h-9.143V.001h9.143z"/></symbol></svg>
-<div class=wrapper>
-<input type=checkbox class=hidden id=menu-control>
-<input type=checkbox class=hidden id=menu-header-control>
-<header class=gdoc-header>
-<div class="container flex align-center justify-between">
-<label for=menu-control class=gdoc-nav__control><svg class="icon gdoc_menu"><title>Open Nav Menu</title><use xlink:href="#gdoc_menu"/></svg><svg class="icon gdoc_arrow_back"><title>Close Nav Menu</title><use xlink:href="#gdoc_arrow_back"/></svg>
-</label>
-<a class=gdoc-header__link href=https://sloth.dev/>
-<span class="gdoc-brand flex align-center">
-<img class=gdoc-brand__img src=/media/sloth-logo-white.svg alt>
-<span class=gdoc-brand__title>Sloth</span>
-</span>
-</a>
-<div class=gdoc-menu-header>
-<span class=gdoc-menu-header__items>
-<a href=https://github.com/slok/sloth class=gdoc-header__link><svg class="icon gdoc_github"><title>GitHub</title><use xlink:href="#gdoc_github"/></svg>
-</a>
-<span id=gdoc-dark-mode><svg class="icon gdoc_brightness_dark"><title>Toggle Dark/Light/Auto mode</title><use xlink:href="#gdoc_brightness_dark"/></svg><svg class="icon gdoc_brightness_light"><title>Toggle Dark/Light/Auto mode</title><use xlink:href="#gdoc_brightness_light"/></svg><svg class="icon gdoc_brightness_auto"><title>Toggle Dark/Light/Auto mode</title><use xlink:href="#gdoc_brightness_auto"/></svg>
-</span>
-<a href=https://sloth.dev/ class="gdoc-header__link gdoc-menu-header__home"><svg class="icon gdoc_home"><title>Back to homepage</title><use xlink:href="#gdoc_home"/></svg>
-</a>
-<label for=menu-header-control class=gdoc-menu-header__control><svg class="icon gdoc_keyborad_arrow_right"><use xlink:href="#gdoc_keyborad_arrow_right"/><title>Close Menu Bar</title></svg>
-</label>
-</span>
-<label for=menu-header-control class=gdoc-menu-header__control><svg class="icon gdoc_keyborad_arrow_left"><use xlink:href="#gdoc_keyborad_arrow_left"/><title>Open Menu Bar</title></svg>
-</label>
-</div>
-</div>
-</header>
-<main class="container flex flex-even">
-<aside class=gdoc-nav>
-<nav>
-<div class=gdoc-search><svg class="icon gdoc_search"><use xlink:href="#gdoc_search"/></svg>
-<input type=text id=gdoc-search-input class=gdoc-search__input placeholder=Search... aria-label=Search maxlength=64>
-<div class="gdoc-search__spinner spinner hidden"></div>
-<ul id=gdoc-search-results class=gdoc-search__list></ul>
-</div>
-<section class=gdoc-nav--main>
-<h2>Navigation</h2>
-<ul class=gdoc-nav__list>
-<li>
-<span class=flex>
-<a href=/introduction/ class=gdoc-nav__entry>
-Getting started
-</a>
-</span>
-<ul class=gdoc-nav__list>
-<li>
-<span class=flex>
-<a href=/introduction/features/ class=gdoc-nav__entry>
-Features
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/introduction/install/ class=gdoc-nav__entry>
-Installing Sloth
-</a>
-</span>
-</li>
-</ul>
-</li>
-<li>
-<span class=flex>SLO API & Specs</span>
-<ul class=gdoc-nav__list>
-<li>
-<span class=flex>
-<a href=/specs/default/ class=gdoc-nav__entry>
-Default (prometheus/v1)
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/specs/kubernetes/ class=gdoc-nav__entry>
-Kubernetes (CRD)
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/specs/openslo/ class=gdoc-nav__entry>
-OpenSLO
-</a>
-</span>
-</li>
-</ul>
-</li>
-<li>
-<span class=flex>
-<a href=/architecture/ class=gdoc-nav__entry>
-Architecture
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/dashboards/ class=gdoc-nav__entry>
-Dashboards
-</a>
-</span>
-</li>
-<li>
-<span class=flex>Usage</span>
-<ul class=gdoc-nav__list>
-<li>
-<span class=flex>
-<a href=/usage/cli/ class=gdoc-nav__entry>
-CLI generate
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/usage/kubernetes/ class=gdoc-nav__entry>
-Kubernetes controller
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/usage/slo-validation/ class=gdoc-nav__entry>
-SLO validation
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/usage/plugins/ class=gdoc-nav__entry>
-SLI plugins
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/usage/slo-period-windows/ class=gdoc-nav__entry>
-SLO period windows
-</a>
-</span>
-</li>
-</ul>
-</li>
-<li>
-<span class=flex>Examples</span>
-<ul class=gdoc-nav__list>
-<li>
-<input type=checkbox id=navtree-02ab23f1 class=gdoc-nav__toggle checked>
-<label for=navtree-02ab23f1 class="flex justify-between">
-<span class=flex>
-<a href=/examples/default/ class=gdoc-nav__entry>
-Default
-</a>
-</span><svg class="icon gdoc_keyborad_arrow_left"><use xlink:href="#gdoc_keyborad_arrow_left"/></svg><svg class="icon gdoc_keyborad_arrow_down hidden"><use xlink:href="#gdoc_keyborad_arrow_down"/></svg>
-</label>
-<ul class=gdoc-nav__list>
-<li>
-<span class=flex>
-<a href=/examples/default/getting-started/ class=gdoc-nav__entry>
-Getting started
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/examples/default/home-wifi/ class=gdoc-nav__entry>
-Home WiFi
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/examples/default/kubernetes-apiserver/ class=gdoc-nav__entry>
-Kubernetes APIserver
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/examples/default/multifile/ class=gdoc-nav__entry>
-Multi file
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/examples/default/no-alerts/ class=gdoc-nav__entry>
-No alerts
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/examples/default/raw-sli/ class="gdoc-nav__entry is-active">
-Raw SLI
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/examples/default/sli-plugin/ class=gdoc-nav__entry>
-SLI plugin
-</a>
-</span>
-</li>
-</ul>
-</li>
-<li>
-<input type=checkbox id=navtree-1ba05e7e class=gdoc-nav__toggle>
-<label for=navtree-1ba05e7e class="flex justify-between">
-<span class=flex>
-<a href=/examples/kubernetes/ class=gdoc-nav__entry>
-Kubernetes
-</a>
-</span><svg class="icon gdoc_keyborad_arrow_left"><use xlink:href="#gdoc_keyborad_arrow_left"/></svg><svg class="icon gdoc_keyborad_arrow_down hidden"><use xlink:href="#gdoc_keyborad_arrow_down"/></svg>
-</label>
-<ul class=gdoc-nav__list>
-<li>
-<span class=flex>
-<a href=/examples/kubernetes/getting-started/ class=gdoc-nav__entry>
-Getting started
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/examples/kubernetes/home-wifi/ class=gdoc-nav__entry>
-Home WiFi
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/examples/kubernetes/multifile/ class=gdoc-nav__entry>
-Multi file
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/examples/kubernetes/sli-plugin/ class=gdoc-nav__entry>
-SLI plugin
-</a>
-</span>
-</li>
-</ul>
-</li>
-<li>
-<input type=checkbox id=navtree-f0cfab89 class=gdoc-nav__toggle>
-<label for=navtree-f0cfab89 class="flex justify-between">
-<span class=flex>
-<a href=/examples/openslo/ class=gdoc-nav__entry>
-OpenSLO
-</a>
-</span><svg class="icon gdoc_keyborad_arrow_left"><use xlink:href="#gdoc_keyborad_arrow_left"/></svg><svg class="icon gdoc_keyborad_arrow_down hidden"><use xlink:href="#gdoc_keyborad_arrow_down"/></svg>
-</label>
-<ul class=gdoc-nav__list>
-<li>
-<span class=flex>
-<a href=/examples/openslo/getting-started/ class=gdoc-nav__entry>
-Getting started
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/examples/openslo/kubernetes-apiserver/ class=gdoc-nav__entry>
-Kubernetes APIserver
-</a>
-</span>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<input type=checkbox id=navtree-91d89edb class=gdoc-nav__toggle>
-<label for=navtree-91d89edb class="flex justify-between">
-<span class=flex>
-<a href=/sli-plugins/ class=gdoc-nav__entry>
-SLI plugins
-</a>
-</span><svg class="icon gdoc_keyborad_arrow_left"><use xlink:href="#gdoc_keyborad_arrow_left"/></svg><svg class="icon gdoc_keyborad_arrow_down hidden"><use xlink:href="#gdoc_keyborad_arrow_down"/></svg>
-</label>
-<ul class=gdoc-nav__list>
-<li>
-<span class=flex>
-<a href=/sli-plugins/coredns-availability/ class=gdoc-nav__entry>
-Coredns Availability
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/sli-plugins/coredns-latency/ class=gdoc-nav__entry>
-Coredns Latency
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/sli-plugins/fake/ class=gdoc-nav__entry>
-Fake
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/sli-plugins/kubernetes-apiserver-availability/ class=gdoc-nav__entry>
-Kubernetes Apiserver Availability
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/sli-plugins/kubernetes-apiserver-latency/ class=gdoc-nav__entry>
-Kubernetes Apiserver Latency
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/sli-plugins/kubernetes-kooper-availability/ class=gdoc-nav__entry>
-Kubernetes Kooper Availability
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/sli-plugins/kubernetes-kooper-latency/ class=gdoc-nav__entry>
-Kubernetes Kooper Latency
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/sli-plugins/kubernetes-kooper-queuecongestion/ class=gdoc-nav__entry>
-Kubernetes Kooper Queuecongestion
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/sli-plugins/noop/ class=gdoc-nav__entry>
-Noop
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/sli-plugins/prometheus-rules-evalavailability/ class=gdoc-nav__entry>
-Prometheus Rules Evalavailability
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/sli-plugins/prometheus-targets-availability/ class=gdoc-nav__entry>
-Prometheus Targets Availability
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/sli-plugins/slok-go-http-metrics-availability/ class=gdoc-nav__entry>
-Slok Go HTTP Metrics Availability
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/sli-plugins/slok-go-http-metrics-latency/ class=gdoc-nav__entry>
-Slok Go HTTP Metrics Latency
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/sli-plugins/traefik-v1-availability/ class=gdoc-nav__entry>
-Traefik V1 Availability
-</a>
-</span>
-</li>
-<li>
-<span class=flex>
-<a href=/sli-plugins/traefik-v1-latency/ class=gdoc-nav__entry>
-Traefik V1 Latency
-</a>
-</span>
-</li>
-</ul>
-</li>
-<li>
-<span class=flex>
-<a href=/faq/ class=gdoc-nav__entry>
-F.A.Q
-</a>
-</span>
-</li>
-</ul>
-</section>
-<section class=gdoc-nav--more>
-<h2>More</h2>
-<ul class=gdoc-nav__list>
-<li>
-<span class=flex><svg class="icon gdoc_download"><use xlink:href="#gdoc_download"/></svg>
-<a href=https://github.com/slok/sloth/releases class=gdoc-nav__entry>
-Releases
-</a>
-</span>
-</li>
-<li>
-<span class=flex><svg class="icon gdoc_timer"><use xlink:href="#gdoc_timer"/></svg>
-<a href=https://github.com/slok/sloth/blob/main/CHANGELOG.md class=gdoc-nav__entry>
-Changelog
-</a>
-</span>
-</li>
-<li>
-<span class=flex><svg class="icon gdoc_github"><use xlink:href="#gdoc_github"/></svg>
-<a href=https://github.com/slok/sloth-common-sli-plugins class=gdoc-nav__entry>
-SLI plugins source
-</a>
-</span>
-</li>
-<li>
-<span class=flex><svg class="icon gdoc_github"><use xlink:href="#gdoc_github"/></svg>
-<a href=https://github.com/slok/sloth-website class=gdoc-nav__entry>
-Docs Source
-</a>
-</span>
-</li>
-</ul>
-</section>
-</nav>
-</aside>
-<div class=gdoc-page>
-<div class="gdoc-page__header flex flex-wrap
-justify-between
-hidden-mobile" itemprop=breadcrumb>
-<div><svg class="icon gdoc_path hidden-mobile"><use xlink:href="#gdoc_path"/></svg>
-<ol class=breadcrumb itemscope itemtype=https://schema.org/BreadcrumbList>
-<li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemscope itemtype=https://schema.org/WebPage itemprop=item itemid=/ href=/><span itemprop=name></span></a><meta itemprop=position content="1"></li><li> / </li><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemscope itemtype=https://schema.org/WebPage itemprop=item itemid=/examples/ href=/examples/><span itemprop=name>Examples</span></a><meta itemprop=position content="2"></li><li> / </li><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><a itemscope itemtype=https://schema.org/WebPage itemprop=item itemid=/examples/default/ href=/examples/default/><span itemprop=name>Default</span></a><meta itemprop=position content="3"></li><li> / </li><li itemprop=itemListElement itemscope itemtype=https://schema.org/ListItem><span itemprop=name>Raw SLI</span><meta itemprop=position content="4"></li>
-</ol>
-</div>
-</div>
-<article class="gdoc-markdown gdoc-markdown__align--left">
-<h1>Raw SLI</h1>
-<div class=gdoc-tabs>
-<input type=radio class="gdoc-tabs__control hidden" name=tabs- id=tabs--0 checked>
-<label for=tabs--0 class=gdoc-tabs__label>
-SLO spec
-</label>
-<div class="gdoc-markdown--nested gdoc-tabs__content">
-<div class=gdoc-include><div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=c># This example shows another less accurate or simpler way of creating the home wifi SLO.</span><span class=w>
-</span><span class=w></span><span class=c>#</span><span class=w>
-</span><span class=w></span><span class=c># The metrics already give us a metric in ratio for each wifi connection satisfaction, instead of getting</span><span class=w>
-</span><span class=w></span><span class=c># good and bad events as connection with a minimum satisfaction ratio, we will calculate the averate of all</span><span class=w>
-</span><span class=w></span><span class=c># ratio satisfaction connections over the time window.</span><span class=w>
-</span><span class=w></span><span class=c># So we can&#39;t use the `events` SLI because we are not going to divide bad and total events.</span><span class=w>
-</span><span class=w></span><span class=c>#</span><span class=w>
-</span><span class=w></span><span class=c># - `wifi-client-satisfaction`</span><span class=w>
-</span><span class=w></span><span class=c>#   - This SLO warn us that we have an average wifi connection satisfaction.</span><span class=w>
-</span><span class=w></span><span class=c>#   - SLI error: Calculated internally by ubiquitis metrics, we use directly the ratio.</span><span class=w>
-</span><span class=w></span><span class=c>#   - SLO objective (95%): We allow the average wifi connection satisfaction is &gt;=95%</span><span class=w>
-</span><span class=w></span><span class=c>#</span><span class=w>
-</span><span class=w></span><span class=c># `sloth generate -i ./examples/raw-home-wifi.yml`</span><span class=w>
-</span><span class=w></span><span class=c>#</span><span class=w>
-</span><span class=w></span><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;prometheus/v1&#34;</span><span class=w>
-</span><span class=w></span><span class=nt>service</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;home-wifi&#34;</span><span class=w>
-</span><span class=w></span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span><span class=nt>cluster</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;valhalla&#34;</span><span class=w>
-</span><span class=w>  </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;ubiquiti&#34;</span><span class=w>
-</span><span class=w>  </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;home&#34;</span><span class=w>
-</span><span class=w></span><span class=nt>slos</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;wifi-client-satisfaction&#34;</span><span class=w>
-</span><span class=w>    </span><span class=nt>objective</span><span class=p>:</span><span class=w> </span><span class=m>95</span><span class=w>
-</span><span class=w>    </span><span class=nt>description</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;Warn us that we have an average wifi connection satisfaction.&#34;</span><span class=w>
-</span><span class=w>    </span><span class=nt>sli</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>raw</span><span class=p>:</span><span class=w>
-</span><span class=w>        </span><span class=c># Get the averate satisfaction ratio and rest 1 (max good) to get the error ratio.</span><span class=w>
-</span><span class=w>        </span><span class=nt>error_ratio_query</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
-</span><span class=sd>          1 - (
-</span><span class=sd>            sum(sum_over_time(unifipoller_client_satisfaction_ratio[{{.window}}]))
-</span><span class=sd>            /
-</span><span class=sd>            sum(count_over_time(unifipoller_client_satisfaction_ratio[{{.window}}]))
-</span><span class=sd>          )</span><span class=w>          
-</span><span class=w>    </span><span class=nt>alerting</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>WifiClientSatisfaction</span><span class=w>
-</span><span class=w>      </span><span class=nt>page_alert</span><span class=p>:</span><span class=w>
-</span><span class=w>        </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>          </span><span class=nt>severity</span><span class=p>:</span><span class=w> </span><span class=l>home</span><span class=w>
-</span><span class=w>      </span><span class=nt>ticket_alert</span><span class=p>:</span><span class=w>
-</span><span class=w>        </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>          </span><span class=nt>severity</span><span class=p>:</span><span class=w> </span><span class=l>warning</span><span class=w>
-</span></code></pre></div></div>
-</div>
-<input type=radio class="gdoc-tabs__control hidden" name=tabs- id=tabs--1>
-<label for=tabs--1 class=gdoc-tabs__label>
-Generated
-</label>
-<div class="gdoc-markdown--nested gdoc-tabs__content">
-<div class=gdoc-include><div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=w>
-</span><span class=w></span><span class=nn>---</span><span class=w>
-</span><span class=w></span><span class=c># Code generated by Sloth (dev): https://github.com/slok/sloth.</span><span class=w>
-</span><span class=w></span><span class=c># DO NOT EDIT.</span><span class=w>
-</span><span class=w>
-</span><span class=w></span><span class=nt>groups</span><span class=p>:</span><span class=w>
-</span><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>sloth-slo-sli-recordings-home-wifi-wifi-client-satisfaction</span><span class=w>
-</span><span class=w>  </span><span class=nt>rules</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span>- <span class=nt>record</span><span class=p>:</span><span class=w> </span><span class=l>slo:sli_error:ratio_rate5m</span><span class=w>
-</span><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class=p>|-</span><span class=sd>
-</span><span class=sd>      (1 - (
-</span><span class=sd>        sum(sum_over_time(unifipoller_client_satisfaction_ratio[5m]))
-</span><span class=sd>        /
-</span><span class=sd>        sum(count_over_time(unifipoller_client_satisfaction_ratio[5m]))
-</span><span class=sd>      )
-</span><span class=sd>      )</span><span class=w>      
-</span><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>cluster</span><span class=p>:</span><span class=w> </span><span class=l>valhalla</span><span class=w>
-</span><span class=w>      </span><span class=nt>cmd</span><span class=p>:</span><span class=w> </span><span class=l>examplesgen.sh</span><span class=w>
-</span><span class=w>      </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class=l>ubiquiti</span><span class=w>
-</span><span class=w>      </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class=l>home</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_id</span><span class=p>:</span><span class=w> </span><span class=l>home-wifi-wifi-client-satisfaction</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_service</span><span class=p>:</span><span class=w> </span><span class=l>home-wifi</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_slo</span><span class=p>:</span><span class=w> </span><span class=l>wifi-client-satisfaction</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_window</span><span class=p>:</span><span class=w> </span><span class=l>5m</span><span class=w>
-</span><span class=w>  </span>- <span class=nt>record</span><span class=p>:</span><span class=w> </span><span class=l>slo:sli_error:ratio_rate30m</span><span class=w>
-</span><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class=p>|-</span><span class=sd>
-</span><span class=sd>      (1 - (
-</span><span class=sd>        sum(sum_over_time(unifipoller_client_satisfaction_ratio[30m]))
-</span><span class=sd>        /
-</span><span class=sd>        sum(count_over_time(unifipoller_client_satisfaction_ratio[30m]))
-</span><span class=sd>      )
-</span><span class=sd>      )</span><span class=w>      
-</span><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>cluster</span><span class=p>:</span><span class=w> </span><span class=l>valhalla</span><span class=w>
-</span><span class=w>      </span><span class=nt>cmd</span><span class=p>:</span><span class=w> </span><span class=l>examplesgen.sh</span><span class=w>
-</span><span class=w>      </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class=l>ubiquiti</span><span class=w>
-</span><span class=w>      </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class=l>home</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_id</span><span class=p>:</span><span class=w> </span><span class=l>home-wifi-wifi-client-satisfaction</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_service</span><span class=p>:</span><span class=w> </span><span class=l>home-wifi</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_slo</span><span class=p>:</span><span class=w> </span><span class=l>wifi-client-satisfaction</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_window</span><span class=p>:</span><span class=w> </span><span class=l>30m</span><span class=w>
-</span><span class=w>  </span>- <span class=nt>record</span><span class=p>:</span><span class=w> </span><span class=l>slo:sli_error:ratio_rate1h</span><span class=w>
-</span><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class=p>|-</span><span class=sd>
-</span><span class=sd>      (1 - (
-</span><span class=sd>        sum(sum_over_time(unifipoller_client_satisfaction_ratio[1h]))
-</span><span class=sd>        /
-</span><span class=sd>        sum(count_over_time(unifipoller_client_satisfaction_ratio[1h]))
-</span><span class=sd>      )
-</span><span class=sd>      )</span><span class=w>      
-</span><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>cluster</span><span class=p>:</span><span class=w> </span><span class=l>valhalla</span><span class=w>
-</span><span class=w>      </span><span class=nt>cmd</span><span class=p>:</span><span class=w> </span><span class=l>examplesgen.sh</span><span class=w>
-</span><span class=w>      </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class=l>ubiquiti</span><span class=w>
-</span><span class=w>      </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class=l>home</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_id</span><span class=p>:</span><span class=w> </span><span class=l>home-wifi-wifi-client-satisfaction</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_service</span><span class=p>:</span><span class=w> </span><span class=l>home-wifi</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_slo</span><span class=p>:</span><span class=w> </span><span class=l>wifi-client-satisfaction</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_window</span><span class=p>:</span><span class=w> </span><span class=l>1h</span><span class=w>
-</span><span class=w>  </span>- <span class=nt>record</span><span class=p>:</span><span class=w> </span><span class=l>slo:sli_error:ratio_rate2h</span><span class=w>
-</span><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class=p>|-</span><span class=sd>
-</span><span class=sd>      (1 - (
-</span><span class=sd>        sum(sum_over_time(unifipoller_client_satisfaction_ratio[2h]))
-</span><span class=sd>        /
-</span><span class=sd>        sum(count_over_time(unifipoller_client_satisfaction_ratio[2h]))
-</span><span class=sd>      )
-</span><span class=sd>      )</span><span class=w>      
-</span><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>cluster</span><span class=p>:</span><span class=w> </span><span class=l>valhalla</span><span class=w>
-</span><span class=w>      </span><span class=nt>cmd</span><span class=p>:</span><span class=w> </span><span class=l>examplesgen.sh</span><span class=w>
-</span><span class=w>      </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class=l>ubiquiti</span><span class=w>
-</span><span class=w>      </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class=l>home</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_id</span><span class=p>:</span><span class=w> </span><span class=l>home-wifi-wifi-client-satisfaction</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_service</span><span class=p>:</span><span class=w> </span><span class=l>home-wifi</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_slo</span><span class=p>:</span><span class=w> </span><span class=l>wifi-client-satisfaction</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_window</span><span class=p>:</span><span class=w> </span><span class=l>2h</span><span class=w>
-</span><span class=w>  </span>- <span class=nt>record</span><span class=p>:</span><span class=w> </span><span class=l>slo:sli_error:ratio_rate6h</span><span class=w>
-</span><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class=p>|-</span><span class=sd>
-</span><span class=sd>      (1 - (
-</span><span class=sd>        sum(sum_over_time(unifipoller_client_satisfaction_ratio[6h]))
-</span><span class=sd>        /
-</span><span class=sd>        sum(count_over_time(unifipoller_client_satisfaction_ratio[6h]))
-</span><span class=sd>      )
-</span><span class=sd>      )</span><span class=w>      
-</span><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>cluster</span><span class=p>:</span><span class=w> </span><span class=l>valhalla</span><span class=w>
-</span><span class=w>      </span><span class=nt>cmd</span><span class=p>:</span><span class=w> </span><span class=l>examplesgen.sh</span><span class=w>
-</span><span class=w>      </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class=l>ubiquiti</span><span class=w>
-</span><span class=w>      </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class=l>home</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_id</span><span class=p>:</span><span class=w> </span><span class=l>home-wifi-wifi-client-satisfaction</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_service</span><span class=p>:</span><span class=w> </span><span class=l>home-wifi</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_slo</span><span class=p>:</span><span class=w> </span><span class=l>wifi-client-satisfaction</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_window</span><span class=p>:</span><span class=w> </span><span class=l>6h</span><span class=w>
-</span><span class=w>  </span>- <span class=nt>record</span><span class=p>:</span><span class=w> </span><span class=l>slo:sli_error:ratio_rate1d</span><span class=w>
-</span><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class=p>|-</span><span class=sd>
-</span><span class=sd>      (1 - (
-</span><span class=sd>        sum(sum_over_time(unifipoller_client_satisfaction_ratio[1d]))
-</span><span class=sd>        /
-</span><span class=sd>        sum(count_over_time(unifipoller_client_satisfaction_ratio[1d]))
-</span><span class=sd>      )
-</span><span class=sd>      )</span><span class=w>      
-</span><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>cluster</span><span class=p>:</span><span class=w> </span><span class=l>valhalla</span><span class=w>
-</span><span class=w>      </span><span class=nt>cmd</span><span class=p>:</span><span class=w> </span><span class=l>examplesgen.sh</span><span class=w>
-</span><span class=w>      </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class=l>ubiquiti</span><span class=w>
-</span><span class=w>      </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class=l>home</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_id</span><span class=p>:</span><span class=w> </span><span class=l>home-wifi-wifi-client-satisfaction</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_service</span><span class=p>:</span><span class=w> </span><span class=l>home-wifi</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_slo</span><span class=p>:</span><span class=w> </span><span class=l>wifi-client-satisfaction</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_window</span><span class=p>:</span><span class=w> </span><span class=l>1d</span><span class=w>
-</span><span class=w>  </span>- <span class=nt>record</span><span class=p>:</span><span class=w> </span><span class=l>slo:sli_error:ratio_rate3d</span><span class=w>
-</span><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class=p>|-</span><span class=sd>
-</span><span class=sd>      (1 - (
-</span><span class=sd>        sum(sum_over_time(unifipoller_client_satisfaction_ratio[3d]))
-</span><span class=sd>        /
-</span><span class=sd>        sum(count_over_time(unifipoller_client_satisfaction_ratio[3d]))
-</span><span class=sd>      )
-</span><span class=sd>      )</span><span class=w>      
-</span><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>cluster</span><span class=p>:</span><span class=w> </span><span class=l>valhalla</span><span class=w>
-</span><span class=w>      </span><span class=nt>cmd</span><span class=p>:</span><span class=w> </span><span class=l>examplesgen.sh</span><span class=w>
-</span><span class=w>      </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class=l>ubiquiti</span><span class=w>
-</span><span class=w>      </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class=l>home</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_id</span><span class=p>:</span><span class=w> </span><span class=l>home-wifi-wifi-client-satisfaction</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_service</span><span class=p>:</span><span class=w> </span><span class=l>home-wifi</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_slo</span><span class=p>:</span><span class=w> </span><span class=l>wifi-client-satisfaction</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_window</span><span class=p>:</span><span class=w> </span><span class=l>3d</span><span class=w>
-</span><span class=w>  </span>- <span class=nt>record</span><span class=p>:</span><span class=w> </span><span class=l>slo:sli_error:ratio_rate30d</span><span class=w>
-</span><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
-</span><span class=sd>      sum_over_time(slo:sli_error:ratio_rate5m{sloth_id=&#34;home-wifi-wifi-client-satisfaction&#34;, sloth_service=&#34;home-wifi&#34;, sloth_slo=&#34;wifi-client-satisfaction&#34;}[30d])
-</span><span class=sd>      / ignoring (sloth_window)
-</span><span class=sd>      count_over_time(slo:sli_error:ratio_rate5m{sloth_id=&#34;home-wifi-wifi-client-satisfaction&#34;, sloth_service=&#34;home-wifi&#34;, sloth_slo=&#34;wifi-client-satisfaction&#34;}[30d])</span><span class=w>      
-</span><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_window</span><span class=p>:</span><span class=w> </span><span class=l>30d</span><span class=w>
-</span><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>sloth-slo-meta-recordings-home-wifi-wifi-client-satisfaction</span><span class=w>
-</span><span class=w>  </span><span class=nt>rules</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span>- <span class=nt>record</span><span class=p>:</span><span class=w> </span><span class=l>slo:objective:ratio</span><span class=w>
-</span><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class=l>vector(0.95)</span><span class=w>
-</span><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>cluster</span><span class=p>:</span><span class=w> </span><span class=l>valhalla</span><span class=w>
-</span><span class=w>      </span><span class=nt>cmd</span><span class=p>:</span><span class=w> </span><span class=l>examplesgen.sh</span><span class=w>
-</span><span class=w>      </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class=l>ubiquiti</span><span class=w>
-</span><span class=w>      </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class=l>home</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_id</span><span class=p>:</span><span class=w> </span><span class=l>home-wifi-wifi-client-satisfaction</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_service</span><span class=p>:</span><span class=w> </span><span class=l>home-wifi</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_slo</span><span class=p>:</span><span class=w> </span><span class=l>wifi-client-satisfaction</span><span class=w>
-</span><span class=w>  </span>- <span class=nt>record</span><span class=p>:</span><span class=w> </span><span class=l>slo:error_budget:ratio</span><span class=w>
-</span><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class=l>vector(1-0.95)</span><span class=w>
-</span><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>cluster</span><span class=p>:</span><span class=w> </span><span class=l>valhalla</span><span class=w>
-</span><span class=w>      </span><span class=nt>cmd</span><span class=p>:</span><span class=w> </span><span class=l>examplesgen.sh</span><span class=w>
-</span><span class=w>      </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class=l>ubiquiti</span><span class=w>
-</span><span class=w>      </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class=l>home</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_id</span><span class=p>:</span><span class=w> </span><span class=l>home-wifi-wifi-client-satisfaction</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_service</span><span class=p>:</span><span class=w> </span><span class=l>home-wifi</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_slo</span><span class=p>:</span><span class=w> </span><span class=l>wifi-client-satisfaction</span><span class=w>
-</span><span class=w>  </span>- <span class=nt>record</span><span class=p>:</span><span class=w> </span><span class=l>slo:time_period:days</span><span class=w>
-</span><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class=l>vector(30)</span><span class=w>
-</span><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>cluster</span><span class=p>:</span><span class=w> </span><span class=l>valhalla</span><span class=w>
-</span><span class=w>      </span><span class=nt>cmd</span><span class=p>:</span><span class=w> </span><span class=l>examplesgen.sh</span><span class=w>
-</span><span class=w>      </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class=l>ubiquiti</span><span class=w>
-</span><span class=w>      </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class=l>home</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_id</span><span class=p>:</span><span class=w> </span><span class=l>home-wifi-wifi-client-satisfaction</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_service</span><span class=p>:</span><span class=w> </span><span class=l>home-wifi</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_slo</span><span class=p>:</span><span class=w> </span><span class=l>wifi-client-satisfaction</span><span class=w>
-</span><span class=w>  </span>- <span class=nt>record</span><span class=p>:</span><span class=w> </span><span class=l>slo:current_burn_rate:ratio</span><span class=w>
-</span><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
-</span><span class=sd>      slo:sli_error:ratio_rate5m{sloth_id=&#34;home-wifi-wifi-client-satisfaction&#34;, sloth_service=&#34;home-wifi&#34;, sloth_slo=&#34;wifi-client-satisfaction&#34;}
-</span><span class=sd>      / on(sloth_id, sloth_slo, sloth_service) group_left
-</span><span class=sd>      slo:error_budget:ratio{sloth_id=&#34;home-wifi-wifi-client-satisfaction&#34;, sloth_service=&#34;home-wifi&#34;, sloth_slo=&#34;wifi-client-satisfaction&#34;}</span><span class=w>      
-</span><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>cluster</span><span class=p>:</span><span class=w> </span><span class=l>valhalla</span><span class=w>
-</span><span class=w>      </span><span class=nt>cmd</span><span class=p>:</span><span class=w> </span><span class=l>examplesgen.sh</span><span class=w>
-</span><span class=w>      </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class=l>ubiquiti</span><span class=w>
-</span><span class=w>      </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class=l>home</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_id</span><span class=p>:</span><span class=w> </span><span class=l>home-wifi-wifi-client-satisfaction</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_service</span><span class=p>:</span><span class=w> </span><span class=l>home-wifi</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_slo</span><span class=p>:</span><span class=w> </span><span class=l>wifi-client-satisfaction</span><span class=w>
-</span><span class=w>  </span>- <span class=nt>record</span><span class=p>:</span><span class=w> </span><span class=l>slo:period_burn_rate:ratio</span><span class=w>
-</span><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
-</span><span class=sd>      slo:sli_error:ratio_rate30d{sloth_id=&#34;home-wifi-wifi-client-satisfaction&#34;, sloth_service=&#34;home-wifi&#34;, sloth_slo=&#34;wifi-client-satisfaction&#34;}
-</span><span class=sd>      / on(sloth_id, sloth_slo, sloth_service) group_left
-</span><span class=sd>      slo:error_budget:ratio{sloth_id=&#34;home-wifi-wifi-client-satisfaction&#34;, sloth_service=&#34;home-wifi&#34;, sloth_slo=&#34;wifi-client-satisfaction&#34;}</span><span class=w>      
-</span><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>cluster</span><span class=p>:</span><span class=w> </span><span class=l>valhalla</span><span class=w>
-</span><span class=w>      </span><span class=nt>cmd</span><span class=p>:</span><span class=w> </span><span class=l>examplesgen.sh</span><span class=w>
-</span><span class=w>      </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class=l>ubiquiti</span><span class=w>
-</span><span class=w>      </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class=l>home</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_id</span><span class=p>:</span><span class=w> </span><span class=l>home-wifi-wifi-client-satisfaction</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_service</span><span class=p>:</span><span class=w> </span><span class=l>home-wifi</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_slo</span><span class=p>:</span><span class=w> </span><span class=l>wifi-client-satisfaction</span><span class=w>
-</span><span class=w>  </span>- <span class=nt>record</span><span class=p>:</span><span class=w> </span><span class=l>slo:period_error_budget_remaining:ratio</span><span class=w>
-</span><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class=m>1</span><span class=w> </span>- <span class=l>slo:period_burn_rate:ratio{sloth_id=&#34;home-wifi-wifi-client-satisfaction&#34;,</span><span class=w>
-</span><span class=w>      </span><span class=l>sloth_service=&#34;home-wifi&#34;, sloth_slo=&#34;wifi-client-satisfaction&#34;}</span><span class=w>
-</span><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>cluster</span><span class=p>:</span><span class=w> </span><span class=l>valhalla</span><span class=w>
-</span><span class=w>      </span><span class=nt>cmd</span><span class=p>:</span><span class=w> </span><span class=l>examplesgen.sh</span><span class=w>
-</span><span class=w>      </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class=l>ubiquiti</span><span class=w>
-</span><span class=w>      </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class=l>home</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_id</span><span class=p>:</span><span class=w> </span><span class=l>home-wifi-wifi-client-satisfaction</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_service</span><span class=p>:</span><span class=w> </span><span class=l>home-wifi</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_slo</span><span class=p>:</span><span class=w> </span><span class=l>wifi-client-satisfaction</span><span class=w>
-</span><span class=w>  </span>- <span class=nt>record</span><span class=p>:</span><span class=w> </span><span class=l>sloth_slo_info</span><span class=w>
-</span><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class=l>vector(1)</span><span class=w>
-</span><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>cluster</span><span class=p>:</span><span class=w> </span><span class=l>valhalla</span><span class=w>
-</span><span class=w>      </span><span class=nt>cmd</span><span class=p>:</span><span class=w> </span><span class=l>examplesgen.sh</span><span class=w>
-</span><span class=w>      </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class=l>ubiquiti</span><span class=w>
-</span><span class=w>      </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class=l>home</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_id</span><span class=p>:</span><span class=w> </span><span class=l>home-wifi-wifi-client-satisfaction</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_mode</span><span class=p>:</span><span class=w> </span><span class=l>cli-gen-prom</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_objective</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;95&#34;</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_service</span><span class=p>:</span><span class=w> </span><span class=l>home-wifi</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_slo</span><span class=p>:</span><span class=w> </span><span class=l>wifi-client-satisfaction</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_spec</span><span class=p>:</span><span class=w> </span><span class=l>prometheus/v1</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_version</span><span class=p>:</span><span class=w> </span><span class=l>dev</span><span class=w>
-</span><span class=w></span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>sloth-slo-alerts-home-wifi-wifi-client-satisfaction</span><span class=w>
-</span><span class=w>  </span><span class=nt>rules</span><span class=p>:</span><span class=w>
-</span><span class=w>  </span>- <span class=nt>alert</span><span class=p>:</span><span class=w> </span><span class=l>WifiClientSatisfaction</span><span class=w>
-</span><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
-</span><span class=sd>      (
-</span><span class=sd>          (slo:sli_error:ratio_rate5m{sloth_id=&#34;home-wifi-wifi-client-satisfaction&#34;, sloth_service=&#34;home-wifi&#34;, sloth_slo=&#34;wifi-client-satisfaction&#34;} &gt; (14.4 * 0.05))
-</span><span class=sd>          and ignoring (sloth_window)
-</span><span class=sd>          (slo:sli_error:ratio_rate1h{sloth_id=&#34;home-wifi-wifi-client-satisfaction&#34;, sloth_service=&#34;home-wifi&#34;, sloth_slo=&#34;wifi-client-satisfaction&#34;} &gt; (14.4 * 0.05))
-</span><span class=sd>      )
-</span><span class=sd>      or ignoring (sloth_window)
-</span><span class=sd>      (
-</span><span class=sd>          (slo:sli_error:ratio_rate30m{sloth_id=&#34;home-wifi-wifi-client-satisfaction&#34;, sloth_service=&#34;home-wifi&#34;, sloth_slo=&#34;wifi-client-satisfaction&#34;} &gt; (6 * 0.05))
-</span><span class=sd>          and ignoring (sloth_window)
-</span><span class=sd>          (slo:sli_error:ratio_rate6h{sloth_id=&#34;home-wifi-wifi-client-satisfaction&#34;, sloth_service=&#34;home-wifi&#34;, sloth_slo=&#34;wifi-client-satisfaction&#34;} &gt; (6 * 0.05))
-</span><span class=sd>      )</span><span class=w>      
-</span><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>severity</span><span class=p>:</span><span class=w> </span><span class=l>home</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_severity</span><span class=p>:</span><span class=w> </span><span class=l>page</span><span class=w>
-</span><span class=w>    </span><span class=nt>annotations</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>summary</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;{{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget burn
-</span><span class=s1>        rate is over expected.&#39;</span><span class=w>
-</span><span class=w>      </span><span class=nt>title</span><span class=p>:</span><span class=w> </span><span class=l>(page) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget</span><span class=w>
-</span><span class=w>        </span><span class=l>burn rate is too fast.</span><span class=w>
-</span><span class=w>  </span>- <span class=nt>alert</span><span class=p>:</span><span class=w> </span><span class=l>WifiClientSatisfaction</span><span class=w>
-</span><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
-</span><span class=sd>      (
-</span><span class=sd>          (slo:sli_error:ratio_rate2h{sloth_id=&#34;home-wifi-wifi-client-satisfaction&#34;, sloth_service=&#34;home-wifi&#34;, sloth_slo=&#34;wifi-client-satisfaction&#34;} &gt; (3 * 0.05))
-</span><span class=sd>          and ignoring (sloth_window)
-</span><span class=sd>          (slo:sli_error:ratio_rate1d{sloth_id=&#34;home-wifi-wifi-client-satisfaction&#34;, sloth_service=&#34;home-wifi&#34;, sloth_slo=&#34;wifi-client-satisfaction&#34;} &gt; (3 * 0.05))
-</span><span class=sd>      )
-</span><span class=sd>      or ignoring (sloth_window)
-</span><span class=sd>      (
-</span><span class=sd>          (slo:sli_error:ratio_rate6h{sloth_id=&#34;home-wifi-wifi-client-satisfaction&#34;, sloth_service=&#34;home-wifi&#34;, sloth_slo=&#34;wifi-client-satisfaction&#34;} &gt; (1 * 0.05))
-</span><span class=sd>          and ignoring (sloth_window)
-</span><span class=sd>          (slo:sli_error:ratio_rate3d{sloth_id=&#34;home-wifi-wifi-client-satisfaction&#34;, sloth_service=&#34;home-wifi&#34;, sloth_slo=&#34;wifi-client-satisfaction&#34;} &gt; (1 * 0.05))
-</span><span class=sd>      )</span><span class=w>      
-</span><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>severity</span><span class=p>:</span><span class=w> </span><span class=l>warning</span><span class=w>
-</span><span class=w>      </span><span class=nt>sloth_severity</span><span class=p>:</span><span class=w> </span><span class=l>ticket</span><span class=w>
-</span><span class=w>    </span><span class=nt>annotations</span><span class=p>:</span><span class=w>
-</span><span class=w>      </span><span class=nt>summary</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;{{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget burn
-</span><span class=s1>        rate is over expected.&#39;</span><span class=w>
-</span><span class=w>      </span><span class=nt>title</span><span class=p>:</span><span class=w> </span><span class=l>(ticket) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget</span><span class=w>
-</span><span class=w>        </span><span class=l>burn rate is too fast.</span><span class=w>
-</span></code></pre></div></div>
-</div>
-</div>
-</article>
-<div class="gdoc-page__footer flex flex-wrap justify-between">
-</div>
-</div>
-</main>
-<footer class=gdoc-footer>
-<div class="container flex">
-<div class="flex flex-wrap">
-<span class="gdoc-footer__item gdoc-footer__item--row">
-Built with <a href=https://gohugo.io/ class=gdoc-footer__link>Hugo</a> and<svg class="icon gdoc_heart"><use xlink:href="#gdoc_heart"/></svg>
-</span>
-</div>
-<div class="flex flex-25 justify-end">
-<span class=gdoc-footer__item>
-<a class="gdoc-footer__link fake-link" href=# aria-label="Back to top"><svg class="icon gdoc_keyborad_arrow_up"><use xlink:href="#gdoc_keyborad_arrow_up"/></svg> <span class=hidden-mobile>Back to top</span>
-</a>
-</span>
-</div>
-</div>
-</footer>
-</div>
-<script defer src=/js/en.search.min.dd11fe9592abe2585c1fbd6e505e89a56e02137e8d9fa50a46a01083b7682837.js></script>
-<script defer src=/js/clipboard-27784b7376.min.js></script>
-<script defer src=/js/clipboard-loader-f0b5fbd5f6.min.js></script>
-</body>
-</html>
+<!doctype html><html lang=en class=no-js> <head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Autogenerate Prometheus SLOs easily and with simple APIs"><meta name=author content="Xabier Larrakoetxea"><link href=https://sloth.dev/examples/default/raw-sli/ rel=canonical><link rel=icon href=../../../static/favicon/favicon-32x32.png><meta name=generator content="mkdocs-1.2.3, mkdocs-material-8.2.1"><title>Raw SLI - Sloth</title><link rel=stylesheet href=../../../assets/stylesheets/main.e8d9bf0c.min.css><link rel=stylesheet href=../../../assets/stylesheets/palette.e6a45f82.min.css><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback"><style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style><link rel=stylesheet href=../../../static/stylesheets/sloth.css><script>__md_scope=new URL("../../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-MGXZFGF3VJ"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&gtag("event","search",{search_term:this.value})}),"undefined"!=typeof location$&&location$.subscribe(function(e){gtag("config","G-MGXZFGF3VJ",{page_path:e.pathname})})})</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-MGXZFGF3VJ"></script></head> <body dir=ltr data-md-color-scheme=default data-md-color-primary=red data-md-color-accent=red> <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script> <input class=md-toggle data-md-toggle=drawer type=checkbox id=__drawer autocomplete=off> <input class=md-toggle data-md-toggle=search type=checkbox id=__search autocomplete=off> <label class=md-overlay for=__drawer></label> <div data-md-component=skip> </div> <div data-md-component=announce> </div> <header class=md-header data-md-component=header> <nav class="md-header__inner md-grid" aria-label=Header> <a href=../../.. title=Sloth class="md-header__button md-logo" aria-label=Sloth data-md-component=logo> <img src=../../../static/media/sloth-logo-white.svg alt=logo> </a> <label class="md-header__button md-icon" for=__drawer> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg> </label> <div class=md-header__title data-md-component=header-title> <div class=md-header__ellipsis> <div class=md-header__topic> <span class=md-ellipsis> Sloth </span> </div> <div class=md-header__topic data-md-component=header-topic> <span class=md-ellipsis> Raw SLI </span> </div> </div> </div> <form class=md-header__option data-md-component=palette> <input class=md-option data-md-color-media data-md-color-scheme=default data-md-color-primary=red data-md-color-accent=red aria-label="Switch to dark mode" type=radio name=__palette id=__palette_1> <label class="md-header__button md-icon" title="Switch to dark mode" for=__palette_2 hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"/></svg> </label> <input class=md-option data-md-color-media data-md-color-scheme=slate data-md-color-primary=red data-md-color-accent=red aria-label="Switch to light mode" type=radio name=__palette id=__palette_2> <label class="md-header__button md-icon" title="Switch to light mode" for=__palette_1 hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg> </label> </form> <label class="md-header__button md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg> </label> <div class=md-search data-md-component=search role=dialog> <label class=md-search__overlay for=__search></label> <div class=md-search__inner role=search> <form class=md-search__form name=search> <input type=text class=md-search__input name=query aria-label=Search placeholder=Search autocapitalize=off autocorrect=off autocomplete=off spellcheck=false data-md-component=search-query required> <label class="md-search__icon md-icon" for=__search> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg> </label> <nav class=md-search__options aria-label=Search> <a href=javascript:void(0) class="md-search__icon md-icon" aria-label=Share data-clipboard data-clipboard-text data-md-component=search-share tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08z"/></svg> </a> <button type=reset class="md-search__icon md-icon" aria-label=Clear tabindex=-1> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg> </button> </nav> <div class=md-search__suggest data-md-component=search-suggest></div> </form> <div class=md-search__output> <div class=md-search__scrollwrap data-md-scrollfix> <div class=md-search-result data-md-component=search-result> <div class=md-search-result__meta> Initializing search </div> <ol class=md-search-result__list></ol> </div> </div> </div> </div> </div> <div class=md-header__source> <a href=https://github.com/slok/sloth title="Go to repository" class=md-source data-md-component=source> <div class="md-source__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><!-- Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg> </div> <div class=md-source__repository> slok/sloth </div> </a> </div> </nav> </header> <div class=md-container data-md-component=container> <nav class=md-tabs aria-label=Tabs data-md-component=tabs> <div class="md-tabs__inner md-grid"> <ul class=md-tabs__list> <li class=md-tabs__item> <a href=../../.. class=md-tabs__link> Home </a> </li> <li class=md-tabs__item> <a href=../../../introduction/ class=md-tabs__link> Getting started </a> </li> <li class=md-tabs__item> <a href=../../../specs/default/ class=md-tabs__link> SLO API and specs </a> </li> <li class=md-tabs__item> <a href=../../../usage/cli/ class=md-tabs__link> Usage </a> </li> <li class=md-tabs__item> <a href=../getting-started/ class="md-tabs__link md-tabs__link--active"> Examples </a> </li> <li class=md-tabs__item> <a href=../../../sli-plugins/coredns-availability/ class=md-tabs__link> SLI plugins </a> </li> <li class=md-tabs__item> <a href=../../../faq/ class=md-tabs__link> F.A.Q </a> </li> </ul> </div> </nav> <main class=md-main data-md-component=main> <div class="md-main__inner md-grid"> <div class="md-sidebar md-sidebar--primary" data-md-component=sidebar data-md-type=navigation> <div class=md-sidebar__scrollwrap> <div class=md-sidebar__inner> <nav class="md-nav md-nav--primary md-nav--lifted" aria-label=Navigation data-md-level=0> <label class=md-nav__title for=__drawer> <a href=../../.. title=Sloth class="md-nav__button md-logo" aria-label=Sloth data-md-component=logo> <img src=../../../static/media/sloth-logo-white.svg alt=logo> </a> Sloth </label> <div class=md-nav__source> <a href=https://github.com/slok/sloth title="Go to repository" class=md-source data-md-component=source> <div class="md-source__icon md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 448 512"><!-- Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg> </div> <div class=md-source__repository> slok/sloth </div> </a> </div> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../.. class=md-nav__link> Home </a> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle" data-md-toggle=__nav_2 type=checkbox id=__nav_2> <div class="md-nav__link md-nav__link--index "> <a href=../../../introduction/ >Getting started</a> <label for=__nav_2> <span class="md-nav__icon md-icon"></span> </label> </div> <nav class=md-nav aria-label="Getting started" data-md-level=1> <label class=md-nav__title for=__nav_2> <span class="md-nav__icon md-icon"></span> Getting started </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../../introduction/features/ class=md-nav__link> Features </a> </li> <li class=md-nav__item> <a href=../../../introduction/install/ class=md-nav__link> Installation </a> </li> <li class=md-nav__item> <a href=../../../introduction/architecture/ class=md-nav__link> Architecture </a> </li> <li class=md-nav__item> <a href=../../../introduction/dashboards/ class=md-nav__link> Dashboards </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle" data-md-toggle=__nav_3 type=checkbox id=__nav_3> <label class=md-nav__link for=__nav_3> SLO API and specs <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav aria-label="SLO API and specs" data-md-level=1> <label class=md-nav__title for=__nav_3> <span class="md-nav__icon md-icon"></span> SLO API and specs </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../../specs/default/ class=md-nav__link> Default </a> </li> <li class=md-nav__item> <a href=../../../specs/kubernetes/ class=md-nav__link> Kubernetes </a> </li> <li class=md-nav__item> <a href=../../../specs/openslo/ class=md-nav__link> OpenSLO </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle" data-md-toggle=__nav_4 type=checkbox id=__nav_4> <label class=md-nav__link for=__nav_4> Usage <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav aria-label=Usage data-md-level=1> <label class=md-nav__title for=__nav_4> <span class="md-nav__icon md-icon"></span> Usage </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../../usage/cli/ class=md-nav__link> CLI generate </a> </li> <li class=md-nav__item> <a href=../../../usage/kubernetes/ class=md-nav__link> Kubernetes controller </a> </li> <li class=md-nav__item> <a href=../../../usage/slo-validation/ class=md-nav__link> SLO Validation </a> </li> <li class=md-nav__item> <a href=../../../usage/plugins/ class=md-nav__link> SLI plugins </a> </li> <li class=md-nav__item> <a href=../../../usage/slo-period-windows/ class=md-nav__link> SLO period windows </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--active md-nav__item--nested"> <input class="md-nav__toggle md-toggle" data-md-toggle=__nav_5 type=checkbox id=__nav_5 checked> <label class=md-nav__link for=__nav_5> Examples <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav aria-label=Examples data-md-level=1> <label class=md-nav__title for=__nav_5> <span class="md-nav__icon md-icon"></span> Examples </label> <ul class=md-nav__list data-md-scrollfix> <li class="md-nav__item md-nav__item--active md-nav__item--nested"> <input class="md-nav__toggle md-toggle" data-md-toggle=__nav_5_1 type=checkbox id=__nav_5_1 checked> <label class=md-nav__link for=__nav_5_1> Default <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav aria-label=Default data-md-level=2> <label class=md-nav__title for=__nav_5_1> <span class="md-nav__icon md-icon"></span> Default </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../getting-started/ class=md-nav__link> Getting started </a> </li> <li class=md-nav__item> <a href=../home-wifi/ class=md-nav__link> Home WiFi </a> </li> <li class=md-nav__item> <a href=../kubernetes-apiserver/ class=md-nav__link> Kubernetes APIserver </a> </li> <li class=md-nav__item> <a href=../multifile/ class=md-nav__link> Multi file </a> </li> <li class=md-nav__item> <a href=../no-alerts/ class=md-nav__link> No alerts </a> </li> <li class="md-nav__item md-nav__item--active"> <input class="md-nav__toggle md-toggle" data-md-toggle=toc type=checkbox id=__toc> <a href=./ class="md-nav__link md-nav__link--active"> Raw SLI </a> </li> <li class=md-nav__item> <a href=../sli-plugin/ class=md-nav__link> SLI plugin </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle" data-md-toggle=__nav_5_2 type=checkbox id=__nav_5_2> <label class=md-nav__link for=__nav_5_2> Kubernetes <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav aria-label=Kubernetes data-md-level=2> <label class=md-nav__title for=__nav_5_2> <span class="md-nav__icon md-icon"></span> Kubernetes </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../kubernetes/getting-started/ class=md-nav__link> Getting started </a> </li> <li class=md-nav__item> <a href=../../kubernetes/home-wifi/ class=md-nav__link> Home WiFi </a> </li> <li class=md-nav__item> <a href=../../kubernetes/multifile/ class=md-nav__link> Multi file </a> </li> <li class=md-nav__item> <a href=../../kubernetes/sli-plugin/ class=md-nav__link> SLI plugin </a> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle" data-md-toggle=__nav_5_3 type=checkbox id=__nav_5_3> <label class=md-nav__link for=__nav_5_3> OpenSLO <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav aria-label=OpenSLO data-md-level=2> <label class=md-nav__title for=__nav_5_3> <span class="md-nav__icon md-icon"></span> OpenSLO </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../openslo/getting-started/ class=md-nav__link> Getting started </a> </li> <li class=md-nav__item> <a href=../../openslo/kubernetes-apiserver/ class=md-nav__link> Kubernetes APIserver </a> </li> </ul> </nav> </li> </ul> </nav> </li> <li class="md-nav__item md-nav__item--nested"> <input class="md-nav__toggle md-toggle" data-md-toggle=__nav_6 type=checkbox id=__nav_6> <label class=md-nav__link for=__nav_6> SLI plugins <span class="md-nav__icon md-icon"></span> </label> <nav class=md-nav aria-label="SLI plugins" data-md-level=1> <label class=md-nav__title for=__nav_6> <span class="md-nav__icon md-icon"></span> SLI plugins </label> <ul class=md-nav__list data-md-scrollfix> <li class=md-nav__item> <a href=../../../sli-plugins/coredns-availability/ class=md-nav__link> CoreDNS availability </a> </li> <li class=md-nav__item> <a href=../../../sli-plugins/coredns-latency/ class=md-nav__link> CoreDNS latency </a> </li> <li class=md-nav__item> <a href=../../../sli-plugins/fake/ class=md-nav__link> Fake </a> </li> <li class=md-nav__item> <a href=../../../sli-plugins/kubernetes-apiserver-availability/ class=md-nav__link> Kubernetes apiserver availability </a> </li> <li class=md-nav__item> <a href=../../../sli-plugins/kubernetes-apiserver-latency/ class=md-nav__link> Kubernetes apiserver latency </a> </li> <li class=md-nav__item> <a href=../../../sli-plugins/kubernetes-kooper-availability/ class=md-nav__link> Kubernetes Kooper availability </a> </li> <li class=md-nav__item> <a href=../../../sli-plugins/kubernetes-kooper-latency/ class=md-nav__link> Kubernetes Kooper latency </a> </li> <li class=md-nav__item> <a href=../../../sli-plugins/kubernetes-kooper-queuecongestion/ class=md-nav__link> Kubernetes Kooper Queue congestion </a> </li> <li class=md-nav__item> <a href=../../../sli-plugins/noop/ class=md-nav__link> Noop </a> </li> <li class=md-nav__item> <a href=../../../sli-plugins/prometheus-rules-evalavailability/ class=md-nav__link> Prometheus rules evaluation availability </a> </li> <li class=md-nav__item> <a href=../../../sli-plugins/prometheus-targets-availability/ class=md-nav__link> Prometheus Target availability </a> </li> <li class=md-nav__item> <a href=../../../sli-plugins/slok-go-http-metrics-availability/ class=md-nav__link> slok/go-http-metrics availability </a> </li> <li class=md-nav__item> <a href=../../../sli-plugins/slok-go-http-metrics-latency/ class=md-nav__link> slok/go-http-metrics latency </a> </li> <li class=md-nav__item> <a href=../../../sli-plugins/traefik-v1-availability/ class=md-nav__link> Traefik V1 availability </a> </li> <li class=md-nav__item> <a href=../../../sli-plugins/traefik-v1-latency/ class=md-nav__link> Traefik V1 latency </a> </li> </ul> </nav> </li> <li class=md-nav__item> <a href=../../../faq/ class=md-nav__link> F.A.Q </a> </li> </ul> </nav> </div> </div> </div> <div class=md-content data-md-component=content> <article class="md-content__inner md-typeset"> <h1>Raw SLI</h1> <div class="tabbed-set tabbed-alternate" data-tabs=1:2><input checked=checked id=__tabbed_1_1 name=__tabbed_1 type=radio><input id=__tabbed_1_2 name=__tabbed_1 type=radio><div class=tabbed-labels><label for=__tabbed_1_1><span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 16 16"><path fill-rule=evenodd d="M4 1.75C4 .784 4.784 0 5.75 0h5.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v8.586A1.75 1.75 0 0 1 14.25 15h-9a.75.75 0 0 1 0-1.5h9a.25.25 0 0 0 .25-.25V6h-2.75A1.75 1.75 0 0 1 10 4.25V1.5H5.75a.25.25 0 0 0-.25.25v2.5a.75.75 0 0 1-1.5 0v-2.5zm7.5-.188V4.25c0 .138.112.25.25.25h2.688a.252.252 0 0 0-.011-.013l-2.914-2.914a.272.272 0 0 0-.013-.011zM5.72 6.72a.75.75 0 0 0 0 1.06l1.47 1.47-1.47 1.47a.75.75 0 1 0 1.06 1.06l2-2a.75.75 0 0 0 0-1.06l-2-2a.75.75 0 0 0-1.06 0zM3.28 7.78a.75.75 0 0 0-1.06-1.06l-2 2a.75.75 0 0 0 0 1.06l2 2a.75.75 0 0 0 1.06-1.06L1.81 9.25l1.47-1.47z"/></svg></span> SLO spec</label><label for=__tabbed_1_2><span class=twemoji><svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 16 16"><path fill-rule=evenodd d="M2.5 1.75a.25.25 0 0 1 .25-.25h8.5a.25.25 0 0 1 .25.25v7.736a.75.75 0 1 0 1.5 0V1.75A1.75 1.75 0 0 0 11.25 0h-8.5A1.75 1.75 0 0 0 1 1.75v11.5c0 .966.784 1.75 1.75 1.75h3.17a.75.75 0 0 0 0-1.5H2.75a.25.25 0 0 1-.25-.25V1.75zM4.75 4a.75.75 0 0 0 0 1.5h4.5a.75.75 0 0 0 0-1.5h-4.5zM4 7.75A.75.75 0 0 1 4.75 7h2a.75.75 0 0 1 0 1.5h-2A.75.75 0 0 1 4 7.75zm11.774 3.537a.75.75 0 0 0-1.048-1.074L10.7 14.145 9.281 12.72a.75.75 0 0 0-1.062 1.058l1.943 1.95a.75.75 0 0 0 1.055.008l4.557-4.45z"/></svg></span> Generated</label></div> <div class=tabbed-content> <div class=tabbed-block> <div class=highlight><pre><span></span><code><a id=__codelineno-0-1 name=__codelineno-0-1 href=#__codelineno-0-1></a><span class=c1># This example shows another less accurate or simpler way of creating the home wifi SLO.</span><span class=w></span>
+<a id=__codelineno-0-2 name=__codelineno-0-2 href=#__codelineno-0-2></a><span class=c1>#</span><span class=w></span>
+<a id=__codelineno-0-3 name=__codelineno-0-3 href=#__codelineno-0-3></a><span class=c1># The metrics already give us a metric in ratio for each wifi connection satisfaction, instead of getting</span><span class=w></span>
+<a id=__codelineno-0-4 name=__codelineno-0-4 href=#__codelineno-0-4></a><span class=c1># good and bad events as connection with a minimum satisfaction ratio, we will calculate the averate of all</span><span class=w></span>
+<a id=__codelineno-0-5 name=__codelineno-0-5 href=#__codelineno-0-5></a><span class=c1># ratio satisfaction connections over the time window.</span><span class=w></span>
+<a id=__codelineno-0-6 name=__codelineno-0-6 href=#__codelineno-0-6></a><span class=c1># So we can&#39;t use the `events` SLI because we are not going to divide bad and total events.</span><span class=w></span>
+<a id=__codelineno-0-7 name=__codelineno-0-7 href=#__codelineno-0-7></a><span class=c1>#</span><span class=w></span>
+<a id=__codelineno-0-8 name=__codelineno-0-8 href=#__codelineno-0-8></a><span class=c1># - `wifi-client-satisfaction`</span><span class=w></span>
+<a id=__codelineno-0-9 name=__codelineno-0-9 href=#__codelineno-0-9></a><span class=c1>#   - This SLO warn us that we have an average wifi connection satisfaction.</span><span class=w></span>
+<a id=__codelineno-0-10 name=__codelineno-0-10 href=#__codelineno-0-10></a><span class=c1>#   - SLI error: Calculated internally by ubiquitis metrics, we use directly the ratio.</span><span class=w></span>
+<a id=__codelineno-0-11 name=__codelineno-0-11 href=#__codelineno-0-11></a><span class=c1>#   - SLO objective (95%): We allow the average wifi connection satisfaction is &gt;=95%</span><span class=w></span>
+<a id=__codelineno-0-12 name=__codelineno-0-12 href=#__codelineno-0-12></a><span class=c1>#</span><span class=w></span>
+<a id=__codelineno-0-13 name=__codelineno-0-13 href=#__codelineno-0-13></a><span class=c1># `sloth generate -i ./examples/raw-home-wifi.yml`</span><span class=w></span>
+<a id=__codelineno-0-14 name=__codelineno-0-14 href=#__codelineno-0-14></a><span class=c1>#</span><span class=w></span>
+<a id=__codelineno-0-15 name=__codelineno-0-15 href=#__codelineno-0-15></a><span class=nt>version</span><span class=p>:</span><span class=w> </span><span class=s>&quot;prometheus/v1&quot;</span><span class=w></span>
+<a id=__codelineno-0-16 name=__codelineno-0-16 href=#__codelineno-0-16></a><span class=nt>service</span><span class=p>:</span><span class=w> </span><span class=s>&quot;home-wifi&quot;</span><span class=w></span>
+<a id=__codelineno-0-17 name=__codelineno-0-17 href=#__codelineno-0-17></a><span class=nt>labels</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-0-18 name=__codelineno-0-18 href=#__codelineno-0-18></a><span class=w>  </span><span class=nt>cluster</span><span class=p>:</span><span class=w> </span><span class=s>&quot;valhalla&quot;</span><span class=w></span>
+<a id=__codelineno-0-19 name=__codelineno-0-19 href=#__codelineno-0-19></a><span class=w>  </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class=s>&quot;ubiquiti&quot;</span><span class=w></span>
+<a id=__codelineno-0-20 name=__codelineno-0-20 href=#__codelineno-0-20></a><span class=w>  </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class=s>&quot;home&quot;</span><span class=w></span>
+<a id=__codelineno-0-21 name=__codelineno-0-21 href=#__codelineno-0-21></a><span class=nt>slos</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-0-22 name=__codelineno-0-22 href=#__codelineno-0-22></a><span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=s>&quot;wifi-client-satisfaction&quot;</span><span class=w></span>
+<a id=__codelineno-0-23 name=__codelineno-0-23 href=#__codelineno-0-23></a><span class=w>    </span><span class=nt>objective</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">95</span><span class=w></span>
+<a id=__codelineno-0-24 name=__codelineno-0-24 href=#__codelineno-0-24></a><span class=w>    </span><span class=nt>description</span><span class=p>:</span><span class=w> </span><span class=s>&quot;Warn</span><span class=nv> </span><span class=s>us</span><span class=nv> </span><span class=s>that</span><span class=nv> </span><span class=s>we</span><span class=nv> </span><span class=s>have</span><span class=nv> </span><span class=s>an</span><span class=nv> </span><span class=s>average</span><span class=nv> </span><span class=s>wifi</span><span class=nv> </span><span class=s>connection</span><span class=nv> </span><span class=s>satisfaction.&quot;</span><span class=w></span>
+<a id=__codelineno-0-25 name=__codelineno-0-25 href=#__codelineno-0-25></a><span class=w>    </span><span class=nt>sli</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-0-26 name=__codelineno-0-26 href=#__codelineno-0-26></a><span class=w>      </span><span class=nt>raw</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-0-27 name=__codelineno-0-27 href=#__codelineno-0-27></a><span class=w>        </span><span class=c1># Get the averate satisfaction ratio and rest 1 (max good) to get the error ratio.</span><span class=w></span>
+<a id=__codelineno-0-28 name=__codelineno-0-28 href=#__codelineno-0-28></a><span class=w>        </span><span class=nt>error_ratio_query</span><span class=p>:</span><span class=w> </span><span class="p p-Indicator">|</span><span class=w></span>
+<a id=__codelineno-0-29 name=__codelineno-0-29 href=#__codelineno-0-29></a><span class=w>          </span><span class=no>1 - (</span><span class=w></span>
+<a id=__codelineno-0-30 name=__codelineno-0-30 href=#__codelineno-0-30></a><span class=w>            </span><span class=no>sum(sum_over_time(unifipoller_client_satisfaction_ratio[{{.window}}]))</span><span class=w></span>
+<a id=__codelineno-0-31 name=__codelineno-0-31 href=#__codelineno-0-31></a><span class=w>            </span><span class=no>/</span><span class=w></span>
+<a id=__codelineno-0-32 name=__codelineno-0-32 href=#__codelineno-0-32></a><span class=w>            </span><span class=no>sum(count_over_time(unifipoller_client_satisfaction_ratio[{{.window}}]))</span><span class=w></span>
+<a id=__codelineno-0-33 name=__codelineno-0-33 href=#__codelineno-0-33></a><span class=w>          </span><span class=no>)</span><span class=w></span>
+<a id=__codelineno-0-34 name=__codelineno-0-34 href=#__codelineno-0-34></a><span class=w>    </span><span class=nt>alerting</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-0-35 name=__codelineno-0-35 href=#__codelineno-0-35></a><span class=w>      </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">WifiClientSatisfaction</span><span class=w></span>
+<a id=__codelineno-0-36 name=__codelineno-0-36 href=#__codelineno-0-36></a><span class=w>      </span><span class=nt>page_alert</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-0-37 name=__codelineno-0-37 href=#__codelineno-0-37></a><span class=w>        </span><span class=nt>labels</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-0-38 name=__codelineno-0-38 href=#__codelineno-0-38></a><span class=w>          </span><span class=nt>severity</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home</span><span class=w></span>
+<a id=__codelineno-0-39 name=__codelineno-0-39 href=#__codelineno-0-39></a><span class=w>      </span><span class=nt>ticket_alert</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-0-40 name=__codelineno-0-40 href=#__codelineno-0-40></a><span class=w>        </span><span class=nt>labels</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-0-41 name=__codelineno-0-41 href=#__codelineno-0-41></a><span class=w>          </span><span class=nt>severity</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">warning</span><span class=w></span>
+</code></pre></div> </div> <div class=tabbed-block> <div class=highlight><pre><span></span><code><a id=__codelineno-1-1 name=__codelineno-1-1 href=#__codelineno-1-1></a><span class=nn>---</span><span class=w></span>
+<a id=__codelineno-1-2 name=__codelineno-1-2 href=#__codelineno-1-2></a><span class=c1># Code generated by Sloth (dev): https://github.com/slok/sloth.</span><span class=w></span>
+<a id=__codelineno-1-3 name=__codelineno-1-3 href=#__codelineno-1-3></a><span class=c1># DO NOT EDIT.</span><span class=w></span>
+<a id=__codelineno-1-4 name=__codelineno-1-4 href=#__codelineno-1-4></a>
+<a id=__codelineno-1-5 name=__codelineno-1-5 href=#__codelineno-1-5></a><span class=nt>groups</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-1-6 name=__codelineno-1-6 href=#__codelineno-1-6></a><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">sloth-slo-sli-recordings-home-wifi-wifi-client-satisfaction</span><span class=w></span>
+<a id=__codelineno-1-7 name=__codelineno-1-7 href=#__codelineno-1-7></a><span class=w>  </span><span class=nt>rules</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-1-8 name=__codelineno-1-8 href=#__codelineno-1-8></a><span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>record</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">slo:sli_error:ratio_rate5m</span><span class=w></span>
+<a id=__codelineno-1-9 name=__codelineno-1-9 href=#__codelineno-1-9></a><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class="p p-Indicator">|-</span><span class=w></span>
+<a id=__codelineno-1-10 name=__codelineno-1-10 href=#__codelineno-1-10></a><span class=w>      </span><span class=no>(1 - (</span><span class=w></span>
+<a id=__codelineno-1-11 name=__codelineno-1-11 href=#__codelineno-1-11></a><span class=w>        </span><span class=no>sum(sum_over_time(unifipoller_client_satisfaction_ratio[5m]))</span><span class=w></span>
+<a id=__codelineno-1-12 name=__codelineno-1-12 href=#__codelineno-1-12></a><span class=w>        </span><span class=no>/</span><span class=w></span>
+<a id=__codelineno-1-13 name=__codelineno-1-13 href=#__codelineno-1-13></a><span class=w>        </span><span class=no>sum(count_over_time(unifipoller_client_satisfaction_ratio[5m]))</span><span class=w></span>
+<a id=__codelineno-1-14 name=__codelineno-1-14 href=#__codelineno-1-14></a><span class=w>      </span><span class=no>)</span><span class=w></span>
+<a id=__codelineno-1-15 name=__codelineno-1-15 href=#__codelineno-1-15></a><span class=w>      </span><span class=no>)</span><span class=w></span>
+<a id=__codelineno-1-16 name=__codelineno-1-16 href=#__codelineno-1-16></a><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-1-17 name=__codelineno-1-17 href=#__codelineno-1-17></a><span class=w>      </span><span class=nt>cluster</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">valhalla</span><span class=w></span>
+<a id=__codelineno-1-18 name=__codelineno-1-18 href=#__codelineno-1-18></a><span class=w>      </span><span class=nt>cmd</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">examplesgen.sh</span><span class=w></span>
+<a id=__codelineno-1-19 name=__codelineno-1-19 href=#__codelineno-1-19></a><span class=w>      </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ubiquiti</span><span class=w></span>
+<a id=__codelineno-1-20 name=__codelineno-1-20 href=#__codelineno-1-20></a><span class=w>      </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home</span><span class=w></span>
+<a id=__codelineno-1-21 name=__codelineno-1-21 href=#__codelineno-1-21></a><span class=w>      </span><span class=nt>sloth_id</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home-wifi-wifi-client-satisfaction</span><span class=w></span>
+<a id=__codelineno-1-22 name=__codelineno-1-22 href=#__codelineno-1-22></a><span class=w>      </span><span class=nt>sloth_service</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home-wifi</span><span class=w></span>
+<a id=__codelineno-1-23 name=__codelineno-1-23 href=#__codelineno-1-23></a><span class=w>      </span><span class=nt>sloth_slo</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">wifi-client-satisfaction</span><span class=w></span>
+<a id=__codelineno-1-24 name=__codelineno-1-24 href=#__codelineno-1-24></a><span class=w>      </span><span class=nt>sloth_window</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">5m</span><span class=w></span>
+<a id=__codelineno-1-25 name=__codelineno-1-25 href=#__codelineno-1-25></a><span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>record</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">slo:sli_error:ratio_rate30m</span><span class=w></span>
+<a id=__codelineno-1-26 name=__codelineno-1-26 href=#__codelineno-1-26></a><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class="p p-Indicator">|-</span><span class=w></span>
+<a id=__codelineno-1-27 name=__codelineno-1-27 href=#__codelineno-1-27></a><span class=w>      </span><span class=no>(1 - (</span><span class=w></span>
+<a id=__codelineno-1-28 name=__codelineno-1-28 href=#__codelineno-1-28></a><span class=w>        </span><span class=no>sum(sum_over_time(unifipoller_client_satisfaction_ratio[30m]))</span><span class=w></span>
+<a id=__codelineno-1-29 name=__codelineno-1-29 href=#__codelineno-1-29></a><span class=w>        </span><span class=no>/</span><span class=w></span>
+<a id=__codelineno-1-30 name=__codelineno-1-30 href=#__codelineno-1-30></a><span class=w>        </span><span class=no>sum(count_over_time(unifipoller_client_satisfaction_ratio[30m]))</span><span class=w></span>
+<a id=__codelineno-1-31 name=__codelineno-1-31 href=#__codelineno-1-31></a><span class=w>      </span><span class=no>)</span><span class=w></span>
+<a id=__codelineno-1-32 name=__codelineno-1-32 href=#__codelineno-1-32></a><span class=w>      </span><span class=no>)</span><span class=w></span>
+<a id=__codelineno-1-33 name=__codelineno-1-33 href=#__codelineno-1-33></a><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-1-34 name=__codelineno-1-34 href=#__codelineno-1-34></a><span class=w>      </span><span class=nt>cluster</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">valhalla</span><span class=w></span>
+<a id=__codelineno-1-35 name=__codelineno-1-35 href=#__codelineno-1-35></a><span class=w>      </span><span class=nt>cmd</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">examplesgen.sh</span><span class=w></span>
+<a id=__codelineno-1-36 name=__codelineno-1-36 href=#__codelineno-1-36></a><span class=w>      </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ubiquiti</span><span class=w></span>
+<a id=__codelineno-1-37 name=__codelineno-1-37 href=#__codelineno-1-37></a><span class=w>      </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home</span><span class=w></span>
+<a id=__codelineno-1-38 name=__codelineno-1-38 href=#__codelineno-1-38></a><span class=w>      </span><span class=nt>sloth_id</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home-wifi-wifi-client-satisfaction</span><span class=w></span>
+<a id=__codelineno-1-39 name=__codelineno-1-39 href=#__codelineno-1-39></a><span class=w>      </span><span class=nt>sloth_service</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home-wifi</span><span class=w></span>
+<a id=__codelineno-1-40 name=__codelineno-1-40 href=#__codelineno-1-40></a><span class=w>      </span><span class=nt>sloth_slo</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">wifi-client-satisfaction</span><span class=w></span>
+<a id=__codelineno-1-41 name=__codelineno-1-41 href=#__codelineno-1-41></a><span class=w>      </span><span class=nt>sloth_window</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">30m</span><span class=w></span>
+<a id=__codelineno-1-42 name=__codelineno-1-42 href=#__codelineno-1-42></a><span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>record</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">slo:sli_error:ratio_rate1h</span><span class=w></span>
+<a id=__codelineno-1-43 name=__codelineno-1-43 href=#__codelineno-1-43></a><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class="p p-Indicator">|-</span><span class=w></span>
+<a id=__codelineno-1-44 name=__codelineno-1-44 href=#__codelineno-1-44></a><span class=w>      </span><span class=no>(1 - (</span><span class=w></span>
+<a id=__codelineno-1-45 name=__codelineno-1-45 href=#__codelineno-1-45></a><span class=w>        </span><span class=no>sum(sum_over_time(unifipoller_client_satisfaction_ratio[1h]))</span><span class=w></span>
+<a id=__codelineno-1-46 name=__codelineno-1-46 href=#__codelineno-1-46></a><span class=w>        </span><span class=no>/</span><span class=w></span>
+<a id=__codelineno-1-47 name=__codelineno-1-47 href=#__codelineno-1-47></a><span class=w>        </span><span class=no>sum(count_over_time(unifipoller_client_satisfaction_ratio[1h]))</span><span class=w></span>
+<a id=__codelineno-1-48 name=__codelineno-1-48 href=#__codelineno-1-48></a><span class=w>      </span><span class=no>)</span><span class=w></span>
+<a id=__codelineno-1-49 name=__codelineno-1-49 href=#__codelineno-1-49></a><span class=w>      </span><span class=no>)</span><span class=w></span>
+<a id=__codelineno-1-50 name=__codelineno-1-50 href=#__codelineno-1-50></a><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-1-51 name=__codelineno-1-51 href=#__codelineno-1-51></a><span class=w>      </span><span class=nt>cluster</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">valhalla</span><span class=w></span>
+<a id=__codelineno-1-52 name=__codelineno-1-52 href=#__codelineno-1-52></a><span class=w>      </span><span class=nt>cmd</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">examplesgen.sh</span><span class=w></span>
+<a id=__codelineno-1-53 name=__codelineno-1-53 href=#__codelineno-1-53></a><span class=w>      </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ubiquiti</span><span class=w></span>
+<a id=__codelineno-1-54 name=__codelineno-1-54 href=#__codelineno-1-54></a><span class=w>      </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home</span><span class=w></span>
+<a id=__codelineno-1-55 name=__codelineno-1-55 href=#__codelineno-1-55></a><span class=w>      </span><span class=nt>sloth_id</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home-wifi-wifi-client-satisfaction</span><span class=w></span>
+<a id=__codelineno-1-56 name=__codelineno-1-56 href=#__codelineno-1-56></a><span class=w>      </span><span class=nt>sloth_service</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home-wifi</span><span class=w></span>
+<a id=__codelineno-1-57 name=__codelineno-1-57 href=#__codelineno-1-57></a><span class=w>      </span><span class=nt>sloth_slo</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">wifi-client-satisfaction</span><span class=w></span>
+<a id=__codelineno-1-58 name=__codelineno-1-58 href=#__codelineno-1-58></a><span class=w>      </span><span class=nt>sloth_window</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">1h</span><span class=w></span>
+<a id=__codelineno-1-59 name=__codelineno-1-59 href=#__codelineno-1-59></a><span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>record</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">slo:sli_error:ratio_rate2h</span><span class=w></span>
+<a id=__codelineno-1-60 name=__codelineno-1-60 href=#__codelineno-1-60></a><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class="p p-Indicator">|-</span><span class=w></span>
+<a id=__codelineno-1-61 name=__codelineno-1-61 href=#__codelineno-1-61></a><span class=w>      </span><span class=no>(1 - (</span><span class=w></span>
+<a id=__codelineno-1-62 name=__codelineno-1-62 href=#__codelineno-1-62></a><span class=w>        </span><span class=no>sum(sum_over_time(unifipoller_client_satisfaction_ratio[2h]))</span><span class=w></span>
+<a id=__codelineno-1-63 name=__codelineno-1-63 href=#__codelineno-1-63></a><span class=w>        </span><span class=no>/</span><span class=w></span>
+<a id=__codelineno-1-64 name=__codelineno-1-64 href=#__codelineno-1-64></a><span class=w>        </span><span class=no>sum(count_over_time(unifipoller_client_satisfaction_ratio[2h]))</span><span class=w></span>
+<a id=__codelineno-1-65 name=__codelineno-1-65 href=#__codelineno-1-65></a><span class=w>      </span><span class=no>)</span><span class=w></span>
+<a id=__codelineno-1-66 name=__codelineno-1-66 href=#__codelineno-1-66></a><span class=w>      </span><span class=no>)</span><span class=w></span>
+<a id=__codelineno-1-67 name=__codelineno-1-67 href=#__codelineno-1-67></a><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-1-68 name=__codelineno-1-68 href=#__codelineno-1-68></a><span class=w>      </span><span class=nt>cluster</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">valhalla</span><span class=w></span>
+<a id=__codelineno-1-69 name=__codelineno-1-69 href=#__codelineno-1-69></a><span class=w>      </span><span class=nt>cmd</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">examplesgen.sh</span><span class=w></span>
+<a id=__codelineno-1-70 name=__codelineno-1-70 href=#__codelineno-1-70></a><span class=w>      </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ubiquiti</span><span class=w></span>
+<a id=__codelineno-1-71 name=__codelineno-1-71 href=#__codelineno-1-71></a><span class=w>      </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home</span><span class=w></span>
+<a id=__codelineno-1-72 name=__codelineno-1-72 href=#__codelineno-1-72></a><span class=w>      </span><span class=nt>sloth_id</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home-wifi-wifi-client-satisfaction</span><span class=w></span>
+<a id=__codelineno-1-73 name=__codelineno-1-73 href=#__codelineno-1-73></a><span class=w>      </span><span class=nt>sloth_service</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home-wifi</span><span class=w></span>
+<a id=__codelineno-1-74 name=__codelineno-1-74 href=#__codelineno-1-74></a><span class=w>      </span><span class=nt>sloth_slo</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">wifi-client-satisfaction</span><span class=w></span>
+<a id=__codelineno-1-75 name=__codelineno-1-75 href=#__codelineno-1-75></a><span class=w>      </span><span class=nt>sloth_window</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">2h</span><span class=w></span>
+<a id=__codelineno-1-76 name=__codelineno-1-76 href=#__codelineno-1-76></a><span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>record</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">slo:sli_error:ratio_rate6h</span><span class=w></span>
+<a id=__codelineno-1-77 name=__codelineno-1-77 href=#__codelineno-1-77></a><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class="p p-Indicator">|-</span><span class=w></span>
+<a id=__codelineno-1-78 name=__codelineno-1-78 href=#__codelineno-1-78></a><span class=w>      </span><span class=no>(1 - (</span><span class=w></span>
+<a id=__codelineno-1-79 name=__codelineno-1-79 href=#__codelineno-1-79></a><span class=w>        </span><span class=no>sum(sum_over_time(unifipoller_client_satisfaction_ratio[6h]))</span><span class=w></span>
+<a id=__codelineno-1-80 name=__codelineno-1-80 href=#__codelineno-1-80></a><span class=w>        </span><span class=no>/</span><span class=w></span>
+<a id=__codelineno-1-81 name=__codelineno-1-81 href=#__codelineno-1-81></a><span class=w>        </span><span class=no>sum(count_over_time(unifipoller_client_satisfaction_ratio[6h]))</span><span class=w></span>
+<a id=__codelineno-1-82 name=__codelineno-1-82 href=#__codelineno-1-82></a><span class=w>      </span><span class=no>)</span><span class=w></span>
+<a id=__codelineno-1-83 name=__codelineno-1-83 href=#__codelineno-1-83></a><span class=w>      </span><span class=no>)</span><span class=w></span>
+<a id=__codelineno-1-84 name=__codelineno-1-84 href=#__codelineno-1-84></a><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-1-85 name=__codelineno-1-85 href=#__codelineno-1-85></a><span class=w>      </span><span class=nt>cluster</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">valhalla</span><span class=w></span>
+<a id=__codelineno-1-86 name=__codelineno-1-86 href=#__codelineno-1-86></a><span class=w>      </span><span class=nt>cmd</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">examplesgen.sh</span><span class=w></span>
+<a id=__codelineno-1-87 name=__codelineno-1-87 href=#__codelineno-1-87></a><span class=w>      </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ubiquiti</span><span class=w></span>
+<a id=__codelineno-1-88 name=__codelineno-1-88 href=#__codelineno-1-88></a><span class=w>      </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home</span><span class=w></span>
+<a id=__codelineno-1-89 name=__codelineno-1-89 href=#__codelineno-1-89></a><span class=w>      </span><span class=nt>sloth_id</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home-wifi-wifi-client-satisfaction</span><span class=w></span>
+<a id=__codelineno-1-90 name=__codelineno-1-90 href=#__codelineno-1-90></a><span class=w>      </span><span class=nt>sloth_service</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home-wifi</span><span class=w></span>
+<a id=__codelineno-1-91 name=__codelineno-1-91 href=#__codelineno-1-91></a><span class=w>      </span><span class=nt>sloth_slo</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">wifi-client-satisfaction</span><span class=w></span>
+<a id=__codelineno-1-92 name=__codelineno-1-92 href=#__codelineno-1-92></a><span class=w>      </span><span class=nt>sloth_window</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">6h</span><span class=w></span>
+<a id=__codelineno-1-93 name=__codelineno-1-93 href=#__codelineno-1-93></a><span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>record</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">slo:sli_error:ratio_rate1d</span><span class=w></span>
+<a id=__codelineno-1-94 name=__codelineno-1-94 href=#__codelineno-1-94></a><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class="p p-Indicator">|-</span><span class=w></span>
+<a id=__codelineno-1-95 name=__codelineno-1-95 href=#__codelineno-1-95></a><span class=w>      </span><span class=no>(1 - (</span><span class=w></span>
+<a id=__codelineno-1-96 name=__codelineno-1-96 href=#__codelineno-1-96></a><span class=w>        </span><span class=no>sum(sum_over_time(unifipoller_client_satisfaction_ratio[1d]))</span><span class=w></span>
+<a id=__codelineno-1-97 name=__codelineno-1-97 href=#__codelineno-1-97></a><span class=w>        </span><span class=no>/</span><span class=w></span>
+<a id=__codelineno-1-98 name=__codelineno-1-98 href=#__codelineno-1-98></a><span class=w>        </span><span class=no>sum(count_over_time(unifipoller_client_satisfaction_ratio[1d]))</span><span class=w></span>
+<a id=__codelineno-1-99 name=__codelineno-1-99 href=#__codelineno-1-99></a><span class=w>      </span><span class=no>)</span><span class=w></span>
+<a id=__codelineno-1-100 name=__codelineno-1-100 href=#__codelineno-1-100></a><span class=w>      </span><span class=no>)</span><span class=w></span>
+<a id=__codelineno-1-101 name=__codelineno-1-101 href=#__codelineno-1-101></a><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-1-102 name=__codelineno-1-102 href=#__codelineno-1-102></a><span class=w>      </span><span class=nt>cluster</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">valhalla</span><span class=w></span>
+<a id=__codelineno-1-103 name=__codelineno-1-103 href=#__codelineno-1-103></a><span class=w>      </span><span class=nt>cmd</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">examplesgen.sh</span><span class=w></span>
+<a id=__codelineno-1-104 name=__codelineno-1-104 href=#__codelineno-1-104></a><span class=w>      </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ubiquiti</span><span class=w></span>
+<a id=__codelineno-1-105 name=__codelineno-1-105 href=#__codelineno-1-105></a><span class=w>      </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home</span><span class=w></span>
+<a id=__codelineno-1-106 name=__codelineno-1-106 href=#__codelineno-1-106></a><span class=w>      </span><span class=nt>sloth_id</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home-wifi-wifi-client-satisfaction</span><span class=w></span>
+<a id=__codelineno-1-107 name=__codelineno-1-107 href=#__codelineno-1-107></a><span class=w>      </span><span class=nt>sloth_service</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home-wifi</span><span class=w></span>
+<a id=__codelineno-1-108 name=__codelineno-1-108 href=#__codelineno-1-108></a><span class=w>      </span><span class=nt>sloth_slo</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">wifi-client-satisfaction</span><span class=w></span>
+<a id=__codelineno-1-109 name=__codelineno-1-109 href=#__codelineno-1-109></a><span class=w>      </span><span class=nt>sloth_window</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">1d</span><span class=w></span>
+<a id=__codelineno-1-110 name=__codelineno-1-110 href=#__codelineno-1-110></a><span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>record</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">slo:sli_error:ratio_rate3d</span><span class=w></span>
+<a id=__codelineno-1-111 name=__codelineno-1-111 href=#__codelineno-1-111></a><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class="p p-Indicator">|-</span><span class=w></span>
+<a id=__codelineno-1-112 name=__codelineno-1-112 href=#__codelineno-1-112></a><span class=w>      </span><span class=no>(1 - (</span><span class=w></span>
+<a id=__codelineno-1-113 name=__codelineno-1-113 href=#__codelineno-1-113></a><span class=w>        </span><span class=no>sum(sum_over_time(unifipoller_client_satisfaction_ratio[3d]))</span><span class=w></span>
+<a id=__codelineno-1-114 name=__codelineno-1-114 href=#__codelineno-1-114></a><span class=w>        </span><span class=no>/</span><span class=w></span>
+<a id=__codelineno-1-115 name=__codelineno-1-115 href=#__codelineno-1-115></a><span class=w>        </span><span class=no>sum(count_over_time(unifipoller_client_satisfaction_ratio[3d]))</span><span class=w></span>
+<a id=__codelineno-1-116 name=__codelineno-1-116 href=#__codelineno-1-116></a><span class=w>      </span><span class=no>)</span><span class=w></span>
+<a id=__codelineno-1-117 name=__codelineno-1-117 href=#__codelineno-1-117></a><span class=w>      </span><span class=no>)</span><span class=w></span>
+<a id=__codelineno-1-118 name=__codelineno-1-118 href=#__codelineno-1-118></a><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-1-119 name=__codelineno-1-119 href=#__codelineno-1-119></a><span class=w>      </span><span class=nt>cluster</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">valhalla</span><span class=w></span>
+<a id=__codelineno-1-120 name=__codelineno-1-120 href=#__codelineno-1-120></a><span class=w>      </span><span class=nt>cmd</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">examplesgen.sh</span><span class=w></span>
+<a id=__codelineno-1-121 name=__codelineno-1-121 href=#__codelineno-1-121></a><span class=w>      </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ubiquiti</span><span class=w></span>
+<a id=__codelineno-1-122 name=__codelineno-1-122 href=#__codelineno-1-122></a><span class=w>      </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home</span><span class=w></span>
+<a id=__codelineno-1-123 name=__codelineno-1-123 href=#__codelineno-1-123></a><span class=w>      </span><span class=nt>sloth_id</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home-wifi-wifi-client-satisfaction</span><span class=w></span>
+<a id=__codelineno-1-124 name=__codelineno-1-124 href=#__codelineno-1-124></a><span class=w>      </span><span class=nt>sloth_service</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home-wifi</span><span class=w></span>
+<a id=__codelineno-1-125 name=__codelineno-1-125 href=#__codelineno-1-125></a><span class=w>      </span><span class=nt>sloth_slo</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">wifi-client-satisfaction</span><span class=w></span>
+<a id=__codelineno-1-126 name=__codelineno-1-126 href=#__codelineno-1-126></a><span class=w>      </span><span class=nt>sloth_window</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">3d</span><span class=w></span>
+<a id=__codelineno-1-127 name=__codelineno-1-127 href=#__codelineno-1-127></a><span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>record</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">slo:sli_error:ratio_rate30d</span><span class=w></span>
+<a id=__codelineno-1-128 name=__codelineno-1-128 href=#__codelineno-1-128></a><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class="p p-Indicator">|</span><span class=w></span>
+<a id=__codelineno-1-129 name=__codelineno-1-129 href=#__codelineno-1-129></a><span class=w>      </span><span class=no>sum_over_time(slo:sli_error:ratio_rate5m{sloth_id=&quot;home-wifi-wifi-client-satisfaction&quot;, sloth_service=&quot;home-wifi&quot;, sloth_slo=&quot;wifi-client-satisfaction&quot;}[30d])</span><span class=w></span>
+<a id=__codelineno-1-130 name=__codelineno-1-130 href=#__codelineno-1-130></a><span class=w>      </span><span class=no>/ ignoring (sloth_window)</span><span class=w></span>
+<a id=__codelineno-1-131 name=__codelineno-1-131 href=#__codelineno-1-131></a><span class=w>      </span><span class=no>count_over_time(slo:sli_error:ratio_rate5m{sloth_id=&quot;home-wifi-wifi-client-satisfaction&quot;, sloth_service=&quot;home-wifi&quot;, sloth_slo=&quot;wifi-client-satisfaction&quot;}[30d])</span><span class=w></span>
+<a id=__codelineno-1-132 name=__codelineno-1-132 href=#__codelineno-1-132></a><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-1-133 name=__codelineno-1-133 href=#__codelineno-1-133></a><span class=w>      </span><span class=nt>sloth_window</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">30d</span><span class=w></span>
+<a id=__codelineno-1-134 name=__codelineno-1-134 href=#__codelineno-1-134></a><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">sloth-slo-meta-recordings-home-wifi-wifi-client-satisfaction</span><span class=w></span>
+<a id=__codelineno-1-135 name=__codelineno-1-135 href=#__codelineno-1-135></a><span class=w>  </span><span class=nt>rules</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-1-136 name=__codelineno-1-136 href=#__codelineno-1-136></a><span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>record</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">slo:objective:ratio</span><span class=w></span>
+<a id=__codelineno-1-137 name=__codelineno-1-137 href=#__codelineno-1-137></a><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">vector(0.95)</span><span class=w></span>
+<a id=__codelineno-1-138 name=__codelineno-1-138 href=#__codelineno-1-138></a><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-1-139 name=__codelineno-1-139 href=#__codelineno-1-139></a><span class=w>      </span><span class=nt>cluster</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">valhalla</span><span class=w></span>
+<a id=__codelineno-1-140 name=__codelineno-1-140 href=#__codelineno-1-140></a><span class=w>      </span><span class=nt>cmd</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">examplesgen.sh</span><span class=w></span>
+<a id=__codelineno-1-141 name=__codelineno-1-141 href=#__codelineno-1-141></a><span class=w>      </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ubiquiti</span><span class=w></span>
+<a id=__codelineno-1-142 name=__codelineno-1-142 href=#__codelineno-1-142></a><span class=w>      </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home</span><span class=w></span>
+<a id=__codelineno-1-143 name=__codelineno-1-143 href=#__codelineno-1-143></a><span class=w>      </span><span class=nt>sloth_id</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home-wifi-wifi-client-satisfaction</span><span class=w></span>
+<a id=__codelineno-1-144 name=__codelineno-1-144 href=#__codelineno-1-144></a><span class=w>      </span><span class=nt>sloth_service</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home-wifi</span><span class=w></span>
+<a id=__codelineno-1-145 name=__codelineno-1-145 href=#__codelineno-1-145></a><span class=w>      </span><span class=nt>sloth_slo</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">wifi-client-satisfaction</span><span class=w></span>
+<a id=__codelineno-1-146 name=__codelineno-1-146 href=#__codelineno-1-146></a><span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>record</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">slo:error_budget:ratio</span><span class=w></span>
+<a id=__codelineno-1-147 name=__codelineno-1-147 href=#__codelineno-1-147></a><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">vector(1-0.95)</span><span class=w></span>
+<a id=__codelineno-1-148 name=__codelineno-1-148 href=#__codelineno-1-148></a><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-1-149 name=__codelineno-1-149 href=#__codelineno-1-149></a><span class=w>      </span><span class=nt>cluster</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">valhalla</span><span class=w></span>
+<a id=__codelineno-1-150 name=__codelineno-1-150 href=#__codelineno-1-150></a><span class=w>      </span><span class=nt>cmd</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">examplesgen.sh</span><span class=w></span>
+<a id=__codelineno-1-151 name=__codelineno-1-151 href=#__codelineno-1-151></a><span class=w>      </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ubiquiti</span><span class=w></span>
+<a id=__codelineno-1-152 name=__codelineno-1-152 href=#__codelineno-1-152></a><span class=w>      </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home</span><span class=w></span>
+<a id=__codelineno-1-153 name=__codelineno-1-153 href=#__codelineno-1-153></a><span class=w>      </span><span class=nt>sloth_id</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home-wifi-wifi-client-satisfaction</span><span class=w></span>
+<a id=__codelineno-1-154 name=__codelineno-1-154 href=#__codelineno-1-154></a><span class=w>      </span><span class=nt>sloth_service</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home-wifi</span><span class=w></span>
+<a id=__codelineno-1-155 name=__codelineno-1-155 href=#__codelineno-1-155></a><span class=w>      </span><span class=nt>sloth_slo</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">wifi-client-satisfaction</span><span class=w></span>
+<a id=__codelineno-1-156 name=__codelineno-1-156 href=#__codelineno-1-156></a><span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>record</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">slo:time_period:days</span><span class=w></span>
+<a id=__codelineno-1-157 name=__codelineno-1-157 href=#__codelineno-1-157></a><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">vector(30)</span><span class=w></span>
+<a id=__codelineno-1-158 name=__codelineno-1-158 href=#__codelineno-1-158></a><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-1-159 name=__codelineno-1-159 href=#__codelineno-1-159></a><span class=w>      </span><span class=nt>cluster</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">valhalla</span><span class=w></span>
+<a id=__codelineno-1-160 name=__codelineno-1-160 href=#__codelineno-1-160></a><span class=w>      </span><span class=nt>cmd</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">examplesgen.sh</span><span class=w></span>
+<a id=__codelineno-1-161 name=__codelineno-1-161 href=#__codelineno-1-161></a><span class=w>      </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ubiquiti</span><span class=w></span>
+<a id=__codelineno-1-162 name=__codelineno-1-162 href=#__codelineno-1-162></a><span class=w>      </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home</span><span class=w></span>
+<a id=__codelineno-1-163 name=__codelineno-1-163 href=#__codelineno-1-163></a><span class=w>      </span><span class=nt>sloth_id</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home-wifi-wifi-client-satisfaction</span><span class=w></span>
+<a id=__codelineno-1-164 name=__codelineno-1-164 href=#__codelineno-1-164></a><span class=w>      </span><span class=nt>sloth_service</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home-wifi</span><span class=w></span>
+<a id=__codelineno-1-165 name=__codelineno-1-165 href=#__codelineno-1-165></a><span class=w>      </span><span class=nt>sloth_slo</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">wifi-client-satisfaction</span><span class=w></span>
+<a id=__codelineno-1-166 name=__codelineno-1-166 href=#__codelineno-1-166></a><span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>record</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">slo:current_burn_rate:ratio</span><span class=w></span>
+<a id=__codelineno-1-167 name=__codelineno-1-167 href=#__codelineno-1-167></a><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class="p p-Indicator">|</span><span class=w></span>
+<a id=__codelineno-1-168 name=__codelineno-1-168 href=#__codelineno-1-168></a><span class=w>      </span><span class=no>slo:sli_error:ratio_rate5m{sloth_id=&quot;home-wifi-wifi-client-satisfaction&quot;, sloth_service=&quot;home-wifi&quot;, sloth_slo=&quot;wifi-client-satisfaction&quot;}</span><span class=w></span>
+<a id=__codelineno-1-169 name=__codelineno-1-169 href=#__codelineno-1-169></a><span class=w>      </span><span class=no>/ on(sloth_id, sloth_slo, sloth_service) group_left</span><span class=w></span>
+<a id=__codelineno-1-170 name=__codelineno-1-170 href=#__codelineno-1-170></a><span class=w>      </span><span class=no>slo:error_budget:ratio{sloth_id=&quot;home-wifi-wifi-client-satisfaction&quot;, sloth_service=&quot;home-wifi&quot;, sloth_slo=&quot;wifi-client-satisfaction&quot;}</span><span class=w></span>
+<a id=__codelineno-1-171 name=__codelineno-1-171 href=#__codelineno-1-171></a><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-1-172 name=__codelineno-1-172 href=#__codelineno-1-172></a><span class=w>      </span><span class=nt>cluster</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">valhalla</span><span class=w></span>
+<a id=__codelineno-1-173 name=__codelineno-1-173 href=#__codelineno-1-173></a><span class=w>      </span><span class=nt>cmd</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">examplesgen.sh</span><span class=w></span>
+<a id=__codelineno-1-174 name=__codelineno-1-174 href=#__codelineno-1-174></a><span class=w>      </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ubiquiti</span><span class=w></span>
+<a id=__codelineno-1-175 name=__codelineno-1-175 href=#__codelineno-1-175></a><span class=w>      </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home</span><span class=w></span>
+<a id=__codelineno-1-176 name=__codelineno-1-176 href=#__codelineno-1-176></a><span class=w>      </span><span class=nt>sloth_id</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home-wifi-wifi-client-satisfaction</span><span class=w></span>
+<a id=__codelineno-1-177 name=__codelineno-1-177 href=#__codelineno-1-177></a><span class=w>      </span><span class=nt>sloth_service</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home-wifi</span><span class=w></span>
+<a id=__codelineno-1-178 name=__codelineno-1-178 href=#__codelineno-1-178></a><span class=w>      </span><span class=nt>sloth_slo</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">wifi-client-satisfaction</span><span class=w></span>
+<a id=__codelineno-1-179 name=__codelineno-1-179 href=#__codelineno-1-179></a><span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>record</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">slo:period_burn_rate:ratio</span><span class=w></span>
+<a id=__codelineno-1-180 name=__codelineno-1-180 href=#__codelineno-1-180></a><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class="p p-Indicator">|</span><span class=w></span>
+<a id=__codelineno-1-181 name=__codelineno-1-181 href=#__codelineno-1-181></a><span class=w>      </span><span class=no>slo:sli_error:ratio_rate30d{sloth_id=&quot;home-wifi-wifi-client-satisfaction&quot;, sloth_service=&quot;home-wifi&quot;, sloth_slo=&quot;wifi-client-satisfaction&quot;}</span><span class=w></span>
+<a id=__codelineno-1-182 name=__codelineno-1-182 href=#__codelineno-1-182></a><span class=w>      </span><span class=no>/ on(sloth_id, sloth_slo, sloth_service) group_left</span><span class=w></span>
+<a id=__codelineno-1-183 name=__codelineno-1-183 href=#__codelineno-1-183></a><span class=w>      </span><span class=no>slo:error_budget:ratio{sloth_id=&quot;home-wifi-wifi-client-satisfaction&quot;, sloth_service=&quot;home-wifi&quot;, sloth_slo=&quot;wifi-client-satisfaction&quot;}</span><span class=w></span>
+<a id=__codelineno-1-184 name=__codelineno-1-184 href=#__codelineno-1-184></a><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-1-185 name=__codelineno-1-185 href=#__codelineno-1-185></a><span class=w>      </span><span class=nt>cluster</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">valhalla</span><span class=w></span>
+<a id=__codelineno-1-186 name=__codelineno-1-186 href=#__codelineno-1-186></a><span class=w>      </span><span class=nt>cmd</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">examplesgen.sh</span><span class=w></span>
+<a id=__codelineno-1-187 name=__codelineno-1-187 href=#__codelineno-1-187></a><span class=w>      </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ubiquiti</span><span class=w></span>
+<a id=__codelineno-1-188 name=__codelineno-1-188 href=#__codelineno-1-188></a><span class=w>      </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home</span><span class=w></span>
+<a id=__codelineno-1-189 name=__codelineno-1-189 href=#__codelineno-1-189></a><span class=w>      </span><span class=nt>sloth_id</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home-wifi-wifi-client-satisfaction</span><span class=w></span>
+<a id=__codelineno-1-190 name=__codelineno-1-190 href=#__codelineno-1-190></a><span class=w>      </span><span class=nt>sloth_service</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home-wifi</span><span class=w></span>
+<a id=__codelineno-1-191 name=__codelineno-1-191 href=#__codelineno-1-191></a><span class=w>      </span><span class=nt>sloth_slo</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">wifi-client-satisfaction</span><span class=w></span>
+<a id=__codelineno-1-192 name=__codelineno-1-192 href=#__codelineno-1-192></a><span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>record</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">slo:period_error_budget_remaining:ratio</span><span class=w></span>
+<a id=__codelineno-1-193 name=__codelineno-1-193 href=#__codelineno-1-193></a><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">1 - slo:period_burn_rate:ratio{sloth_id=&quot;home-wifi-wifi-client-satisfaction&quot;,</span><span class=w></span>
+<a id=__codelineno-1-194 name=__codelineno-1-194 href=#__codelineno-1-194></a><span class=w>      </span><span class="l l-Scalar l-Scalar-Plain">sloth_service=&quot;home-wifi&quot;, sloth_slo=&quot;wifi-client-satisfaction&quot;}</span><span class=w></span>
+<a id=__codelineno-1-195 name=__codelineno-1-195 href=#__codelineno-1-195></a><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-1-196 name=__codelineno-1-196 href=#__codelineno-1-196></a><span class=w>      </span><span class=nt>cluster</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">valhalla</span><span class=w></span>
+<a id=__codelineno-1-197 name=__codelineno-1-197 href=#__codelineno-1-197></a><span class=w>      </span><span class=nt>cmd</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">examplesgen.sh</span><span class=w></span>
+<a id=__codelineno-1-198 name=__codelineno-1-198 href=#__codelineno-1-198></a><span class=w>      </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ubiquiti</span><span class=w></span>
+<a id=__codelineno-1-199 name=__codelineno-1-199 href=#__codelineno-1-199></a><span class=w>      </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home</span><span class=w></span>
+<a id=__codelineno-1-200 name=__codelineno-1-200 href=#__codelineno-1-200></a><span class=w>      </span><span class=nt>sloth_id</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home-wifi-wifi-client-satisfaction</span><span class=w></span>
+<a id=__codelineno-1-201 name=__codelineno-1-201 href=#__codelineno-1-201></a><span class=w>      </span><span class=nt>sloth_service</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home-wifi</span><span class=w></span>
+<a id=__codelineno-1-202 name=__codelineno-1-202 href=#__codelineno-1-202></a><span class=w>      </span><span class=nt>sloth_slo</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">wifi-client-satisfaction</span><span class=w></span>
+<a id=__codelineno-1-203 name=__codelineno-1-203 href=#__codelineno-1-203></a><span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>record</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">sloth_slo_info</span><span class=w></span>
+<a id=__codelineno-1-204 name=__codelineno-1-204 href=#__codelineno-1-204></a><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">vector(1)</span><span class=w></span>
+<a id=__codelineno-1-205 name=__codelineno-1-205 href=#__codelineno-1-205></a><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-1-206 name=__codelineno-1-206 href=#__codelineno-1-206></a><span class=w>      </span><span class=nt>cluster</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">valhalla</span><span class=w></span>
+<a id=__codelineno-1-207 name=__codelineno-1-207 href=#__codelineno-1-207></a><span class=w>      </span><span class=nt>cmd</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">examplesgen.sh</span><span class=w></span>
+<a id=__codelineno-1-208 name=__codelineno-1-208 href=#__codelineno-1-208></a><span class=w>      </span><span class=nt>component</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ubiquiti</span><span class=w></span>
+<a id=__codelineno-1-209 name=__codelineno-1-209 href=#__codelineno-1-209></a><span class=w>      </span><span class=nt>context</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home</span><span class=w></span>
+<a id=__codelineno-1-210 name=__codelineno-1-210 href=#__codelineno-1-210></a><span class=w>      </span><span class=nt>sloth_id</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home-wifi-wifi-client-satisfaction</span><span class=w></span>
+<a id=__codelineno-1-211 name=__codelineno-1-211 href=#__codelineno-1-211></a><span class=w>      </span><span class=nt>sloth_mode</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">cli-gen-prom</span><span class=w></span>
+<a id=__codelineno-1-212 name=__codelineno-1-212 href=#__codelineno-1-212></a><span class=w>      </span><span class=nt>sloth_objective</span><span class=p>:</span><span class=w> </span><span class=s>&quot;95&quot;</span><span class=w></span>
+<a id=__codelineno-1-213 name=__codelineno-1-213 href=#__codelineno-1-213></a><span class=w>      </span><span class=nt>sloth_service</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home-wifi</span><span class=w></span>
+<a id=__codelineno-1-214 name=__codelineno-1-214 href=#__codelineno-1-214></a><span class=w>      </span><span class=nt>sloth_slo</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">wifi-client-satisfaction</span><span class=w></span>
+<a id=__codelineno-1-215 name=__codelineno-1-215 href=#__codelineno-1-215></a><span class=w>      </span><span class=nt>sloth_spec</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">prometheus/v1</span><span class=w></span>
+<a id=__codelineno-1-216 name=__codelineno-1-216 href=#__codelineno-1-216></a><span class=w>      </span><span class=nt>sloth_version</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">dev</span><span class=w></span>
+<a id=__codelineno-1-217 name=__codelineno-1-217 href=#__codelineno-1-217></a><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">sloth-slo-alerts-home-wifi-wifi-client-satisfaction</span><span class=w></span>
+<a id=__codelineno-1-218 name=__codelineno-1-218 href=#__codelineno-1-218></a><span class=w>  </span><span class=nt>rules</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-1-219 name=__codelineno-1-219 href=#__codelineno-1-219></a><span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>alert</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">WifiClientSatisfaction</span><span class=w></span>
+<a id=__codelineno-1-220 name=__codelineno-1-220 href=#__codelineno-1-220></a><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class="p p-Indicator">|</span><span class=w></span>
+<a id=__codelineno-1-221 name=__codelineno-1-221 href=#__codelineno-1-221></a><span class=w>      </span><span class=no>(</span><span class=w></span>
+<a id=__codelineno-1-222 name=__codelineno-1-222 href=#__codelineno-1-222></a><span class=w>          </span><span class=no>(slo:sli_error:ratio_rate5m{sloth_id=&quot;home-wifi-wifi-client-satisfaction&quot;, sloth_service=&quot;home-wifi&quot;, sloth_slo=&quot;wifi-client-satisfaction&quot;} &gt; (14.4 * 0.05))</span><span class=w></span>
+<a id=__codelineno-1-223 name=__codelineno-1-223 href=#__codelineno-1-223></a><span class=w>          </span><span class=no>and ignoring (sloth_window)</span><span class=w></span>
+<a id=__codelineno-1-224 name=__codelineno-1-224 href=#__codelineno-1-224></a><span class=w>          </span><span class=no>(slo:sli_error:ratio_rate1h{sloth_id=&quot;home-wifi-wifi-client-satisfaction&quot;, sloth_service=&quot;home-wifi&quot;, sloth_slo=&quot;wifi-client-satisfaction&quot;} &gt; (14.4 * 0.05))</span><span class=w></span>
+<a id=__codelineno-1-225 name=__codelineno-1-225 href=#__codelineno-1-225></a><span class=w>      </span><span class=no>)</span><span class=w></span>
+<a id=__codelineno-1-226 name=__codelineno-1-226 href=#__codelineno-1-226></a><span class=w>      </span><span class=no>or ignoring (sloth_window)</span><span class=w></span>
+<a id=__codelineno-1-227 name=__codelineno-1-227 href=#__codelineno-1-227></a><span class=w>      </span><span class=no>(</span><span class=w></span>
+<a id=__codelineno-1-228 name=__codelineno-1-228 href=#__codelineno-1-228></a><span class=w>          </span><span class=no>(slo:sli_error:ratio_rate30m{sloth_id=&quot;home-wifi-wifi-client-satisfaction&quot;, sloth_service=&quot;home-wifi&quot;, sloth_slo=&quot;wifi-client-satisfaction&quot;} &gt; (6 * 0.05))</span><span class=w></span>
+<a id=__codelineno-1-229 name=__codelineno-1-229 href=#__codelineno-1-229></a><span class=w>          </span><span class=no>and ignoring (sloth_window)</span><span class=w></span>
+<a id=__codelineno-1-230 name=__codelineno-1-230 href=#__codelineno-1-230></a><span class=w>          </span><span class=no>(slo:sli_error:ratio_rate6h{sloth_id=&quot;home-wifi-wifi-client-satisfaction&quot;, sloth_service=&quot;home-wifi&quot;, sloth_slo=&quot;wifi-client-satisfaction&quot;} &gt; (6 * 0.05))</span><span class=w></span>
+<a id=__codelineno-1-231 name=__codelineno-1-231 href=#__codelineno-1-231></a><span class=w>      </span><span class=no>)</span><span class=w></span>
+<a id=__codelineno-1-232 name=__codelineno-1-232 href=#__codelineno-1-232></a><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-1-233 name=__codelineno-1-233 href=#__codelineno-1-233></a><span class=w>      </span><span class=nt>severity</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">home</span><span class=w></span>
+<a id=__codelineno-1-234 name=__codelineno-1-234 href=#__codelineno-1-234></a><span class=w>      </span><span class=nt>sloth_severity</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">page</span><span class=w></span>
+<a id=__codelineno-1-235 name=__codelineno-1-235 href=#__codelineno-1-235></a><span class=w>    </span><span class=nt>annotations</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-1-236 name=__codelineno-1-236 href=#__codelineno-1-236></a><span class=w>      </span><span class=nt>summary</span><span class=p>:</span><span class=w> </span><span class=s>&#39;{{$labels.sloth_service}}</span><span class=nv> </span><span class=s>{{$labels.sloth_slo}}</span><span class=nv> </span><span class=s>SLO</span><span class=nv> </span><span class=s>error</span><span class=nv> </span><span class=s>budget</span><span class=nv> </span><span class=s>burn</span><span class=w></span>
+<a id=__codelineno-1-237 name=__codelineno-1-237 href=#__codelineno-1-237></a><span class=w>        </span><span class=s>rate</span><span class=nv> </span><span class=s>is</span><span class=nv> </span><span class=s>over</span><span class=nv> </span><span class=s>expected.&#39;</span><span class=w></span>
+<a id=__codelineno-1-238 name=__codelineno-1-238 href=#__codelineno-1-238></a><span class=w>      </span><span class=nt>title</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">(page) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget</span><span class=w></span>
+<a id=__codelineno-1-239 name=__codelineno-1-239 href=#__codelineno-1-239></a><span class=w>        </span><span class="l l-Scalar l-Scalar-Plain">burn rate is too fast.</span><span class=w></span>
+<a id=__codelineno-1-240 name=__codelineno-1-240 href=#__codelineno-1-240></a><span class=w>  </span><span class="p p-Indicator">-</span><span class=w> </span><span class=nt>alert</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">WifiClientSatisfaction</span><span class=w></span>
+<a id=__codelineno-1-241 name=__codelineno-1-241 href=#__codelineno-1-241></a><span class=w>    </span><span class=nt>expr</span><span class=p>:</span><span class=w> </span><span class="p p-Indicator">|</span><span class=w></span>
+<a id=__codelineno-1-242 name=__codelineno-1-242 href=#__codelineno-1-242></a><span class=w>      </span><span class=no>(</span><span class=w></span>
+<a id=__codelineno-1-243 name=__codelineno-1-243 href=#__codelineno-1-243></a><span class=w>          </span><span class=no>(slo:sli_error:ratio_rate2h{sloth_id=&quot;home-wifi-wifi-client-satisfaction&quot;, sloth_service=&quot;home-wifi&quot;, sloth_slo=&quot;wifi-client-satisfaction&quot;} &gt; (3 * 0.05))</span><span class=w></span>
+<a id=__codelineno-1-244 name=__codelineno-1-244 href=#__codelineno-1-244></a><span class=w>          </span><span class=no>and ignoring (sloth_window)</span><span class=w></span>
+<a id=__codelineno-1-245 name=__codelineno-1-245 href=#__codelineno-1-245></a><span class=w>          </span><span class=no>(slo:sli_error:ratio_rate1d{sloth_id=&quot;home-wifi-wifi-client-satisfaction&quot;, sloth_service=&quot;home-wifi&quot;, sloth_slo=&quot;wifi-client-satisfaction&quot;} &gt; (3 * 0.05))</span><span class=w></span>
+<a id=__codelineno-1-246 name=__codelineno-1-246 href=#__codelineno-1-246></a><span class=w>      </span><span class=no>)</span><span class=w></span>
+<a id=__codelineno-1-247 name=__codelineno-1-247 href=#__codelineno-1-247></a><span class=w>      </span><span class=no>or ignoring (sloth_window)</span><span class=w></span>
+<a id=__codelineno-1-248 name=__codelineno-1-248 href=#__codelineno-1-248></a><span class=w>      </span><span class=no>(</span><span class=w></span>
+<a id=__codelineno-1-249 name=__codelineno-1-249 href=#__codelineno-1-249></a><span class=w>          </span><span class=no>(slo:sli_error:ratio_rate6h{sloth_id=&quot;home-wifi-wifi-client-satisfaction&quot;, sloth_service=&quot;home-wifi&quot;, sloth_slo=&quot;wifi-client-satisfaction&quot;} &gt; (1 * 0.05))</span><span class=w></span>
+<a id=__codelineno-1-250 name=__codelineno-1-250 href=#__codelineno-1-250></a><span class=w>          </span><span class=no>and ignoring (sloth_window)</span><span class=w></span>
+<a id=__codelineno-1-251 name=__codelineno-1-251 href=#__codelineno-1-251></a><span class=w>          </span><span class=no>(slo:sli_error:ratio_rate3d{sloth_id=&quot;home-wifi-wifi-client-satisfaction&quot;, sloth_service=&quot;home-wifi&quot;, sloth_slo=&quot;wifi-client-satisfaction&quot;} &gt; (1 * 0.05))</span><span class=w></span>
+<a id=__codelineno-1-252 name=__codelineno-1-252 href=#__codelineno-1-252></a><span class=w>      </span><span class=no>)</span><span class=w></span>
+<a id=__codelineno-1-253 name=__codelineno-1-253 href=#__codelineno-1-253></a><span class=w>    </span><span class=nt>labels</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-1-254 name=__codelineno-1-254 href=#__codelineno-1-254></a><span class=w>      </span><span class=nt>severity</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">warning</span><span class=w></span>
+<a id=__codelineno-1-255 name=__codelineno-1-255 href=#__codelineno-1-255></a><span class=w>      </span><span class=nt>sloth_severity</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">ticket</span><span class=w></span>
+<a id=__codelineno-1-256 name=__codelineno-1-256 href=#__codelineno-1-256></a><span class=w>    </span><span class=nt>annotations</span><span class=p>:</span><span class=w></span>
+<a id=__codelineno-1-257 name=__codelineno-1-257 href=#__codelineno-1-257></a><span class=w>      </span><span class=nt>summary</span><span class=p>:</span><span class=w> </span><span class=s>&#39;{{$labels.sloth_service}}</span><span class=nv> </span><span class=s>{{$labels.sloth_slo}}</span><span class=nv> </span><span class=s>SLO</span><span class=nv> </span><span class=s>error</span><span class=nv> </span><span class=s>budget</span><span class=nv> </span><span class=s>burn</span><span class=w></span>
+<a id=__codelineno-1-258 name=__codelineno-1-258 href=#__codelineno-1-258></a><span class=w>        </span><span class=s>rate</span><span class=nv> </span><span class=s>is</span><span class=nv> </span><span class=s>over</span><span class=nv> </span><span class=s>expected.&#39;</span><span class=w></span>
+<a id=__codelineno-1-259 name=__codelineno-1-259 href=#__codelineno-1-259></a><span class=w>      </span><span class=nt>title</span><span class=p>:</span><span class=w> </span><span class="l l-Scalar l-Scalar-Plain">(ticket) {{$labels.sloth_service}} {{$labels.sloth_slo}} SLO error budget</span><span class=w></span>
+<a id=__codelineno-1-260 name=__codelineno-1-260 href=#__codelineno-1-260></a><span class=w>        </span><span class="l l-Scalar l-Scalar-Plain">burn rate is too fast.</span><span class=w></span>
+</code></pre></div> </div> </div> </div> </article> </div> </div> <a href=# class="md-top md-icon" data-md-component=top data-md-state=hidden> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg> Back to top </a> </main> <footer class=md-footer> <nav class="md-footer__inner md-grid" aria-label=Footer> <a href=../no-alerts/ class="md-footer__link md-footer__link--prev" aria-label="Previous: No alerts" rel=prev> <div class="md-footer__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg> </div> <div class=md-footer__title> <div class=md-ellipsis> <span class=md-footer__direction> Previous </span> No alerts </div> </div> </a> <a href=../sli-plugin/ class="md-footer__link md-footer__link--next" aria-label="Next: SLI plugin" rel=next> <div class=md-footer__title> <div class=md-ellipsis> <span class=md-footer__direction> Next </span> SLI plugin </div> </div> <div class="md-footer__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg> </div> </a> </nav> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-copyright> <div class=md-copyright__highlight> 🄯 2022 Xabier Larrakoetxea </div> </div> <div class=md-social> <a href=https://github.com/slok/sloth/releases target=_blank rel=noopener title=Releases class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 16 16"><path fill-rule=evenodd d="M2.5 7.775V2.75a.25.25 0 0 1 .25-.25h5.025a.25.25 0 0 1 .177.073l6.25 6.25a.25.25 0 0 1 0 .354l-5.025 5.025a.25.25 0 0 1-.354 0l-6.25-6.25a.25.25 0 0 1-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 0 1 0 2.474l-5.026 5.026a1.75 1.75 0 0 1-2.474 0l-6.25-6.25A1.75 1.75 0 0 1 1 7.775zM6 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/></svg> </a> <a href=https://github.com/slok/sloth/blob/main/CHANGELOG.md target=_blank rel=noopener title=Changelog class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 16 16"><path fill-rule=evenodd d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.744 3.744 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 1-.75-.75V1.75zm8.755 3a2.25 2.25 0 0 1 2.25-2.25H14.5v9h-3.757c-.71 0-1.4.201-1.992.572l.004-7.322zm-1.504 7.324.004-5.073-.002-2.253A2.25 2.25 0 0 0 5.003 2.5H1.5v9h3.757a3.75 3.75 0 0 1 1.994.574z"/></svg> </a> <a href=https://github.com/slok/sloth-common-sli-plugins target=_blank rel=noopener title="SLI plugins source" class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M16 7V3h-2v4h-4V3H8v4C7 7 6 8 6 9v5.5L9.5 18v3h5v-3l3.5-3.5V9c0-1-1-2-2-2m0 6.67-2.91 2.92-.42.41h-1.34l-.41-.41L8 13.67V9.09c0-.03.06-.09.09-.09h7.83c.03 0 .08.06.08.09v4.58z"/></svg> </a> <a href=https://github.com/slok/sloth-website target=_blank rel=noopener title="Docs source" class=md-social__link> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M8 12h8v2H8v-2m2 8H6V4h7v5h5v3.1l2-2V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4v-2m-2-2h4.1l.9-.9V16H8v2m12.2-5c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1z"/></svg> </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"base": "../../..", "features": ["announce.dismiss", "content.code.annotate", "navigation.indexes", "navigation.instant", "navigation.tabs", "navigation.tracking", "navigation.top", "search.highlight", "search.share", "search.suggest", "toc.follow"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.bd0b6b67.min.js"}</script> <script src=../../../assets/javascripts/bundle.8aa65030.min.js></script> </body> </html>

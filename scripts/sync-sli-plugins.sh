@@ -4,11 +4,14 @@ set -eufCo pipefail
 export SHELLOPTS
 IFS=$'\t\n'
 
-command -v git >/dev/null 2>&1 || { echo 'please install git'; exit 1; }
+command -v git >/dev/null 2>&1 || {
+  echo 'please install git'
+  exit 1
+}
 
 TMP_DIR=./tmp
 SLOTH_DIR="${TMP_DIR}/sloth"
-SYNC_DIR=./content/sli-plugins
+SYNC_DIR=./docs-src/sli-plugins
 PLUGINS_REPO_DIR="${TMP_DIR}/sli-plugins/plugins"
 PLUGINS_DIR="${PLUGINS_REPO_DIR}/plugins"
 
@@ -19,28 +22,12 @@ rm -rf ${SYNC_DIR}
 mkdir ${SYNC_DIR}
 
 echo "[*] Cloning repositories"
-git clone git://github.com/slok/sloth-common-sli-plugins -b main --depth 1 "${PLUGINS_REPO_DIR}"
-
-echo "[*] Creating plugin index file"
-cat > ${SYNC_DIR}/_index.md <<EOF
----
-title: "SLI plugins"
-weight: 980
-geekdocCollapseSection: true
----
-
-<!-- spellchecker-disable -->
-
-{{< toc-tree >}}
-
-<!-- spellchecker-enable -->
-EOF
-
+git clone git@github.com:slok/sloth-common-sli-plugins -b main --depth 1 "${PLUGINS_REPO_DIR}"
 
 echo "[*] Syncing SLO examples"
 PREV_DIR="${PWD}"
 cd ${PLUGINS_DIR}
-find . -name "README.md"|while read fname; do
+find . -name "README.md" | while read fname; do
   # Get group name.
   group_name=$(dirname "${fname}")
 
@@ -48,9 +35,8 @@ find . -name "README.md"|while read fname; do
   group_name=${group_name#./}
 
   # Replace "/" with "-"
-  id="${group_name//\//-}"     
-  
-  # Copy readme
-  mkdir -p "${PREV_DIR}/${SYNC_DIR}/${id}"
-  cp "${fname}" "${PREV_DIR}/${SYNC_DIR}/${id}/_index.md"
+  id="${group_name//\//-}"
+
+  # Copy readme.
+  cp "${fname}" "${PREV_DIR}/${SYNC_DIR}/${id}.md"
 done

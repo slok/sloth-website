@@ -1,9 +1,13 @@
-#!/bin/bash
+#!/bin/sh
+
 # vim: ai:ts=8:sw=8:noet
 set -eufCo pipefail
 export SHELLOPTS
 IFS=$'\t\n'
 
-command -v hugo >/dev/null 2>&1 || { echo 'please install hugo'; exit 1; }
+command -v mkdocs >/dev/null 2>&1 || {
+    echo 'please install mkdocs'
+    exit 1
+}
 
-hugo server -s ./ --minify --bind=0.0.0.0 
+mkdocs serve --dev-addr 0.0.0.0:8000
