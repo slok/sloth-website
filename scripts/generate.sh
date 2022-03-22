@@ -17,3 +17,6 @@ mkdocs build --strict --clean --site-dir docs
 
 # Create Github's custom CNAME.
 echo "sloth.dev" >./docs/CNAME
+
+# Fix permissions.
+chown 1000:1000 -R ./docs

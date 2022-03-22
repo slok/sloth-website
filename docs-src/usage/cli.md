@@ -21,6 +21,13 @@ This mode only needs the CLI so its very useful for GitOps, CI, scripts or as a 
 !!! warning "Kubernetes specs need prometheus-operator CRDs"
     Kubernetes specs generate Prometheus operator Rules CRs, this means that the [CRD][prom-op-rules-crd] is required to be registered in the cluster.
 
+!!! tip "Disable optimized rules"
+    By default Sloth will try optimizing long time windows (e.g 30 day) by sacrificing data precision. If you want to disable this use `--disable-optimized-rules`.  
+
+!!! success "SLO directory discovery"
+    If the input and the output is a directory instead of a file, Sloth will discover all SLOs recursively in a directory and output the generated files with the corresponding structure in the output.
+
+    If you are executing Sloth per file using bash loops, changing to this method is recommended (`>=v0.10.0`) because it will have a huge impact performance (e.g: CI time).
 
 !!! example
 

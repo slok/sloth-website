@@ -9,18 +9,21 @@ In the controller mode, Sloth will be running listneing to Kubernetes Sloth SLO 
 
 In the end, the controller mode makes the same work as the CLI however integrates better with a native Kubernetes flow.
 
-
 !!! info "Sloth [CRD][sloth-crd] is required"
+
     ```bash
     $ kubectl apply -f ./pkg/kubernetes/gen/crd/sloth.slok.dev_prometheusservicelevels.yaml
     ```
 
-
-
 !!! info "Prometheus Operator Rules [CRD][prom-op-rules] is required"
+
     ```bash
     $ kubectl apply -f ./test/integration/crd/prometheus-operator-crd.yaml
     ```
+
+!!! tip "Disable optimized rules"
+
+    By default Sloth will try optimizing long time windows (e.g 30 day) by sacrificing data precision. If you want to disable this use `--disable-optimized-rules`.  
 
 ## Deploying in Kubernetes
 
