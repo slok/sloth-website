@@ -6,6 +6,7 @@ title: "Installing Sloth"
 
 - Using github releases: https://github.com/slok/sloth/releases
 - Using [asdf]: https://github.com/slok/asdf-sloth
+- Install `sloth-bin` [from the Arch User Repository](https://aur.archlinux.org/packages/sloth-bin)
 
 ## Docker images
 
