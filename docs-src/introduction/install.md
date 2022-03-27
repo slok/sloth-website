@@ -2,11 +2,11 @@
 title: "Installing Sloth"
 ---
 
-## :material-tag: Releases
+## :material-tag: Binary releases
 
-- Using github releases: https://github.com/slok/sloth/releases
-- Using [asdf]: https://github.com/slok/asdf-sloth
-- Using [Arch linux][arch] AUR: https://aur.archlinux.org/packages/sloth-bin)
+- :material-github: Using github releases: <https://github.com/slok/sloth/releases>
+- :material-console-line: Using [asdf]: <https://github.com/slok/asdf-sloth>
+- :material-arch: Using [Arch linux][arch] AUR: <https://aur.archlinux.org/packages/sloth-bin>
 
 ## :material-docker: Docker images
 
