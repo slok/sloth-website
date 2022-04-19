@@ -87,7 +87,7 @@ Yes, use `disable: true` on `page` and `ticket`.
 
 ## Grafana dashboard?
 
-Check [grafana-dashboard](({{< relref "../dashboards" >}})), this dashboard will load the SLOs automatically.
+Check [grafana-dashboard](../introduction/dashboards.md), this dashboard will load the SLOs automatically.
 
 ## CLI VS K8s controller?
 
