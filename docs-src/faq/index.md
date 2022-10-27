@@ -95,7 +95,7 @@ If you don't have Kubernetes and you need raw prometheus rules, its easy, the CL
 
 On the other side if you have Kubernetes (and most likely prometheus-operator). Using [`sloth.slok.dev/v1/PrometheusServiceLevel`](pkg/kubernetes/api/sloth/v1) CRD will output the same result used as a CLI or used as a Kubernetes controller.
 
-The only difference between bot modes is how Sloth application loads the SLOs manifest. On both modes the output will be a Prometheus Operator Rules CRD.
+The only difference between the two modes is how Sloth application loads the SLOs manifest. For either mode, the output will be a Prometheus Operator Rules CRD.
 
 Both have pros and cons:
 
