@@ -2,7 +2,7 @@
 
 ## Build the docker image
 
-`docker build -t slok.dev/sloth-website .`
+`make build`
 
 ## Run site locally
 
