@@ -70,4 +70,4 @@ ls -la ./bin
 [asdf]: https://asdf-vm.com/
 [arch]: https://archlinux.org/
 [helm-chart]: https://github.com/slok/sloth/tree/main/deploy/kubernetes/helm
-[CRDs]: https://raw.githubusercontent.com/slok/sloth/v0.11.0/pkg/kubernetes/gen/crd
+[CRDs]: https://raw.githubusercontent.com/slok/sloth/v0.11.0/pkg/kubernetes/gen/crd/sloth.slok.dev_prometheusservicelevels.yaml

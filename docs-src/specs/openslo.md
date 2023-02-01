@@ -21,7 +21,7 @@ Regarding Sloth features, [OpenSLO] spec doesn't support all of the sloth featur
 - No SLI plugins support.
 - No Kubernetes support (at least until official OpenSLO CRDs are released).
 
-Check [Examples](../examples/openslo)
+Check [Examples](../examples/openslo/getting-started.md)
 
 !!! example
 
