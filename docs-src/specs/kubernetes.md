@@ -18,7 +18,7 @@ Check related resources:
 - [K8s client][k8s-cli].
 - [CRD manifest][crd-manifest].
 
-Will generate from a [Sloth CRD](pkg/kubernetes/api/sloth/v1) spec into [Prometheus-operator][crd rules][prom-op-rules]. This generates the prometheus operator CRDs based on the Sloth CRD template.
+Will generate from a [Sloth CRD](https://github.com/slok/sloth/tree/main/pkg/kubernetes/api/sloth/v1) spec into [Prometheus-operator][crd rules][prom-op-rules]. This generates the prometheus operator CRDs based on the Sloth CRD template.
 
 !!! example
 

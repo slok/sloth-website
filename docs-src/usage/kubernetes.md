@@ -50,4 +50,4 @@ Check [Kubernetes installing section](../introduction/install.md#kubernetes)
     ```
 
 [sloth-crd]: https://raw.githubusercontent.com/slok/sloth/main/pkg/kubernetes/gen/crd/sloth.slok.dev_prometheusservicelevels.yaml
-[prom-op-rules]: https://github.com/prometheus-operator/kube-prometheus/blob/main/manifests/setup/prometheus-operator-0prometheusruleCustomResourceDefinition.yaml
+[prom-op-rules]: https://github.com/prometheus-operator/kube-prometheus/blob/main/manifests/setup/0prometheusruleCustomResourceDefinition.yaml

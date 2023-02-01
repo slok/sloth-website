@@ -93,7 +93,7 @@ Check [grafana-dashboard](../introduction/dashboards.md), this dashboard will lo
 
 If you don't have Kubernetes and you need raw prometheus rules, its easy, the CLI (`generate`) mode is the only one that supports raw prometheus rules.
 
-On the other side if you have Kubernetes (and most likely prometheus-operator). Using [`sloth.slok.dev/v1/PrometheusServiceLevel`](pkg/kubernetes/api/sloth/v1) CRD will output the same result used as a CLI or used as a Kubernetes controller.
+On the other side if you have Kubernetes (and most likely prometheus-operator). Using [`sloth.slok.dev/v1/PrometheusServiceLevel`](https://raw.githubusercontent.com/slok/sloth/main/pkg/kubernetes/gen/crd/sloth.slok.dev_prometheusservicelevels.yaml) CRD will output the same result used as a CLI or used as a Kubernetes controller.
 
 The only difference between the two modes is how Sloth application loads the SLOs manifest. For either mode, the output will be a Prometheus Operator Rules CRD.
 
@@ -112,7 +112,7 @@ In a few words, theres no right or wrong answer, pick your own flavour based on 
 
 - Events: This are based on 2 queries, the one that returns the total/valid number of events and the one that returns the bad events. Sloht will make a query dividing them to get the final error ratio (0-1).
 - Raw: This is a single raw prometheus query that when executed will return the error ratio (0-1).
-- Plugins: Check [plugins]({{< relref "../sli-plugins" >}}) for more information. It reference plugins that will be preloaded and already developed. Sloth will execute them on generation and it will return a raw query. This is the best way to abstract queries from users or having SLOs at scale.
+- Plugins: Check [plugins](../sli-plugins/coredns-availability.md) for more information. It reference plugins that will be preloaded and already developed. Sloth will execute them on generation and it will return a raw query. This is the best way to abstract queries from users or having SLOs at scale.
 
 ## Custom SLO time windows?
 
