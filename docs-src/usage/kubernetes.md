@@ -5,7 +5,7 @@ weight: 020
 
 `kubernetes-controller` command runs Sloth as a controller/operator that will react on [`sloth.slok.dev/v1/PrometheusServiceLevel`][sloth-crd] CRD.
 
-In the controller mode, Sloth will be running listneing to Kubernetes Sloth SLO CR events and generate the required prometheus-operator [CR rules][prom-op-rules]
+In the controller mode, Sloth will be running listening to Kubernetes Sloth SLO CR events and generate the required prometheus-operator [CR rules][prom-op-rules]
 
 In the end, the controller mode makes the same work as the CLI however integrates better with a native Kubernetes flow.
 
