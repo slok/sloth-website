@@ -10,9 +10,9 @@ Sloth comes with [Grafana] ready dashboards to be imported and used.
 
 This dashboards features detailed view of each of the SLOs.
 
-![Details slo](/static/media/dashboards/details-slo.png)
+![Details slo](../static/media/dashboards/details-slo.png)
 
-![Error budget burndown](/static/media/dashboards/details-slo-burndown.png)
+![Error budget burndown](../static/media/dashboards/details-slo-burndown.png)
 
 Every SLO will show:
 
@@ -25,7 +25,7 @@ Every SLO will show:
 - Error budget month burndown chart.
 - Burn rate magnitude.
 
-![General slo info](/static/media/dashboards/details-slo-general.png)
+![General slo info](../static/media/dashboards/details-slo-general.png)
 
 Apart from this, the dashboards has a general view of the current exceeded SLO list and graph.
 
@@ -36,7 +36,7 @@ Apart from this, the dashboards has a general view of the current exceeded SLO l
 This dashboards shows a high level overview of all the SLOs in the system managed by sloth. Normally this
 dashboards will be used to check correlation between SLO error budget burns.
 
-![High level overview](/static/media/dashboards/high-level.png)
+![High level overview](../static/media/dashboards/high-level.png)
 
 This dashboards comes with:
 
