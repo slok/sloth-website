@@ -2,7 +2,7 @@ site_name: Sloth
 site_url: https://sloth.dev
 site_description: Autogenerate Prometheus SLOs easily and with simple APIs 
 site_author: Xabier Larrakoetxea
-copyright: 🄯 2022 Xabier Larrakoetxea
+copyright: 2025 Xabier Larrakoetxea
 
 repo_name: slok/sloth
 repo_url: https://github.com/slok/sloth
@@ -64,8 +64,8 @@ markdown_extensions:
   - pymdownx.caret
   - pymdownx.details
   - pymdownx.emoji:
-      emoji_generator: !!python/name:materialx.emoji.to_svg
-      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.inlinehilite
