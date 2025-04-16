@@ -136,7 +136,8 @@ nav:
     - CLI generate: usage/cli.md
     - Kubernetes controller: usage/kubernetes.md
     - SLO Validation: usage/slo-validation.md
-    - SLI plugins: usage/plugins.md
+    - SLI plugins: usage/sli-plugins.md
+    - SLO plugins: usage/slo-plugins.md
     - SLO period windows: usage/slo-period-windows.md
   - Examples:
     - Default: examples/default/

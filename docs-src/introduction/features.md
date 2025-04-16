@@ -16,7 +16,8 @@ title: "Features"
 - Kubernetes ([Prometheus-operator]) support.
 - Kubernetes Controller/operator mode with CRDs.
 - Support different SLI types.
-- Support for [SLI plugins](../usage/plugins.md)
+- Support for [SLI plugins](../usage/sli-plugins.md)
+- Fully customizable SLO rules generation logic using [SLO plugins](../usage/slo-plugins.md)
 - A library with [common SLI plugins][common-sli-plugins].
 - [OpenSLO] support.
 

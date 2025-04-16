@@ -29,6 +29,6 @@ Normally this format is used when the integration you want is a vanilla Promethe
     INFO[0000] Prometheus rules written                      format=yaml groups=6 out=/tmp/home-wifi.yml svc=storage.IOWriter version=v0.1.0-43-g5715af5
     ```
 
-[spec]: https://pkg.go.dev/github.com/slok/sloth@v0.6.0/pkg/prometheus/api/v1
+[spec]: https://pkg.go.dev/github.com/slok/sloth/pkg/prometheus/api/v1
 [prom-recordings]: https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/
 [prom-alerts]: https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/

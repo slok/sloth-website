@@ -114,6 +114,22 @@ In a few words, theres no right or wrong answer, pick your own flavour based on 
 - Raw: This is a single raw prometheus query that when executed will return the error ratio (0-1).
 - Plugins: Check [plugins](../sli-plugins/coredns-availability.md) for more information. It reference plugins that will be preloaded and already developed. Sloth will execute them on generation and it will return a raw query. This is the best way to abstract queries from users or having SLOs at scale.
 
+## SLO plugins VS SLI plugins, what should I use?
+
+It depends on your use case:
+
+If you only need to act on the SLI query level — for example, to standardize or slightly modify the queries — then SLI plugins are likely enough. They’re simpler and focused solely on how the SLI is calculated.
+
+If you need more flexibility, such as mutating the final generated Prometheus rules, injecting metadata, rewriting a full prom rule, adding a new Prometheus rule, or making changes before Sloth's validation step, then you should use SLO plugins.
+
+SLO plugins are more powerful and give you full control over the SLO Sloth rules generation process, but they come with added complexity. Use them when you need deep customization.
+
+## SLO plugins at SLO group level or SLO level?
+
+If all the SLOs in a group need the same plugin, use the SLO group level. If you need customization at the most isolated level of SLO, use the SLO level plugins.
+
+Remember plugins are a chain, so you can combine both, set the shared plugin ones at SLO Group level, and specific ones at SLO level.
+
 ## Custom SLO time windows?
 
 Please Check [SLO period windows section](../usage/slo-period-windows.md)
