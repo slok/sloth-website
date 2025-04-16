@@ -2,198 +2,210 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://sloth.dev/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/examples/default/getting-started/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/examples/default/home-wifi/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/examples/default/kubernetes-apiserver/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/examples/default/multifile/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/examples/default/no-alerts/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/examples/default/raw-sli/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/examples/default/sli-plugin/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
+    </url>
+    <url>
+         <loc>https://sloth.dev/examples/default/slo-plugin/</loc>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/examples/kubernetes/getting-started/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/examples/kubernetes/home-wifi/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/examples/kubernetes/multifile/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/examples/kubernetes/sli-plugin/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
+    </url>
+    <url>
+         <loc>https://sloth.dev/examples/kubernetes/slo-plugin/</loc>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/examples/openslo/getting-started/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/examples/openslo/kubernetes-apiserver/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/faq/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/introduction/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/introduction/architecture/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/introduction/dashboards/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/introduction/features/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/introduction/install/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/sli-plugins/coredns-availability/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/sli-plugins/coredns-latency/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/sli-plugins/fake/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/sli-plugins/haproxy-frontend-availability/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/sli-plugins/istio-v1-availability/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/sli-plugins/istio-v1-latency/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/sli-plugins/kubernetes-apiserver-availability/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/sli-plugins/kubernetes-apiserver-latency/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/sli-plugins/kubernetes-kooper-availability/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/sli-plugins/kubernetes-kooper-latency/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/sli-plugins/kubernetes-kooper-queuecongestion/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/sli-plugins/kubernetes-nginx-ingress-availability/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/sli-plugins/noop/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/sli-plugins/prometheus-rules-evalavailability/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/sli-plugins/prometheus-targets-availability/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/sli-plugins/slok-go-http-metrics-availability/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/sli-plugins/slok-go-http-metrics-latency/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/sli-plugins/traefik-v1-availability/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/sli-plugins/traefik-v1-latency/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/sli-plugins/traefik-v2-availability/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/sli-plugins/traefik-v2-latency/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/specs/default/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/specs/kubernetes/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/specs/openslo/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/usage/cli/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/usage/kubernetes/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
-         <loc>https://sloth.dev/usage/plugins/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <loc>https://sloth.dev/usage/sli-plugins/</loc>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/usage/slo-period-windows/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
+    </url>
+    <url>
+         <loc>https://sloth.dev/usage/slo-plugins/</loc>
+         <lastmod>2025-04-16</lastmod>
     </url>
     <url>
          <loc>https://sloth.dev/usage/slo-validation/</loc>
-         <lastmod>2025-03-30</lastmod>
+         <lastmod>2025-04-16</lastmod>
     </url>
 </urlset>

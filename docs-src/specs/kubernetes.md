@@ -35,6 +35,6 @@ Will generate from a [Sloth CRD](https://github.com/slok/sloth/tree/main/pkg/kub
     INFO[0000] SLO alert rules generated                     rules=2 slo=home-wifi-risk-wifi-client-satisfaction svc=generate.prometheus.Service version=v0.1.0-43-g5715af5
     ```
 
-[spec]: https://pkg.go.dev/github.com/slok/sloth@v0.6.0/pkg/kubernetes/api/sloth/v1
-[k8s-cli]: https://pkg.go.dev/github.com/slok/sloth@v0.6.0/pkg/kubernetes/gen/clientset/versioned/typed/sloth/v1
+[spec]: https://pkg.go.dev/github.com/slok/sloth/pkg/kubernetes/api/sloth/v1
+[k8s-cli]: https://pkg.go.dev/github.com/slok/sloth/pkg/kubernetes/gen/clientset/versioned/typed/sloth/v1
 [crd-manifest]: https://raw.githubusercontent.com/slok/sloth/main/pkg/kubernetes/gen/crd/sloth.slok.dev_prometheusservicelevels.yaml

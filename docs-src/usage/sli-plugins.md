@@ -28,7 +28,7 @@ Developing a [`prometheus/v1`][plugins-v1] SLI plugin is very easy, however you 
 - Plugin received options are a `map[string]string` to avoid `interface{}` problems on dynamic execution code, the conversion to specific types are responsibility of the plugin.
 - Plugins don't depend on go modules, GOPATH or similar (thanks to the previous requirements).
 
-Sloth knows how to autodiscover plugins giving a path (`--sli-plugins-path`), and will load all the discovered ones.
+Sloth knows how to autodiscover plugins giving a path (`--plugins-path`), and will load all the discovered ones.
 
 A very simple example:
 
