@@ -25,7 +25,7 @@ SLO plugins are an extensibility mechanism in Sloth that allow you to customize 
 
 While [SLI plugins](./sli-plugins.md) allow you to define how SLI queries will be (e.g: service latency, availability...), SLO plugins operate on the whole SLO specification. They can mutate the whole Prometheus generation process like injecting metadata, changing rule intervals, generate new alerts, or even mutate the SLO configuration programmatically.
 
-## Plugin chaininig
+## Plugin chaining
 
 SLO plugins work similar to a processor chain, if you are familiar with HTTP middlewares, this is similar, the SLO will pass
 over and over though a series of chained plugins and these plugins can change the result of the SLO. Take into account that this is
@@ -190,13 +190,47 @@ INFO[0000] Plugins loaded                                sli-plugins=15 slo-plug
 
 SLO plugins are Go plugins loaded and executed using [Yaegi] engine.
 
+To ensure portability and stability, plugins must follow a few structural [requirements](#requirements). However, the most important aspect is how a plugin is loaded, instantiated, and executed. At the core of this is the [`slov1.Plugin`][plugin-go-interface] interface, which all plugins must implement.
+
+When Sloth loads a plugin, it invokes a factory method named `NewPlugin`. This method receives two arguments:
+
+- App utilities: Provided by Sloth to give access to helpful features like logging.
+- Plugin configuration: Passed as a `json.RawMessage`, is the configuration the user configured when declaring the plugin.
+
+Sloth SLO plugins work at single SLO level, meaning that plugins will be call one SLO at a time.
+
+Once Sloth has instantiated your plugin, it adds it to the plugin execution chain. When it is your plugin’s turn to run, Sloth will call the plugin’s `ProcessSLO` method with three arguments:
+
+- Context: The Go [`context.Context`](https://pkg.go.dev/context#Context) for managing cancellation, deadlines, context information share...
+- Request: Contains the full input SLO specification model and all associated metadata.
+- Result: Represents the output that Sloth will generate for the given SLO.
+
+Both Request and Result are passed as pointers, so your plugin can freely mutate them. In most cases, plugins only modify the Result, but modifying the Request is also allowed when needed. Finally the plugins can return an error if something went wrong that will make all the plugin chain fail.
+
+
+!!! warning "Mutating Request"
+    
+    Take into account that mutating Request object can have side effects, is not recommended but its possible.
+
+!!! note "`json.RawMessage` as configuration"
+
+    Plugin configuration in Sloth is schemaless by design. Since Go is a statically typed language, there is no perfect built-in way to handle dynamic types, especially when different plugins may expect different configuration formats.
+
+    To solve this, Sloth uses `json.RawMessage` for plugin configuration. This gives full control to the plugin itself to define, parse, and validate its own config.
+
+    Go’s standard library provides powerful JSON tooling, and JSON supports rich data types, including common ones like `string`, `int`, and more complex ones like `time.Duration`. By using `json.RawMessage`, Sloth hands off the responsibility of parsing the config to the plugin, allowing it to unmarshal into any custom struct it needs.
+
+    In most cases, this is as simple as calling `json.Unmarshal`.
+    
+    This approach keeps the system flexible, safe, and extensible, even as plugins evolve independently.
+
 ### Requirements
 
 SLO plugins have a strict set of requirements to ensure they remain simple, safe, and portable across environments:
 
 - Must define a global constant `PluginVersion` specifying the plugin version.
 - Must define a global constant `PluginID` to uniquely identify the plugin.
-- Must implement a `NewPlugin` function, which acts as a factory to create a new plugin instance of [`Plugin` interface](https://pkg.go.dev/github.com/slok/sloth/pkg/prometheus/plugin/slo/v1#Plugin).
+- Must implement a `NewPlugin` function, which acts as a factory to create a new plugin instance of [`Plugin` interface][plugin-go-interface].
 - The entire plugin implementation must reside in a single file named `plugin.go`.
 - Only the Go standard library is allowed, usage of `reflect` and `unsafe` is strictly prohibited.
 - External packages must come from [the approved list](#available-external-go-packages).
@@ -221,7 +255,7 @@ Apart from the Go standard library, Sloth SLO plugins have a very restricted set
     - [`github.com/slok/sloth/pkg/common/utils/data`](https://pkg.go.dev/github.com/slok/sloth/pkg/common/utils/data)
     - [`github.com/slok/sloth/pkg/common/utils/prometheus`](https://pkg.go.dev/github.com/slok/sloth/pkg/common/utils/prometheus)
 
-##  Testing and integration tests
+###  Testing
 
 For testing, plugins can be run like any regular Go application. However, it's highly recommended to use the Sloth SLO plugin test utilities, as they simulate the real plugin execution environment used by Sloth.
 
@@ -254,3 +288,4 @@ All plugin [examples](#examples) come with their tests.
 
 [yaegi]: https://github.com/traefik/yaegi
 [discussions]: https://github.com/slok/sloth/discussions
+[plugin-go-interface]: https://pkg.go.dev/github.com/slok/sloth/pkg/prometheus/plugin/slo/v1#Plugin
