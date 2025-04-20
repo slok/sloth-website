@@ -166,6 +166,33 @@ This SLO plugin declaration will execute in order and print the debug message:
     - {id: "sloth.dev/core/debug/v1", priority: -999999, config: {msg: "Plugin 1"}}
     ```
 
+## Override previous
+
+As explained earlier, a [plugin chain](#plugin-chaining) in Sloth is built by combining default plugins, SLO group plugins, and SLO-level plugins, in that order. However, there are cases where you may want to **skip previously declared plugins**, for example, if a specific group or SLO should not inherit global logic.
+
+For these scenarios, you can use the `override_previous: true` (or `overridePrevious: true` in k8s CR) flag. When this setting is enabled, Sloth will ignore plugins declared in earlier levels of the chain. The scope of what gets ignored depends on where the flag is set:
+
+- At the SLO group level: Only the default plugins will be ignored.
+- At the SLO level: Both default and group plugins will be ignored.
+
+This gives you fine-grained control over how plugins are composed and allows you to fully isolate plugin behavior when needed.
+
+Example:
+
+```yaml
+version: "prometheus/v1"
+service: "myservice"
+#...
+slo_plugins:
+  override_previous: true
+  chain:
+    - id: "sloth.dev/core/debug/v1"
+      priority: 1000
+      config:
+        msg: "Plugin 3"
+#...
+```
+
 ## Built-in plugins
 
 - [`sloth.dev/core/alert_rules_v1`](https://github.com/slok/sloth/tree/main/internal/plugin/slo/core/alert_rules_v1): Default Sloth Prometheus alert rules generation.
