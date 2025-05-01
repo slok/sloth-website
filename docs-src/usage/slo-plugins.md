@@ -195,12 +195,12 @@ slo_plugins:
 
 ## Built-in plugins
 
-- [`sloth.dev/core/alert_rules_v1`](https://github.com/slok/sloth/tree/main/internal/plugin/slo/core/alert_rules_v1): Default Sloth Prometheus alert rules generation.
-- [`sloth.dev/core/debug_v1`](https://github.com/slok/sloth/tree/main/internal/plugin/slo/core/debug_v1): A debugging plugin that can be used to show data received in the plugin.
-- [`sloth.dev/core/metadata_rules_v1`](https://github.com/slok/sloth/tree/main/internal/plugin/slo/core/metadata_rules_v1): Default Sloth Prometheus metadata recording rules generation.
-- [`sloth.dev/core/noop_v1`](https://github.com/slok/sloth/tree/main/internal/plugin/slo/core/noop_v1): A noop plugin.
-- [`sloth.dev/core/sli_rules_v1`](https://github.com/slok/sloth/tree/main/internal/plugin/slo/core/sli_rules_v1): Default Sloth Prometheus SLI recording rules generation.
-- [`sloth.dev/core/validate_v1`](https://github.com/slok/sloth/tree/main/internal/plugin/slo/core/validate_v1): Default Sloth validation of SLOs.
+- [`sloth.dev/core/alert_rules/v1`](https://github.com/slok/sloth/tree/main/internal/plugin/slo/core/alert_rules_v1): Default Sloth Prometheus alert rules generation.
+- [`sloth.dev/core/debug/v1`](https://github.com/slok/sloth/tree/main/internal/plugin/slo/core/debug_v1): A debugging plugin that can be used to show data received in the plugin.
+- [`sloth.dev/core/metadata_rules/v1`](https://github.com/slok/sloth/tree/main/internal/plugin/slo/core/metadata_rules_v1): Default Sloth Prometheus metadata recording rules generation.
+- [`sloth.dev/core/noop/v1`](https://github.com/slok/sloth/tree/main/internal/plugin/slo/core/noop_v1): A noop plugin.
+- [`sloth.dev/core/sli_rules/v1`](https://github.com/slok/sloth/tree/main/internal/plugin/slo/core/sli_rules_v1): Default Sloth Prometheus SLI recording rules generation.
+- [`sloth.dev/core/validate/v1`](https://github.com/slok/sloth/tree/main/internal/plugin/slo/core/validate_v1): Default Sloth validation of SLOs.
 
 ## Loading plugins in Sloth
 
@@ -271,6 +271,8 @@ Apart from the Go standard library, Sloth SLO plugins have a very restricted set
 
     If there is a common use case that can meet your needs by importing an external library, open a [discussion thread][discussions] on Sloth so we can discuss it and eventually add that package so SLO plugins can import it.
 
+- Env
+    - [`github.com/caarlos0/env/v11`](https://pkg.go.dev/github.com/caarlos0/env/v11)
 - Prometheus
     - [`github.com/prometheus/common/model`](https://pkg.go.dev/github.com/prometheus/common/model)
     - [`github.com/prometheus/prometheus/model/rulefmt`](https://pkg.go.dev/github.com/prometheus/prometheus/model/rulefmt)
