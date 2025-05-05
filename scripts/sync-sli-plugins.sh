@@ -24,7 +24,7 @@ mkdir ${SYNC_DIR}
 echo "[*] Cloning repositories"
 git clone git@github.com:slok/sloth-common-sli-plugins -b main --depth 1 "${PLUGINS_REPO_DIR}"
 
-echo "[*] Syncing SLO examples"
+echo "[*] Syncing SLI plugins"
 PREV_DIR="${PWD}"
 cd ${PLUGINS_DIR}
 find . -name "README.md" | while read fname; do
