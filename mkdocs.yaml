@@ -143,6 +143,8 @@ nav:
     - Default: examples/default/
     - Kubernetes: examples/kubernetes/
     - OpenSLO: examples/openslo/
+  - SLO plugins:
+    - slo-plugins/
   - SLI plugins:
     - sli-plugins/
   - F.A.Q: faq/index.md
