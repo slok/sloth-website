@@ -130,6 +130,48 @@ If all the SLOs in a group need the same plugin, use the SLO group level. If you
 
 Remember plugins are a chain, so you can combine both, set the shared plugin ones at SLO Group level, and specific ones at SLO level.
 
+## Can I override the full Sloth SLO plugin logic?
+
+Yes you can disable the default app plugins and set your own app plugins. These level of SLO plugins will target all SLOs. 
+
+Lets run an example and go step by step:
+
+```bash
+sloth generate \
+    --disable-default-slo-plugins \ # (1)!
+    -i ./examples/getting-started.yml \
+    -p /path/to/our/custom/slo/plugins/ \ # (2)!
+    -s '{"id": "sloth.dev/core/sli_rules/v1" }' \ # (3)!
+    -s '{"id": "my.custom.plugin/rule_intervals/v1", "config": {"interval": {"default": "42m"}}}' # (4)!
+```
+
+1. First of all we disable the defualt logic from Sloth (Default app plugins).
+    we do this because we want to override all the logic
+2. We point the directory for our custom plugins.
+3. We want some of the default behaviour from sloth, so we load that specific default plugin, in this case is the SLI rule generation.
+4. We load our custom rule interval setter plugin with some config.
+
+With this command example we changed how Sloth works to make multiple things:
+
+- Disabled validation
+- Only generate SLI rules
+- Add a custom rule interval based on our custom logic.
+
+## Can I set a custom SLO validation logic?
+
+Yes you can, by disabling the default plugins to remove the validation plugin, then setting our own validation and maintaining the default generation plugins from sloth. Example:
+
+```bash
+sloth generate \
+    -i ./examples/getting-started.yml \
+    -p /path/to/our/custom/slo/plugins/ \
+    --disable-default-slo-plugins \
+    -s '{"id": "my.custom.plugin/custom_validation/v1"}'
+    -s '{"id": "sloth.dev/core/sli_rules/v1" }'
+    -s '{"id": "sloth.dev/core/metadata_rules/v1" }'
+    -s '{"id": "sloth.dev/core/alert_rules/v1" }'
+```
+
 ## Custom SLO time windows?
 
 Please Check [SLO period windows section](../usage/slo-period-windows.md)
