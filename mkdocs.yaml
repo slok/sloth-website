@@ -144,7 +144,8 @@ nav:
     - Kubernetes: examples/kubernetes/
     - OpenSLO: examples/openslo/
   - SLO plugins:
-    - slo-plugins/
+    - Core: slo-plugins/core
+    - Contrib: slo-plugins/contrib
   - SLI plugins:
     - sli-plugins/
   - F.A.Q: faq/index.md
