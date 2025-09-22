@@ -173,6 +173,14 @@
          <lastmod>2025-09-22</lastmod>
     </url>
     <url>
+         <loc>https://sloth.dev/slo-plugins/contrib/denominator_corrected_rules_v1/</loc>
+         <lastmod>2025-09-22</lastmod>
+    </url>
+    <url>
+         <loc>https://sloth.dev/slo-plugins/contrib/error_budget_exhausted_alert_v1/</loc>
+         <lastmod>2025-09-22</lastmod>
+    </url>
+    <url>
          <loc>https://sloth.dev/slo-plugins/contrib/info_labels_v1/</loc>
          <lastmod>2025-09-22</lastmod>
     </url>
