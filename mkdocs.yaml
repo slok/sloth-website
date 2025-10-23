@@ -139,6 +139,7 @@ nav:
     - SLI plugins: usage/sli-plugins.md
     - SLO plugins: usage/slo-plugins.md
     - SLO period windows: usage/slo-period-windows.md
+    - Go library: usage/go-library.md
   - Examples:
     - Default: examples/default/
     - Kubernetes: examples/kubernetes/
