@@ -172,6 +172,20 @@ sloth generate \
     -s '{"id": "sloth.dev/core/alert_rules/v1" }'
 ```
 
+## Can the SLO plugins do advanced logic?
+
+Yes, the best way is using an example. This plugin optimizes the performance of the SLI error total window. To do so, the plugins does 2 things:
+
+- Infers metrics from the user defined SLIs by parsing recursively the prometheus expression nodes.
+- Creates new rule group with an specific interval
+
+```go
+--8<-- "manual/slo-plugin-advanced-faq/plugin.go"
+```
+
+
+
+
 ## Custom SLO time windows?
 
 Please Check [SLO period windows section](../usage/slo-period-windows.md)
