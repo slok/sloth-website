@@ -183,9 +183,6 @@ Yes, the best way is using an example. This plugin optimizes the performance of 
 --8<-- "manual/slo-plugin-advanced-faq/plugin.go"
 ```
 
-
-
-
 ## Custom SLO time windows?
 
 Please Check [SLO period windows section](../usage/slo-period-windows.md)
