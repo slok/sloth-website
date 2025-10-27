@@ -69,7 +69,7 @@ func main() {
 	if err != nil {
 		panic(fmt.Sprintf("could not generate SLOs: %v", err))
 	}
-	err = sloth.WriteResultAsPrometheusStd(ctx, *result, os.Stdout)
+	err = gen.WriteResultAsPrometheusStd(ctx, *result, os.Stdout)
 	if err != nil {
 		panic(fmt.Sprintf("could not write result: %v", err))
 	}

@@ -22,8 +22,8 @@ The library is designed to have a **simple, high-level API**, so you can leverag
 
 The library has two main building blocks:
 
-- **SLO Generator**: Generates SLOs and returns a structured in-memory representation (domain model) result.  
-- **Storage Helpers**: Take the generated domain objects and export them into different formats or backends.
+- **SLO generation**: Generates SLOs and returns a structured in-memory representation (domain model) result.  
+- **SLO result storage**: Take the generated domain objects and export them into different formats or backends.
 
 This separation allows you to automate SLO generation, customize the pipeline between generation and storage, or even implement your own storage layer.
 
