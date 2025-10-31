@@ -6,6 +6,9 @@ weight: 060
 !!! note "Version"
     The Go library and SLO plugins are available in Sloth `>= v0.15.0`.
 
+!!! tip ":simple-go: Go docs"
+    Check out the go docs at [pkg.go.dev](https://pkg.go.dev/github.com/slok/sloth/pkg/lib)
+
 ## Introduction
 
 Sloth has traditionally been used as a CLI application or a Kubernetes operator. However, some use cases require **custom SLO generation**, for example, when existing SLO plugins are not enough, or when the SLO workflow needs tight integration with other systems.

@@ -49,8 +49,8 @@ ls -la ./bin
     kind: Kustomization
 
     resources:
-    - https://raw.githubusercontent.com/slok/sloth/v0.12.0/pkg/kubernetes/gen/crd/sloth.slok.dev_prometheusservicelevels.yaml
-    - https://raw.githubusercontent.com/slok/sloth/v0.12.0/deploy/kubernetes/raw/sloth-with-common-plugins.yaml
+    - https://raw.githubusercontent.com/slok/sloth/v0.15.0/pkg/kubernetes/gen/crd/sloth.slok.dev_prometheusservicelevels.yaml
+    - https://raw.githubusercontent.com/slok/sloth/v0.15.0/deploy/kubernetes/raw/sloth-with-common-plugins.yaml
     ```
 
 === ":simple-helm: Helm"
@@ -70,4 +70,4 @@ ls -la ./bin
 [asdf]: https://asdf-vm.com/
 [arch]: https://archlinux.org/
 [helm-chart]: https://github.com/slok/sloth/tree/main/deploy/kubernetes/helm
-[CRDs]: https://raw.githubusercontent.com/slok/sloth/v0.12.0/pkg/kubernetes/gen/crd/sloth.slok.dev_prometheusservicelevels.yaml
+[CRDs]: https://raw.githubusercontent.com/slok/sloth/v0.15.0/pkg/kubernetes/gen/crd/sloth.slok.dev_prometheusservicelevels.yaml
