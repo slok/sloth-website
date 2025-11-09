@@ -87,6 +87,7 @@ markdown_extensions:
       custom_checkbox: true
   - pymdownx.tilde
   - pymdownx.snippets:
+      url_download: true
       base_path: docs-src/snippets
 
 # Plugins.
@@ -149,4 +150,5 @@ nav:
     - Contrib: slo-plugins/contrib
   - SLI plugins:
     - sli-plugins/
+  - Chart: chart/index.md
   - F.A.Q: faq/index.md
