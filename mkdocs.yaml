@@ -127,7 +127,7 @@ nav:
     - Features: introduction/features.md
     - Installation: introduction/install.md
     - Architecture: introduction/architecture.md
-    - Dashboards: introduction/dashboards.md
+    - User Interface: introduction/ui.md
   - SLO API and specs:
     - Default: specs/default.md
     - Kubernetes: specs/kubernetes.md

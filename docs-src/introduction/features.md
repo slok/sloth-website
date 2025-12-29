@@ -11,7 +11,8 @@ title: "Features"
 - SLO spec validation (including `validate` command for Gitops and CI).
 - Customization of labels, disabling different type of alerts...
 - A single way (uniform) of creating SLOs across all different services and teams.
-- Automatic [Grafana dashboard](./dashboards.md) to see all your SLOs state.
+- Built-in experimental [UI](./ui.md) to explore and monitor SLOs in real-time.
+- Automatic [Grafana dashboard](./ui.md) to see all your SLOs state.
 - Single binary and easy to use CLI.
 - Kubernetes ([Prometheus-operator]) support.
 - Kubernetes Controller/operator mode with CRDs.
