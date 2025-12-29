@@ -6,6 +6,9 @@ Sloth provides different ways to visualize and interact with your SLOs, helping 
 
 ## Built-in UI
 
+!!! note "Version"
+    The Built-in UI is available in Sloth `>= v0.16.0`.
+
 !!! warning "Experimental"
     The built-in UI is an experimental feature that is being actively iterated and will evolve over time.
 
