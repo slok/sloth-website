@@ -25,6 +25,10 @@ In the end, the controller mode makes the same work as the CLI however integrate
 
     By default Sloth will try optimizing long time windows (e.g 30 day) by sacrificing data precision. If you want to disable this use `--disable-optimized-rules`.  
 
+!!! tip "Custom K8s output format"
+
+    By default, Sloth generates Prometheus Operator `PrometheusRule` CRs. You can customize the output format using [K8s transformer plugins](./k8s-transformer-plugins.md) (e.g., ConfigMaps, VictoriaMetrics VMRule, Google Managed Prometheus).
+
 ## Deploying in Kubernetes
 
 Check [Kubernetes installing section](../introduction/install.md#kubernetes)
