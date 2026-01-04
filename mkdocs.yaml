@@ -138,6 +138,7 @@ nav:
     - SLO Validation: usage/slo-validation.md
     - SLI plugins: usage/sli-plugins.md
     - SLO plugins: usage/slo-plugins.md
+    - K8s transformer plugins: usage/k8s-transformer-plugins.md
     - SLO period windows: usage/slo-period-windows.md
     - Go library: usage/go-library.md
   - Examples:
