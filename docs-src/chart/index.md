@@ -1,0 +1,1 @@
+--8<-- "https://raw.githubusercontent.com/slok/sloth/refs/heads/main/deploy/kubernetes/helm/sloth/README.md"
