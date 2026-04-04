@@ -2,7 +2,7 @@ site_name: Sloth
 site_url: https://sloth.dev
 site_description: Autogenerate Prometheus SLOs easily and with simple APIs 
 site_author: Xabier Larrakoetxea
-copyright: 2025 Xabier Larrakoetxea
+copyright: 2026 Xabier Larrakoetxea
 
 repo_name: slok/sloth
 repo_url: https://github.com/slok/sloth
