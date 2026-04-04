@@ -12,6 +12,11 @@ weight: 046
 !!! note "Kubernetes controller only"
     This feature only works with `kubernetes` specs mode.
 
+!!! danger "The Sloth k8s operator/controller reconcile loop is additive"
+    On each iteration it creates or updates the Kubernetes objects returned by the transform plugin, but never deletes objects from previous iterations. If the transformer output changes between reconciliations (fewer resources, different names, or a different plugin) stale resources will remain in the cluster.
+
+    The default PrometheusRule transformer is unaffected because it always produces a single resource with a fixed name, but custom transform plugins that generate multiple or variably-named resources can leave orphans. For environments where this matters, use an external GitOps tool (e.g. Argo CD, Flux) with Sloth in CLI generator mode, which gives the GitOps controller full ownership of the resource lifecycle including pruning.
+
 ## Introduction
 
 K8s transformer plugins transform generated Prometheus rules into custom Kubernetes objects. By default, Sloth generates Prometheus Operator `PrometheusRule` CRs. With transformer plugins, you can output to:
